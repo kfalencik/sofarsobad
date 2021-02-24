@@ -1,0 +1,330 @@
+// Set your colors
+$primary:#f5f6fb;
+$secondary: #152445;
+$tertiary: rgba(228,211,143,1);
+$red: #ff4f33;
+$black: rgb(20, 20, 20);
+$white: #FFFFFF;
+$grey: #dbdbdb;
+$lightgrey: #929292;
+$blue: aliceblue;
+
+$gold: linear-gradient(90deg, rgba(228,211,143,1) 0%, rgba(243,243,184,1) 25%, rgba(212,178,98,1) 65%);
+
+// Mixins
+@mixin goldFrame {
+  position: relative;
+
+  &::before {
+    content: '';
+    height: 3px;
+    background: $gold;
+    position: absolute;
+    top: -3px;
+    left: 0;
+    right: 0;
+  }
+
+  &::after {
+    content: '';
+    height: 3px;
+    background: $gold;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+  }
+}
+
+//Fonts
+$fontTitle: 'Playfair Display', serif;
+$fontBody: 'Noto Sans', sans-serif;
+// Breakpoints
+
+$small: 460px;
+$medium: 768px;
+$large: 1024px;
+$xlarge: 1200px;
+$superlarge: 1408px;
+
+body {
+  color: $black;
+  font-family: $fontBody;
+  font-size: 14px;
+}
+
+a {
+  color: $black;
+  transition: all .3s ease;
+}
+
+p {
+  margin: 15px 0;
+}
+
+strong {
+  color: inherit;
+}
+
+form {
+  padding-top: 15px;
+}
+
+.b-checkbox.checkbox input[type=checkbox] + .check {
+  border-radius: 0;
+  border-width: 1px;
+}
+
+.button {
+  transition: all .4s ease;
+  border-radius: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+
+  .icon {
+    margin: 0;
+  }
+
+  &.is-primary {
+    background-color: $primary;
+    color: $white;
+    border-color: $primary;
+
+    &:hover, &:focus {
+      background: transparent;
+      border-color: $primary;
+      color: $primary;
+    }
+  }
+
+  &.is-black {
+    background-color: $black;
+    color: $white;
+    border-color: $grey;
+  }
+}
+
+.help {
+  color: $lightgrey;
+}
+
+.input {
+  border: 1px solid $primary;
+  color: $black;
+  font-size: 1em;
+  font-family: $fontBody;
+  padding: calc(0.375em - 2px) 0.75em;
+  width: 100%;
+
+  &--secondary {
+    border-color: $white;
+  }
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, h5 {
+  font-family: $fontTitle;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+h1, .h1 {
+  font-size: 1.8em;
+
+  @media (min-width: $large) {
+    font-size: 2.4em;
+  }
+}
+
+h2, .h2 {
+  font-size: 1.6em;
+  margin-bottom: 15px;
+
+  @media (min-width: $large) {
+    font-size: 2em;
+    margin: 1em 0;
+  }
+}
+
+h3, .h3 {
+  font-size: 1.2em;
+
+  @media (min-width: $large) {
+    font-size: 1.4em;
+    margin: 0.5em 0;
+  }
+}
+
+h4 {
+  font-size: 1em;
+
+  @media (min-width: $large) {
+    font-size: 1.2em;
+  }
+}
+
+h5 {
+  font-size: 1em;
+}
+
+.page-header {
+  max-width: 800px;
+  padding: 20px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.textarea {
+  resize: none;
+}
+
+.pagination-list {
+  list-style: none !important;
+  margin-top: 0 !important;
+
+  li + li {
+    margin-top: 0;
+  }
+}
+
+@import './transitions.scss';
+
+.b-sidebar {
+  position: relative;
+}
+
+.b-sidebar .sidebar-content {
+  width: 280px;
+  height: 100%;
+
+  &.is-right {
+    width: 320px;
+  }
+}
+
+.b-sidebar .sidebar-background {
+  background-color: #e6e6e6;
+  opacity: 0.35;
+  transition: all 0.5s ease;
+}
+
+.page {
+
+  main {
+    display: block;
+
+    > div:first-child {
+      min-height: 70vh;
+      background: $white;
+    }
+
+    .columns {
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.toggler {
+  display: none;
+}
+
+.toggler + .toggler-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all .4s ease-in-out;
+}
+
+.toggler:checked + .toggler-content {
+  max-height: 1000px;
+  opacity: 1;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+.section {
+  padding: 3rem 1.5rem;
+
+  @media (max-width: $medium) {
+    padding: 1.5rem 1rem;
+  }
+
+  &--page {
+    padding-top: 0;
+  }
+}
+
+
+
+ul {
+  list-style: disc;
+}
+
+ul, ol {
+  margin-left: 35px;
+
+  li {
+    padding: 10px 0;
+  }
+}
+
+
+// Bulma overrides
+.b-checkbox.checkbox{
+
+  &:hover input[type=checkbox]:not(:disabled) + .check{
+    border-color: $grey;
+  }
+
+  input[type=checkbox]:checked + .check {
+    background-color: $black;
+    border-color: $grey;
+  }
+}
+
+.button .icon:last-child:not(:first-child), .button .icon:first-child:not(:last-child) {
+  margin: 0;
+}
+
+.select:not(.is-multiple):not(.is-loading)::after {
+  border-color: $grey;
+}
+
+.pagination-link.is-current {
+  background-color: $black;
+  border-color: $grey;
+}
+
+.input:focus, .taginput .taginput-container.is-focusable:focus, .textarea:focus, .select select:focus, .is-focused.input, .taginput .is-focused.taginput-container.is-focusable, .is-focused.textarea, .select select.is-focused, .input:active, .taginput .taginput-container.is-focusable:active, .textarea:active, .select select:active, .is-active.input, .taginput .is-active.taginput-container.is-focusable, .is-active.textarea, .select select.is-active {
+  border-color: $grey;
+}
+
+.button:focus, .select select:focus, input:focus {
+  outline-color: $black;
+}
+
+.select select, .field input, .field textarea {
+  border-color: $grey;
+  box-shadow: none !important;
+  border-radius: 0;
+}
+
+.button:focus, .button.is-focused {
+  border-color: $grey;
+}
+
+.button:focus:not(:active), .button.is-focused:not(:active), .button.is-primary:focus:not(:active), .button.is-primary.is-focused:not(:active), .input:focus, .taginput .taginput-container.is-focusable:focus, .textarea:focus, .select select:focus, .is-focused.input, .taginput .is-focused.taginput-container.is-focusable, .is-focused.textarea, .select select.is-focused, .input:active, .taginput .taginput-container.is-focusable:active, .textarea:active, .select select:active, .is-active.input, .taginput .is-active.taginput-container.is-focusable, .is-active.textarea, .select select.is-active, .b-checkbox.checkbox input[type=checkbox]:focus:checked + .check {
+  box-shadow: 0 0 0 0.125em rgba(0, 128, 128, 0.25);
+}

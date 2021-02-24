@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /dashbaord/
+
+Sitemap: https://www.falencik.com/sitemap.xml
