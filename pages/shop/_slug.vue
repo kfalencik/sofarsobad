@@ -885,10 +885,6 @@ export default {
       overflow-y: auto;
       padding: 20px;
       position: relative;
-
-      /deep/ p {
-        margin: 15px 0;
-      }
     }
 
     &__nav-item {
