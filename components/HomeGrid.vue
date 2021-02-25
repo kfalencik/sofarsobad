@@ -155,7 +155,7 @@ export default {
 
 <style lang="scss" scoped>
 .hero {
-  height: calc(100vh - 123px);
+  height: calc(100vh - 82px);
   overflow: hidden;
   margin-bottom: 50px;
   position: relative;
@@ -175,7 +175,7 @@ export default {
   }
 
   @media (max-width: $medium) {
-    height: calc(100vh - 118px);
+    height: calc(100vh - 67px);
 
     &::after {
       box-shadow: inset 0 0 150px #000000;

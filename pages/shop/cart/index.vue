@@ -14,7 +14,7 @@ import Cart from '~/components/Cart';
 export default {
   head () {
     return {
-      title: 'Peter Falencik Photography - Cart',
+      title: 'So Far So Bad - Cart',
     }
   },
   name: 'Checkout',
@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     price: function(price) {
-      return '$' + (Math.floor(price * 100) / 100).toFixed(2)
+      return '£' + (Math.floor(price * 100) / 100).toFixed(2)
     },
     product(id) {
       const product = this.$store.state.products.filter(product => product.id === parseInt(id));

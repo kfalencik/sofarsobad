@@ -49,7 +49,7 @@ export default {
     },
     price: function(price) {
       price = parseFloat(price) + this.materials[0].finishes[0].styles[0].sizes[0]
-      return '$' + (Math.floor(price * 100) / 100).toFixed(2)
+      return '£' + (Math.floor(price * 100) / 100).toFixed(2)
     }
   }
 }

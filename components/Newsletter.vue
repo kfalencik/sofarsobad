@@ -62,7 +62,6 @@ export default {
 
 <style lang="scss" scoped>
   .newsletter {
-    margin-top: 50px;
     background: $black;
     color: $white;
 

@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="sr-only">
-      <h1>Welcome to Peter Falencik Photography!</h1>
-      <h2>Change your walls with Peter Falencik Photography</h2>
+      <h1>Welcome to So Far So Bad!</h1>
+      <h2>Change your walls with So Far So Bad</h2>
       <p>Adorning your walls with art is easy when there are thousands of motifs in so many shapes and sizes. It’s even easier when the canvas print is made precisely to your measurements on an environmentally friendly canvas. Your canvas is just a click away. All you need to do is find your favourite motif, choose the size and then decide how you want the edge of the canvas to look.</p>
       <p>You can order your canvas print with or without an inner frame. The DIY inner frame is easy to assemble without tools. Everything you need for your canvas print comes in the package, including the wire for hanging. The print is of the highest quality and will not fade in sunlight. Your print will arrive in a cardboard box that is partially or entirely made from recycled materials.</p>
       <p>We want to help you find the perfect canvas. Our collection contains canvas prints by innovative designers, creative photographers and illustrators who have all created motifs for living rooms, kitchens, bedrooms, children’s rooms and hallways. Together they offer a range of creative expressions suitable for all styles, personalities and settings.</p>
@@ -77,7 +77,7 @@ export default {
 
   head () {
     return {
-      title: 'Peter Falencik Photography',
+      title: 'So Far So Bad',
     }
   },
 
@@ -85,7 +85,7 @@ export default {
     return {
       "@context" : "https://schema.org",
       "@type" : "Organization",
-      "name" : "Peter Falencik Photography",
+      "name" : "So Far So Bad",
       "legalName": "Smart Photos Studio LLC",
       "logo": "https://falencik.com/logo.png",
       "foundingDate": "2020",

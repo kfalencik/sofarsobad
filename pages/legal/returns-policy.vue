@@ -15,7 +15,7 @@
           <h3>RETURN PROCESS</h3>
           <p>To return an item, please email customer service at studio@falencik.com to obtain a Return Merchandise Authorization (RMA) number. After receiving a RMA number, place the item securely in its original packaging and include your proof of purchase, and mail your return to the following address:</p>
 
-          <div>Peter Falencik Photography</div>
+          <div>So Far So Bad</div>
           <div>Attn: Returns</div>
           <div>RMA #</div>
           <div>1280 WILDWOOD LAKES BLVD</div>
@@ -41,7 +41,7 @@
 export default {
   head () {
     return {
-      title: 'Peter Falencik Photography - Returns Policy',
+      title: 'So Far So Bad - Returns Policy',
     }
   },
 }

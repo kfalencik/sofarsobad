@@ -93,6 +93,7 @@ export default {
 
 <style lang="scss" scoped>
   .slideshow {
+    margin-top: 50px;
     height: 50px;
     width: 100%;
     padding: 0;

@@ -7,13 +7,12 @@
       </div>
       <div class="columns">
         <div class="column is-half-widescreen">
-            <address>
-              Peter Falencik Photography,<br />
-              1280 WILDWOOD LAKES BLVD,<br />
-              Naples, FL 34104,<br />
-              United States
-            </address>
-          </p>
+          <address>
+            So Far So Bad,<br />
+            67/2 Lorne Street,<br />
+            EH6 8QG, Edinburgh<br />
+            United Kingdom
+          </address>
           <form name="contact" data-netlify="true" data-netlify-recaptcha="true">
             <div class="field">
               <label class="label">Name</label>
@@ -51,7 +50,7 @@
 export default {
   head () {
     return {
-      title: 'Peter Falencik Photography - Contact',
+      title: 'So Far So Bad - Contact',
     }
   },
 }

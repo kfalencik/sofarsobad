@@ -4,8 +4,8 @@
       <template v-if="authorized">
         <div class="sidebar">
           <router-link to="/">
-            <h1 class="sr-only">Peter Falencik Photography</h1>
-            <img src="/logo.png" alt="Peter Falencik Photography" />
+            <h1 class="sr-only">So Far So Bad</h1>
+            <img src="/logo.png" alt="So Far So Bad" />
           </router-link>
 
           <nav>
@@ -47,7 +47,7 @@ import LoginForm from '~/components/LoginForm';
 export default {
   head () {
     return {
-      title: 'Peter Falencik Photography - Dashboard',
+      title: 'So Far So Bad - Dashboard',
     }
   },
   components: {

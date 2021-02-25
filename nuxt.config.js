@@ -21,7 +21,6 @@ export default async function() {
   });
 
   return {
-    mode: 'universal',
     /*
     ** Headers of the page
     */

@@ -129,7 +129,7 @@ export default {
     },
 
     price: function(price) {
-      return '$' + (Math.floor(price * 100) / 100).toFixed(2)
+      return '£' + (Math.floor(price * 100) / 100).toFixed(2)
     },
 
     priceFormatter: function(price) {
@@ -157,6 +157,8 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    background: $black;
+    color: $white;
 
     &__items {
       overflow-x: hidden;

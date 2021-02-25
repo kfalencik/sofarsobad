@@ -55,7 +55,7 @@ body {
 }
 
 a {
-  color: $black;
+  color: $red;
   transition: all .3s ease;
 }
 
@@ -194,6 +194,8 @@ h5 {
 .b-sidebar .sidebar-content {
   width: 280px;
   height: 100%;
+  background: $black;
+  color: $white;
 
   &.is-right {
     width: 320px;

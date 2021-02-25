@@ -426,10 +426,10 @@ import SimilarProducts from '~/components/SimilarProducts';
 export default {
   head () {
     return {
-      title: 'Peter Falencik Photography - ' + this.product.title,
+      title: 'So Far So Bad - ' + this.product.title,
       meta: [
         { hid: 'keywords', name: 'keywords', content: 'art, naples, beach, falencik, property, canvas, florida, photography, wall art, beautiful, acryclic, photographer, peter falencik'},
-        { hid: 'ogtitle', property: 'og:title', content: 'Peter Falencik Photography - ' + this.product.title},
+        { hid: 'ogtitle', property: 'og:title', content: 'So Far So Bad - ' + this.product.title},
         { hid: 'ogdesc', property: 'og:description', content: 'A beautiful canvas "' + this.product.title + '" for your wall'},
         { hid: 'ogtype', property: 'og:type', content: 'product.item'},
         { hid: 'ogurl', property: 'og:url', content: 'https://www.falencik.com/shop/' + this.$route.params.slug},
@@ -438,7 +438,7 @@ export default {
         { property: 'product:price:currency', content: 'USD'},
         { property: 'product:retailer_item_id', content: this.product.id},
         { hid: 'twittercard', name: 'twitter:card', content: 'summary_large_image'},
-        { hid: 'twittertitle', name: 'twitter:title', content: 'Peter Falencik Photography - ' + this.product.title},
+        { hid: 'twittertitle', name: 'twitter:title', content: 'So Far So Bad - ' + this.product.title},
         { hid: 'twitterdesc', name: 'twitter:description', content: 'A beautiful canvas "' + this.product.title + '" for your wall'},
         { hid: 'twitterimage', name: 'twitter:image', content: this.product.image1},
       ],
@@ -462,7 +462,7 @@ export default {
       ],
       "brand": {
         "@type": "Brand",
-        "name": "Peter Falencik Photography"
+        "name": "So Far So Bad"
       },
       "description": this.product.description,
       "sku": this.product.slug,
@@ -719,7 +719,7 @@ export default {
     },
 
     priceDisplay: function(price) {
-      return '$' + (Math.floor(price * 100) / 100).toFixed(2)
+      return '£' + (Math.floor(price * 100) / 100).toFixed(2)
     },
 
     priceFormatter: function(price) {

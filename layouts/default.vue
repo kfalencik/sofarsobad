@@ -2,7 +2,6 @@
   <div :class="{'page': true, 'page--home': home}">
     <div  v-if="loaded">
     <Header />
-    <slideshow />
     <main keep-alive>
       <div >
         <div class="container">
@@ -10,7 +9,7 @@
         </div>
         <nuxt />
       </div>
-      
+      <slideshow />
       <Newsletter />
     </main>
     <Footer />

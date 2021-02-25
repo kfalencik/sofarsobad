@@ -3,8 +3,8 @@
     <div class="container">
       <div>
         <router-link to="/">
-          <h1 class="sr-only">Peter Falencik Photography</h1>
-          <img src="/logo.png" width="150" alt="Peter Falencik Photography" />
+          <h1 class="sr-only">So Far So Bad</h1>
+          <img src="/logo.png" width="150" alt="So Far So Bad" />
         </router-link>
       </div>
       <h3>Zaloguj sie do panelu sterowania</h3>

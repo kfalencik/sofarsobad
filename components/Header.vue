@@ -5,8 +5,8 @@
         <div class="header__left">
           <div class="header__logo">
             <router-link to="/">
-              <h1 class="sr-only">Peter Falencik Photography</h1>
-              <img src="/logo-white.png" alt="Peter Falencik Photography" height="35" />
+              <h1 class="sr-only">So Far So Bad</h1>
+              <img src="/logo-white.png" alt="So Far So Bad" height="35" />
             </router-link>
           </div>
         </div>
@@ -82,7 +82,7 @@ import Cart from '~/components/Cart';
   export default{
     data() {
       return {
-        siteName: 'Peter Falencik Photography',
+        siteName: 'So Far So Bad',
         navigation: false
       }
     },
@@ -159,8 +159,9 @@ import Cart from '~/components/Cart';
 <style lang="scss" scoped>
   .header {
     z-index: 20;
-    border-bottom: 1px solid $primary;
     background: $black;
+    position: sticky;
+    top: 0;
 
     .section {
       padding-top: 20px;

@@ -47,7 +47,7 @@
   export default {
     head () {
       return {
-        title: 'Peter Falencik Photography - ' + this.product.title + ' reviews',
+        title: 'So Far So Bad - ' + this.product.title + ' reviews',
       }
     },
     transition: 'page',
@@ -103,7 +103,7 @@
             "priceRange": "$$$",
             "brand": {
               "@type": "Brand",
-              "name": "Peter Falencik Photography"
+              "name": "So Far So Bad"
             },
             "description": this.product.description,
             "sku": this.product.slug,

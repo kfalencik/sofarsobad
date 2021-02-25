@@ -39,7 +39,7 @@ import Filters from '~/components/Filters';
 export default {
   head () {
     return {
-      title: 'Peter Falencik Photography - Shop',
+      title: 'So Far So Bad - Shop',
     }
   },
 

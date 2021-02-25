@@ -234,7 +234,7 @@
 export default {
     head () {
       return {
-        title: 'Peter Falencik Photography - Checkout',
+        title: 'So Far So Bad - Checkout',
       }
     },
     data() {
@@ -247,9 +247,9 @@ export default {
           production: process.env.PP_CIDD
         },
         experienceOptions: {
-          name: "Peter Falencik Photography",
+          name: "So Far So Bad",
           presentation: {
-            brand_name: "Peter Falencik Photography",
+            brand_name: "So Far So Bad",
             logo_image: "https://www.falencik.com/logo.png"
           },
           input_fields: {

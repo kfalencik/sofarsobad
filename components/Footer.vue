@@ -3,7 +3,7 @@
     <div class="footer__bottom">
       <div class="section">
         <div class="footer__left">
-          <span>Copyright @ 2020 Peter Falencik Photography - All rights reserved</span>
+          <span>Copyright @ 2021 So Far So Bad - All rights reserved</span>
         </div>
         <div class="footer__center">
           <nav>
@@ -16,7 +16,7 @@
           </nav>
         </div>
         <div class="sr-only">
-          <a rel="noreferrer" href="https://www.facebook.com/Iconarishop/" target="_blank">Facebook</a>
+          <a rel="noreferrer" href="https://www.facebook.com/sofarsobadapparel/" target="_blank">Facebook</a>
         </div>
         <div class="footer__right">
           <img src="/payment-methods.png" width="200" alt="" role="presentation" />

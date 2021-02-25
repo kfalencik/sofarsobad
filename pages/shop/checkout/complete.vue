@@ -20,12 +20,10 @@
 </template>
 
 <script>
-import CartItem from '~/components/CartItem';
-
 export default {
   head () {
     return {
-      title: 'Peter Falencik Photography - Order complete',
+      title: 'So Far So Bad - Order complete',
     }
   },
   computed: {
