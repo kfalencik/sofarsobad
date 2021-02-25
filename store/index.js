@@ -118,6 +118,8 @@ export const mutations = {
     };
     const self = this;
 
+    console.log(product)
+
     product[1].forEach((file, index) => {
       storage.child(`images/${product[0].slug}/${file.name}`).put(file, metadata).then((payload) => {
         payload.ref.getDownloadURL().then((url) => {

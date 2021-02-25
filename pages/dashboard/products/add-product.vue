@@ -13,26 +13,7 @@
         </b-field>
 
         <b-field class="form__input" label="Opis">
-          <b-input maxlength="1000" type="textarea" placeholder="Opis produktu" v-model="description"></b-input>
-        </b-field>
-
-        <b-field class="form__input" message="Wybierz przynajmniej jedna kategorie" label="Katergorie">
-          <b-taginput
-            v-model="categories"
-            ellipsis
-            autocomplete
-            :allow-new="false"
-            :data="categoriesSelect"
-            maxtags="4"
-            :openOnFocus="true"
-            @typing="getFilteredTags"
-            field="title"
-            icon="label"
-            placeholder="Wybierz kategorie">
-              <template slot-scope="props">
-                {{props.option.slug}}
-              </template>
-          </b-taginput>
+          <b-input maxlength="1000" type="textarea" placeholder="Opis produktu" v-model="body"></b-input>
         </b-field>
 
         <b-field class="form__input file" label="Glowne zdjecie produktu">
@@ -42,60 +23,65 @@
               <span>Click to upload</span>
             </a>
           </b-upload>
-          <span class="file-thumbnail" v-if="image1">
-            <img :src="image1URL" />
-          </span>
         </b-field>
 
-        <b-field class="form__input file" label="Zdjecie 3D produktu">
+        <span class="file-thumbnail" v-if="image1">
+            <img :src="image1URL" />
+          </span>
+
+        <b-field class="form__input file" label="Zdjecie 1 produktu">
           <b-upload v-model="image2" required>
             <a class="button is-info">
               <b-icon icon="upload"></b-icon>
               <span>Click to upload</span>
             </a>
           </b-upload>
-          <span class="file-thumbnail" v-if="image2">
-            <img :src="image2URL" />
-          </span>
         </b-field>
 
-        <b-field class="form__input file" label="Zdjecie na scianie 1">
+        <span class="file-thumbnail" v-if="image2">
+          <img :src="image2URL" />
+        </span>
+
+        <b-field class="form__input file" label="Zdjecie 2">
           <b-upload v-model="image3" required>
             <a class="button is-info">
               <b-icon icon="upload"></b-icon>
               <span>Click to upload</span>
             </a>
           </b-upload>
-          <span class="file-thumbnail" v-if="image3">
-            <img :src="image3URL" />
-          </span>
         </b-field>
 
-        <b-field class="form__input file" label="Zdjecie na scianie 2">
+        <span class="file-thumbnail" v-if="image3">
+            <img :src="image3URL" />
+          </span>
+
+        <b-field class="form__input file" label="Zdjecie 3">
           <b-upload v-model="image4" required>
             <a class="button is-info">
               <b-icon icon="upload"></b-icon>
               <span>Click to upload</span>
             </a>
           </b-upload>
-          <span class="file-thumbnail" v-if="image4">
-            <img :src="image4URL" />
-          </span>
         </b-field>
 
-        <b-field class="form__input file" label="Zdjecie na scianie 3">
+        <span class="file-thumbnail" v-if="image4">
+            <img :src="image4URL" />
+          </span>
+
+        <b-field class="form__input file" label="Zdjecie 4">
           <b-upload v-model="image5" required>
             <a class="button is-info">
               <b-icon icon="upload"></b-icon>
               <span>Click to upload</span>
             </a>
           </b-upload>
-          <span class="file-thumbnail" v-if="image5">
-            <img :src="image5URL" />
-          </span>
         </b-field>
 
-        <b-field message='W dolarach np. "120.99"' class="form__input" label="Cena">
+        <span class="file-thumbnail" v-if="image5">
+          <img :src="image5URL" />
+        </span>
+
+        <b-field message='W funtach np. "120.99"' class="form__input" label="Cena">
           <b-input placeholder="Cena" v-model="price" required></b-input>
         </b-field>
 
@@ -107,69 +93,6 @@
           <b-input placeholder="Ilosc sprzedazy" v-model="bought" required></b-input>
         </b-field>
 
-        <b-field class="form__input">
-          <label class="checkbox">
-            <input type="checkbox" v-model="panorama"> Panoarama?
-          </label>
-        </b-field>
-
-        <template v-if="panorama">
-          <b-field class="form__input file" label="Zdjecie 3D produktu (Panorama)">
-            <b-upload v-model="image2pano" required>
-              <a class="button is-info">
-                <b-icon icon="upload"></b-icon>
-                <span>Click to upload</span>
-              </a>
-            </b-upload>
-            <span class="file-thumbnail" v-if="image2pano">
-              <img :src="image2panoURL" />
-            </span>
-          </b-field>
-
-          <b-field class="form__input file" label="Zdjecie na scianie 1 (Panorama)">
-            <b-upload v-model="image3pano" required>
-              <a class="button is-info">
-                <b-icon icon="upload"></b-icon>
-                <span>Click to upload</span>
-              </a>
-            </b-upload>
-            <span class="file-thumbnail" v-if="image3pano">
-              <img :src="image3panoURL" />
-            </span>
-          </b-field>
-
-          <b-field class="form__input file" label="Zdjecie na scianie 2 (Panorama)">
-            <b-upload v-model="image4pano" required>
-              <a class="button is-info">
-                <b-icon icon="upload"></b-icon>
-                <span>Click to upload</span>
-              </a>
-            </b-upload>
-            <span class="file-thumbnail" v-if="image4pano">
-              <img :src="image4panoURL" />
-            </span>
-          </b-field>
-
-          <b-field class="form__input file" label="Zdjecie na scianie 3 (Panorama)">
-            <b-upload v-model="image5pano" required>
-              <a class="button is-info">
-                <b-icon icon="upload"></b-icon>
-                <span>Click to upload</span>
-              </a>
-            </b-upload>
-            <span class="file-thumbnail" v-if="image5pano">
-              <img :src="image5panoURL" />
-            </span>
-          </b-field>
-        </template>
-
-        <b-field label="Orientacja" v-if="!panorama">
-          <b-select placeholder="Wybierz orientacje" v-model="landscape" required>
-            <option value="true">Pozioma</option>
-            <option value="false">Pionowa</option>
-          </b-select>
-        </b-field>
-
         <b-field class="form__input" message="Beda uzyte w wyszukiwarce produktow. Najelpiej dodac ok 5-10" label="Dodaj tagi">
           <b-taginput
             v-model="tags"
@@ -178,8 +101,6 @@
             placeholder="Dodaj">
           </b-taginput>
         </b-field>
-
-        
 
         <div class="form__input form__input--buttons">
           <button type="button" @click="addProduct" class="button is-success">Dodaj produkt</button>
@@ -194,15 +115,12 @@ export default {
   data() {
     return {
       title: '',
-      description: '',
+      body: '',
       slug: '',
-      categories: [],
       price: 0,
       discount: 0,
       bought: 0,
-      panorama: false,
-      landscape: "true",
-      tags: '',
+      tags: [],
       latestId: 0,
       image1: null,
       image1URL: null,
@@ -213,23 +131,11 @@ export default {
       image4: null,
       image4URL: null,
       image5: null,
-      image5URL: null,
-      image2pano: null,
-      image2panoURL: null,
-      image3pano: null,
-      image3panoURL: null,
-      image4pano: null,
-      image4panoURL: null,
-      image5pano: null,
-      image5panoURL: null
+      image5URL: null
     }
   },
   layout: 'dashboard',
   computed: {
-    categoriesSelect() {
-      this.category = this.$store.state.categories[0].slug;
-      return this.$store.state.categories;
-    },
     products() {
       return this.$store.state.products;
     }
@@ -294,54 +200,6 @@ export default {
         
         this.image5URL = reader.readAsDataURL(o);
       }
-    },
-    image2pano (o) {
-      if (!this.image2pano || this.image2pano.type !== 'image/jpeg') {
-        this.$store.commit('addMessage', ['Zly typ pliku. Sprawdz czy zdjecie jest w dobrym formacie.', 'bad']);
-        this.image2pano = null
-        this.image2panoURL = null
-      } else {
-        var reader = new FileReader();
-        reader.onload = e => this.image2panoURL = e.target.result
-        
-        this.image2panoURL = reader.readAsDataURL(o);
-      }
-    },
-    image3pano (o) {
-      if (!this.image3pano || this.image3pano.type !== 'image/jpeg') {
-        this.$store.commit('addMessage', ['Zly typ pliku. Sprawdz czy zdjecie jest w dobrym formacie.', 'bad']);
-        this.image3pano = null
-        this.image3panoURL = null
-      } else {
-        var reader = new FileReader();
-        reader.onload = e => this.image3panoURL = e.target.result
-        
-        this.image3panoURL = reader.readAsDataURL(o);
-      }
-    },
-    image4pano (o) {
-      if (!this.image4pano || this.image4pano.type !== 'image/jpeg') {
-        this.$store.commit('addMessage', ['Zly typ pliku. Sprawdz czy zdjecie jest w dobrym formacie.', 'bad']);
-        this.image4pano = null
-        this.image4panoURL = null
-      } else {
-        var reader = new FileReader();
-        reader.onload = e => this.image4panoURL = e.target.result
-        
-        this.image4panoURL = reader.readAsDataURL(o);
-      }
-    },
-    image5pano (o) {
-      if (!this.image5pano || this.image5pano.type !== 'image/jpeg') {
-        this.$store.commit('addMessage', ['Zly typ pliku. Sprawdz czy zdjecie jest w dobrym formacie.', 'bad']);
-        this.image5pano = null
-        this.image5panoURL = null
-      } else {
-        var reader = new FileReader();
-        reader.onload = e => this.image5panoURL = e.target.result
-        
-        this.image5panoURL = reader.readAsDataURL(o);
-      }
     }
   },
   methods: {
@@ -350,12 +208,6 @@ export default {
         this.title === '' ||
         this.slug === '' ||
         this.price === 0 ||
-        this.image1 === null ||
-        this.image2 === null ||
-        this.image3 === null ||
-        this.image4 === null ||
-        this.image5 === null ||
-        this.categories === [] ||
         this.tags === ''
       ){
         this.$store.commit('addMessage', ['Cos jest nie tak, sprawdz wszystkie pola.', 'bad']);
@@ -377,34 +229,38 @@ export default {
 
         this.latestId = this.latestId + 1;
 
-        const uploadImages = [this.image1, this.image2, this.image3, this.image4, this.image5]
-        if (this.panorama) uploadImages.push(this.image2pano, this.image3pano, this.image4pano, this.image5pano)
+        const uploadImages = [this.image1]
+
+        if (this.image2) {
+          uploadImages.push(this.image2)
+        }
+        if (this.image3) {
+          uploadImages.push(this.image2)
+        }
+        if (this.image4) {
+          uploadImages.push(this.image2)
+        }
+        if (this.image5) {
+          uploadImages.push(this.image5)
+        }
 
         this.$store.commit('addProduct', [
           {
             id: this.latestId,
             title: this.title,
-            description: this.description,
+            body: this.body,
             slug: this.slug,
-            categories: this.categories.map(item => item.slug).join(", "),
             price: this.price,
             discount: parseInt(this.discount),
-            landscape: this.panorama ? true : this.landscape === 'true' ? true : false,
             tags: this.tags.join(", "),
             date: date,
             bought: this.bought,
-            panorama: this.panorama
           },
           uploadImages
         ]);
 
         this.$buefy.toast.open({message: 'Produkt zostal dodany!', type: 'is-success'});
       }
-    },
-
-    getFilteredTags(text) {
-      const data = this.$store.state.categories;
-      this.categoriesSelect = data.filter((option) => option.title.toLowerCase().indexOf(text.toLowerCase()) >= 0)
     }
   }
 }
@@ -430,6 +286,10 @@ export default {
 
     .file-thumbnail {
       margin-top: 15px;
+
+      img {
+        max-height: 200px;
+      }
     }
 
     &__input-description {

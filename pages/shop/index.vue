@@ -3,7 +3,7 @@
     <div class="container">
       <div class="page-header">
         <h2>Shop</h2>
-        <p>Discover our collection of beautiful fine art prints created just for you, offering a wide range of styles and subjects including our popular abstract and modern art prints.</p>
+        <p>Discover our collection of tattoo inspired, minimalist designs. We know how much you love plain apparel with simple illustrations, so we're striving to deliver just that.</p>
       </div>
       <div class="filters">
         <!-- <b-button icon-left="filter" @click="toggleFilters">Filters</b-button> -->
