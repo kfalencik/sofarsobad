@@ -20,10 +20,13 @@ export default async function() {
     productPaths.push('/dashboard/products/' + product.id);
   });
 
+  console.log(products)
+
   return {
     /*
     ** Headers of the page
     */
+    ssr: true,
     head: {
       htmlAttrs: {
         lang: 'en',
@@ -56,6 +59,7 @@ export default async function() {
       ]
     },
     generate: {
+      crawler: true,
       routes: [
         ...productPaths,
         '/shop',
