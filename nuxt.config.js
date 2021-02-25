@@ -3,7 +3,12 @@ import 'firebase/firestore'
 import firebaseConfig from './assets/data/firebase';
 
 export default async function() {
-  firebase.initializeApp(firebaseConfig);
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  } else {
+    firebase.app(); // if already initialized, use that one
+  }
+
   const db = firebase.firestore();
   let productPaths = [];
   let products = [];
