@@ -27,6 +27,7 @@ export default async function() {
     ** Headers of the page
     */
     ssr: true,
+    target: 'static',
     head: {
       htmlAttrs: {
         lang: 'en',
