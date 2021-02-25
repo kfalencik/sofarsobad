@@ -175,7 +175,7 @@ export default {
   }
 
   @media (max-width: $medium) {
-    height: calc(100vh - 130px);
+    height: calc(100vh - 118px);
 
     &::after {
       box-shadow: inset 0 0 150px #000000;

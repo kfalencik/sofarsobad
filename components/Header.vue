@@ -252,8 +252,8 @@ import Cart from '~/components/Cart';
       }
 
       button {
-        color: $lightgrey;
-        border-color: $primary;
+        color: $white;
+        background: none;
       }
     }
 
@@ -441,6 +441,8 @@ import Cart from '~/components/Cart';
     padding: 0;
     margin: 0;
     height: auto;
+    color: $white;
+    background: none;
   }
 
   @media (min-width: $medium) {

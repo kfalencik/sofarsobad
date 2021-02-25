@@ -93,7 +93,7 @@ export default {
 
 <style lang="scss" scoped>
   .slideshow {
-    height: 80px;
+    height: 50px;
     width: 100%;
     padding: 0;
     position: relative;
@@ -110,11 +110,11 @@ export default {
       position: relative;
       height: 100%;
       width: 100%;
-      height: 80px;
+      height: 50px;
 
       @media (min-width: $medium) {
-      height: 40px;
-    }
+        height: 40px;
+      }
     }
 
     &__slide {
