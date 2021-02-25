@@ -18,10 +18,10 @@ export default {
       heroPreviousSlide: 5,
       heroTotalSlides: 5,
       services: [
-        '<strong>Free shipping.</strong> We provide free shipping in the whole of USA.',
+        '<strong>Free shipping.</strong> in UK, for all orders above £80.',
         '<strong>Safe payments.</strong> Secure payment system with PayPal.',
         '<strong>Discounts.</strong> Opportunities to save money everywhere.',
-        '<strong>Custom orders.</strong> Order bespoke sized products.',
+        '<strong>Hassle free returns.</strong> Up to 30 days.',
         '<strong>Support 24/7.</strong> Get our help anytime.'
       ],
 			heroInterval: null,

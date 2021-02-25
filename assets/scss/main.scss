@@ -3,10 +3,10 @@ $primary:#f5f6fb;
 $secondary: #152445;
 $tertiary: rgba(228,211,143,1);
 $red: #ff4f33;
-$black: rgb(20, 20, 20);
+$black: rgb(0, 0, 0);
 $white: #FFFFFF;
-$grey: #dbdbdb;
-$lightgrey: #929292;
+$grey: #666;
+$lightgrey: #ebebeb;
 $blue: aliceblue;
 
 $gold: linear-gradient(90deg, rgba(228,211,143,1) 0%, rgba(243,243,184,1) 25%, rgba(212,178,98,1) 65%);
@@ -51,6 +51,7 @@ body {
   color: $black;
   font-family: $fontBody;
   font-size: 14px;
+  background-color: $lightgrey;
 }
 
 a {
@@ -212,7 +213,6 @@ h5 {
 
     > div:first-child {
       min-height: 70vh;
-      background: $white;
     }
 
     .columns {

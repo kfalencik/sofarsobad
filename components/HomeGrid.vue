@@ -1,141 +1,217 @@
 <template>
-  <div class="home-grid">
-    <div class="home-grid__item">
-      <img :src="require('@/assets/images/home-main.jpg')" />
-      <div class="home-grid__text">
-        <h1 class="h2">Beautiful Art Prints</h1>
-        <p>Discover our collection of beautiful fine art prints created just for you, offering a wide range of styles and subjects including our popular beach and modern art prints.</p>
-        <b-button to="/shop" tag="router-link" class="is-black"> 
-          Explore Our Designs
-        </b-button>
-      </div>
-    </div>
-    <div class="home-grid__item">
-      <img :src="require('@/assets/images/home-small-1.jpg')" />
-      <div class="home-grid__text">
-        <span class="pre-header">Still warm</span>
-        <h3 class="h2">New & Noteworthy</h3>
-        <b-button @click="newProducts" class="is-black"> 
-          Shop new arivals
-        </b-button>
-      </div>
-    </div>
-    <div class="home-grid__item">
-      <img :src="require('@/assets/images/home-small-2.jpg')" />
-      <div class="home-grid__text">
-        <span class="pre-header">Go wide</span>
-        <h3 class="h2">Panoramas</h3>
-        <b-button @click="panoramaProducts" class="is-black"> 
-          Shop our panoramas
-        </b-button>
-      </div>
+  <div class="hero">
+    <canvas id="mainstage"></canvas>
+    <svg id="weirdFilter">
+      <filter id="svgFilter">
+        <feTurbulence id="turbulence" type="turbulence" baseFrequency="0.009" numOctaves="5" />
+        <feDisplacementMap id="displacement" in="SourceGraphic" scale="200" />
+      </filter>
+    </svg>
+
+    <div class="hero__title">
+      <img src="/medusa.png" alt="So Far So Bad" />
+      <h1 class="sr-only">So Far So Bad Apparel</h1>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HomeGrid',
-
+  data: function(){
+    return {
+      starArray: [],
+      starColors: [],
+      mouseEngaged: false,
+      mousePressed: false,
+      speedAmplifier: 5,
+      mouseX: null,
+      mouseY: null,
+      canvas: null,
+      context: null,
+      calcWidth: null,
+      then: null
+    }
+  },
+  mounted: function() {
+    this.createStarField();
+  },
   methods: {
-    newProducts() {
-      this.$store.commit('sortProducts', 'date-az');
-      this.$router.push('/shop')
+    createStarField() {
+      //create variables and set the canvas stage.
+      this.canvas = document.getElementById("mainstage");
+      this.context = this.canvas.getContext("2d");
+      //calculate the distances of the canvas and the width we use to determine number of stars.
+      this.calcWidth = document.getElementById("mainstage").clientWidth / 10;
+      this.canvas.width = document.getElementById("mainstage").clientWidth;
+      this.canvas.height = document.getElementById("mainstage").clientHeight;
+      //create the stars
+      this.initiateStars(this.canvas, this.starArray, this.calcWidth);
+      //start the main loop to keep the canvas updates.
+      this.main();
     },
-    panoramaProducts() {
-      this.$store.commit('orientationProducts', 'panorama');
-      this.$store.dispatch('filterProducts');
-      this.$router.push('/shop')
+    main() {
+      const self = this;
+      setInterval(function() {
+        self.update();
+        self.render();
+      }, 1000/60);
+    },
+    update() {
+      if (this.speedAmplifier > 1.1) {
+        this.speedAmplifier = this.speedAmplifier - 0.1;
+      }
+      for (let k = 0; k < this.starArray.length; k++) {
+          if (
+            //if the stars are close to the edge, change their direction.
+            this.starArray[k].y < -1 ||
+            this.starArray[k].y > this.canvas.height + 1 ||
+            this.starArray[k].x < -1 ||
+            this.starArray[k].x > this.canvas.width + 1
+          ) {
+            let remainder = this.starArray[k].angle % 90;
+            this.starArray[k].angle = this.starArray[k].angle + 90 + remainder;
+            this.starArray[k].startAngle = this.starArray[k].angle;
+          } else {
+            this.starArray[k].angle = this.starArray[k].startAngle;
+          }
+        this.calculateStarMovement(this.starArray[k]);
+      }
+    },
+    render() {
+      let distance = 150;
+      //clear the canvas.
+      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      //Run through the stars
+      for (let i = 0; i < this.starArray.length; i++) {
+        //draw the stars individual points
+        this.drawSingleStar(this.starArray[i], this.context);
+      }
+      //double for loop to check each star against all the others.
+      for (let k = 0; k < this.starArray.length; k++) {
+        for (let u = 0; u < this.starArray.length; u++) {
+          if (
+            //check the distance between the two points
+            this.starArray[k].x >= this.starArray[u].x - distance &&
+            this.starArray[k].x <= this.starArray[u].x + distance &&
+            this.starArray[k].y >= this.starArray[u].y - distance &&
+            this.starArray[k].y <= this.starArray[u].y + distance &&
+            // and make sure it's not the same star
+            u != k
+          ) {
+            //if they are within the range set, calculate their distance and draw line with color and opacity matching distance and color difference between them.
+            let a = this.starArray[k].x - this.starArray[u].x;
+            let b = this.starArray[k].y - this.starArray[u].y;
+            //calculate the opacity based on distance.
+            let opacity = 1 - 1 / distance * Math.sqrt(a * a + b * b);
+            let red = Math.round((this.starArray[k].color.red + this.starArray[u].color.red) / 2);
+            let green = Math.round((this.starArray[k].color.green + this.starArray[u].color.green) / 2);
+            let blue = Math.round((this.starArray[k].color.blue + this.starArray[u].color.blue) / 2);
+            // set color of the line based on the middle value of red, green and blue from the two points.
+            this.context.strokeStyle = "rgba(" + red + "," + green + "," + blue + "," + opacity + ")";
+            this.context.beginPath();
+            this.context.lineWidth = 3;
+            this.context.moveTo(this.starArray[k].x, this.starArray[k].y);
+            this.context.lineTo(this.starArray[u].x, this.starArray[u].y);
+            this.context.stroke();
+          }
+        }
+      }
+    },
+    calculateStarMovement(target) {
+      target.x -= target.speed * Math.sin(target.angle * (Math.PI / 180));
+      target.y += target.speed * Math.cos(target.angle * (Math.PI / 180));
+    },
+    drawSingleStar(star, context) {
+      context.fillStyle = "rgba(" + star.color.red + "," + star.color.green + "," + star.color.blue + "," + 0.5 + ")";
+      context.beginPath();
+      context.arc(star.x, star.y, 5, 0, 2 * Math.PI);
+      context.closePath();
+      context.fill();
+    },
+    initiateStars(canvas, starArray, calcWidth) {
+      let starColor = {
+        red: 255,
+        green: 255,
+        blue: 255
+      };
+      this.starColors.push(starColor);
+      //generate number of star objects with variables based on the calcWidth variable.
+      for (let y = 0; y < calcWidth; y++) {
+        let starAngle = Math.floor(Math.random() * 360) + 0;
+        let star = {
+          x: Math.floor(Math.random() * canvas.width) + 0,
+          y: Math.floor(Math.random() * canvas.height) + 0,
+          color: this.starColors[Math.floor(Math.random() * this.starColors.length) + 0],
+          angle: starAngle,
+          startAngle: starAngle,
+          speed: (Math.floor(Math.random() * 12) + 6) / 15
+        };
+        this.starArray.push(star);
+      }
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .home-grid {
-    max-width: 1980px;
-    margin: 0 auto;
+.hero {
+  height: calc(100vh - 123px);
+  overflow: hidden;
+  margin-bottom: 50px;
+  position: relative;
+  min-height: 568px;
+  background: #000;
 
-    @media (min-width: $medium) {
-      margin: 20px auto;
-    }
+  &::after {
+    box-shadow: inset 0 0 70px #000000;
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 9;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
 
-    @media (min-width: $medium) {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      grid-gap: 20px;
-    }
-    
-    &__item {
-      position: relative;
-      margin-bottom: 3px;
+  @media (max-width: $medium) {
+    height: calc(100vh - 130px);
 
-      @media (max-width: $medium) {
-        color: $black !important;
-      }
-
-
-      @media (min-width: $medium) {
-        margin: 0;
-        height: 500px;
-      }
-
-      h3 {
-        margin: 5px 0 15px;
-      }
-
-      .pre-header {
-        font-size: 1em;
-        text-transform: uppercase;
-      }
-
-      img {
-        width: 100%;
-        height: 150px;
-        object-fit: cover;
-        display: block;
-
-        @media (min-width: $medium) {
-          height: 100%;
-        }
-      }
-    }
-
-    &__item:nth-child(1) {
-      grid-area: 1 / 1 / 2 / 3; 
-    }
-
-    &__item:nth-child(2) { 
-      grid-area: 2 / 1 / 3 / 2;
-    }
-    &__item:nth-child(3) {
-      grid-area: 2 / 2 / 3 / 3;
-
-      img {
-        object-position: left;
-      }
-    }
-
-    &__text {
-      text-align: center;
-      padding: 20px;
-      padding-bottom: 40px;
-      background: $primary;
-
-      @media (min-width: $medium) {
-        position: absolute;
-        bottom: 0;
-        padding-bottom: 50px;
-        left: 50%;
-        transform: translateX(-50%);
-        right: 15px;
-        bottom: 20px;
-        width: calc(100% - 30px);
-        padding: 20px;
-        background: rgba(255,255,255,0.75);
-        border: 1px solid $black;
-      }
+    &::after {
+      box-shadow: inset 0 0 150px #000000;
     }
   }
+
+  &__title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    width: 98%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+
+    img {
+      width: 768px;
+      max-width: 90%;
+    }
+  }
+}
+
+#svgFilter {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+}
+
+#mainstage {
+  width: 100%;
+  height: 100%;
+  overflow:hidden;
+  margin: 0;
+  padding: 0px;
+  background-color: black;
+  filter:blur(5px) url(#svgFilter);
+}
 </style>

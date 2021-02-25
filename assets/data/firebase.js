@@ -1,10 +1,9 @@
 export default {
-    apiKey: "AIzaSyACUsK5sxlzdFGvO27pX_L7B4tjDrNgHQc",
-    authDomain: "iconari-app.firebaseapp.com",
-    databaseURL: "https://iconari-app.firebaseio.com",
-    projectId: "iconari-app",
-    storageBucket: "iconari-app.appspot.com",
-    messagingSenderId: "225002566343",
-    appId: "1:225002566343:web:26e266d20ed929982004e2",
-    measurementId: "G-8FRST5DH88"
+    apiKey: "AIzaSyA3sfsONeHXH5jpDcBDDk0cW12os3hg4Hc",
+    authDomain: "sofarsobadapparel.firebaseapp.com",
+    projectId: "sofarsobadapparel",
+    storageBucket: "sofarsobadapparel.appspot.com",
+    messagingSenderId: "513389186735",
+    appId: "1:513389186735:web:6524eb8423bae71b1ece5a",
+    measurementId: "G-73YKQTQXB0"
 }

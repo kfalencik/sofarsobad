@@ -6,7 +6,7 @@
           <div class="header__logo">
             <router-link to="/">
               <h1 class="sr-only">Peter Falencik Photography</h1>
-              <img src="/logo.png" alt="Peter Falencik Photography" />
+              <img src="/logo-white.png" alt="Peter Falencik Photography" height="35" />
             </router-link>
           </div>
         </div>
@@ -160,6 +160,7 @@ import Cart from '~/components/Cart';
   .header {
     z-index: 20;
     border-bottom: 1px solid $primary;
+    background: $black;
 
     .section {
       padding-top: 20px;
@@ -235,8 +236,8 @@ import Cart from '~/components/Cart';
         }
 
         .is-primary {
-          background-color: $black;
-          border-color: $black;
+          background-color: $white;
+          border-color: $white;
         }
       }
 
@@ -291,6 +292,7 @@ import Cart from '~/components/Cart';
           border-bottom: 2px solid transparent;
 
           a {
+            color: $white;
             letter-spacing: 0.2em;
             padding-bottom: 8px;
             text-transform: uppercase;
@@ -298,7 +300,7 @@ import Cart from '~/components/Cart';
 
 
             &.nuxt-link-exact-active, &:hover {
-              border-bottom: 2px solid $black;
+              border-bottom: 2px solid $white;
             }
           }
         }
@@ -388,7 +390,7 @@ import Cart from '~/components/Cart';
             padding: 12px 0;
             display: block;
             font-size: 0.8em;
-            color: $black;
+            color: $white;
           }
         }
       }
@@ -428,7 +430,7 @@ import Cart from '~/components/Cart';
 
         a {
           position: relative;
-          color: $black;
+          color: $white;
         }
       }
     }
