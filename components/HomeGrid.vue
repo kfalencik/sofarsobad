@@ -78,7 +78,7 @@ export default {
       }
     },
     render() {
-      let distance = 150;
+      let distance = 120;
       //clear the canvas.
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
       //Run through the stars
@@ -175,7 +175,7 @@ export default {
   }
 
   @media (max-width: $medium) {
-    height: calc(100vh - 67px);
+    height: calc(100vh - 100px);
 
     &::after {
       box-shadow: inset 0 0 150px #000000;
