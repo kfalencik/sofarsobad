@@ -1,6 +1,6 @@
 export const strict = false
 
-import  firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import emailjs from 'emailjs-com';
 import 'firebase/firestore';
 import 'firebase/firebase-storage';
@@ -135,8 +135,6 @@ export const mutations = {
       contentType: 'image/jpeg',
     };
     const self = this;
-
-    console.log(product)
 
     product[1].forEach((file, index) => {
       storage.child(`images/${product[0].slug}/${file.name}`).put(file, metadata).then((payload) => {

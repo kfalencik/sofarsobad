@@ -1,5 +1,5 @@
 <template>
-  <div v-if="product">
+  <div v-if="product && product.title">
       <div class="section section--page">
         <div class="product container">
           <template v-if="overlay">
@@ -99,7 +99,7 @@ import Stars from '~/components/Stars';
 import SimilarProducts from '~/components/SimilarProducts';
 
 export default {
-  head () {
+  metaInfo () {
     return {
       title: 'So Far So Bad - ' + this.product.title,
       meta: [
@@ -120,31 +120,6 @@ export default {
       link: [
         { rel: 'canonical', href: 'https://www.sofarsobad.co.uk/shop/' + this.$route.params.slug}
       ]
-    }
-  },
-
-  jsonld() {
-    return {
-      "@context": "https://www.schema.org",
-      "@type": "Product",
-      "name": this.product.title,
-      "brand": {
-        "@type": "Brand",
-        "name": "So Far So Bad"
-      },
-      "description": this.product.body,
-      "sku": this.product.slug,
-      "logo": "https://sofarsobad.co.uk/logo.png",
-      "image": this.product.image1,
-      "productID": this.product.slug,
-      "offers": {
-        "@type": "Offer",
-        "url": "https://sofarsobad.co.uk/shop/" + this.product.slug,
-        "priceCurrency": "GBP",
-        "price": this.priceFormatter(this.productTotal),
-        "priceValidUntil": "2025-11-20",
-        "availability": "https://schema.org/InStock"
-      }
     }
   },
 
