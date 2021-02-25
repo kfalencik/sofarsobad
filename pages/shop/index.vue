@@ -3,7 +3,7 @@
     <div class="container">
       <div class="page-header">
         <h2>Shop</h2>
-        <p>Discover our collection of tattoo inspired, minimalist designs. We know how much you love plain apparel with simple illustrations, so we're striving to deliver just that.</p>
+        <p>Discover our collection of tattoo inspired, minimalist designs. We know how much you love simple apparel with small but bold illustrations, so that's what we're striving to deliver.</p>
       </div>
       <div class="filters">
         <!-- <b-button icon-left="filter" @click="toggleFilters">Filters</b-button> -->
