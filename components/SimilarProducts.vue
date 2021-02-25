@@ -23,7 +23,6 @@ export default {
 
       const slug = this.$route.params.slug;
       const product = productsArray.filter(item => item.slug === slug)[0];
-      const productCategories = product.categories.split(', ').sort((a, b) => (a > b) ? 1 : -1);
       
       for (let i = productsArray.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -34,15 +33,6 @@ export default {
         productsArray.forEach(item => {
           if (item.slug !== slug) {
             item.similarity = 0
-            if (item.categories.split(', ').sort((a, b) => (a < b) ? 1 : -1).includes(productCategories[0])) {
-              item.similarity = item.similarity + 2
-            }
-            if (item.categories.split(', ').sort((a, b) => (a < b) ? 1 : -1).includes(productCategories[1])) {
-              item.similarity = item.similarity + 1
-            }
-            if (item.categories.split(', ').sort((a, b) => (a < b) ? 1 : -1).includes(productCategories[2])) {
-              item.similarity = item.similarity + 1
-            }
             if (item.title.substring(0, 3) === product.title.substring(0, 3)) {
               item.similarity = item.similarity + 5
             }

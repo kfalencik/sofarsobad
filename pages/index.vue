@@ -1,7 +1,7 @@
 <template>
   <div>
     <HomeGrid />
-    <Popular v-if="!loaded" number="8" />
+    <New v-if="!loaded" number="8" />
     
     <!-- <New number="8" /> -->
     <!-- <Testimonials /> -->

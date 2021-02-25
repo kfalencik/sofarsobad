@@ -8,13 +8,7 @@
       <Products :products="products" />
 
       <div class="has-text-centered">
-        <b-button to="/shop" tag="router-link" class="is-black"> 
-          <b-icon
-            icon="cart"
-            size="is-small">
-          </b-icon>
-          &nbsp; Explore Our Designs
-        </b-button>
+        <b-button to="/shop" tag="router-link" class="is-black">Explore More</b-button>
       </div>
     </div>
   </div>
@@ -42,6 +36,8 @@ export default {
 
 <style lang="scss" scoped>
   .container {
+    margin-bottom: 25px;
+
     h2 {
       margin-top: 0;
       text-align: center;
