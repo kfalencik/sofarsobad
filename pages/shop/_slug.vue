@@ -4,16 +4,12 @@
         <div class="product container">
           <template v-if="overlay">
             <div class="product__overlay" @click="overlay = false">
-              <img :src="product.image1" v-if="image === 1" role="presentation" alt="" />
-              <img :src="product.image2" v-if="image === 2" role="presentation" alt="" />
-              <img :src="product.image3" v-if="image === 3" role="presentation" alt="" />
-              <img :src="product.image4" v-if="image === 4" role="presentation" alt="" />
-              <img :src="product.image5" v-if="image === 5" role="presentation" alt="" />
+              <img v-for="(item, index) in productImages" :src="item" :key="`overlay-image-${index}`" role="presentation" alt="" v-show="image === index + 1" />
 
-              <button @click.prevent.stop="image === 1 ? image = 5 : image = image - 1" class="product__nav-item" title="Previous">
+              <button @click.prevent.stop="image === 1 ? image = productImages.length : image = image - 1" class="product__overlay-nav-item" title="Previous">
                 <b-icon icon="arrow-left"></b-icon>
               </button>
-              <button @click.prevent.stop="image === 5 ? image = 1 : image = image + 1" class="product__nav-item" title="Next">
+              <button @click.prevent.stop="image === productImages.length ? image = 1 : image = image + 1" class="product__overlay-nav-item" title="Next">
                 <b-icon icon="arrow-right"></b-icon>
               </button>
 
@@ -23,18 +19,10 @@
             </div>
           </template>
 
-          <div class="mt-4">
-            <router-link to="/shop"><b-icon icon="chevron-left" size="is-small"></b-icon>Back to shop</router-link>
-          </div>
-
-          <div class="page-header">
-            <h2>{{product.title}}</h2>
-            <Stars :product="product.id" link="true" />
-            <p v-if="product.body" v-html="product.body"></p>
-          </div>
-
-          <div class="columns is-4">
-            <div class="column is-two-thirds"></div>
+          <div class="columns is-4 mt-4">
+            <div class="column is-two-thirds">
+              <router-link to="/shop"><b-icon icon="chevron-left" size="is-small"></b-icon>Back to shop</router-link>
+            </div>
             <div class="column is-one-third">
               <div class="product__navigation has-text-right">
                 <span @click="nextProduct('next')"><b-icon icon="chevron-left" size="is-small"></b-icon> Previous Product</span>
@@ -47,51 +35,39 @@
           <div class="columns is-4">
             <div class="column is-two-thirds">
               <div class="product__image">
-                <img :src="product.image1" v-if="image === 1" role="presentation" alt="" />
-                <img :src="product.image2" v-if="image === 2" role="presentation" alt="" />
-                <img :src="product.image3" v-if="image === 3" role="presentation" alt="" />
-                <img :src="product.image4" v-if="image === 4" role="presentation" alt="" />
-                <img :src="product.image5" v-if="image === 5" role="presentation" alt="" />
+                <img v-for="(item, index) in productImages" :src="item" :key="`product-image-${index}`" v-show="image === index + 1" role="presentation" alt="" />
 
                 <button @click="overlay = true" class="product__image-fullscreen" title="Full screen">
                   <b-icon icon="fullscreen"></b-icon>
                 </button>
-                <button @click="image === 5 ? image = 1 : image = image + 1" class="product__nav-item" title="Next">
+                <button @click="image === productImages.length ? image = 1 : image = image + 1" class="product__nav-item" title="Next">
                   <b-icon icon="arrow-right"></b-icon>
                 </button>
-                <button @click="image === 1 ? image = 5 : image = image - 1" class="product__nav-item" title="Previous">
+                <button @click="image === 1 ? image = productImages.length : image = image - 1" class="product__nav-item" title="Previous">
                   <b-icon icon="arrow-left"></b-icon>
                 </button>
               </div>
 
               <div class="product__thumbnails"> 
-                <div class="product__thumbnails-item" @click="image = 1;" :class="{'product__thumbnails-item--active': image === 1}">
-                  <img :src="product.image1" alt="Thumbnail 1" />
-                </div>
-                <div class="product__thumbnails-item" @click="image = 2;" :class="{'product__thumbnails-item--active': image === 2}">
-                  <img :src="product.image2" alt="Thumbnail 2" />
-                </div>
-                <div class="product__thumbnails-item" @click="image = 3;" :class="{'product__thumbnails-item--active': image === 3}">
-                  <img :src="product.image3" alt="Thumbnail 3" />
-                </div>
-                <div class="product__thumbnails-item" @click="image = 4;" :class="{'product__thumbnails-item--active': image === 4}">
-                  <img :src="product.image4" alt="Thumbnail 4" />
-                </div>
-                <div class="product__thumbnails-item" @click="image = 5;" :class="{'product__thumbnails-item--active': image === 5}">
-                  <img :src="product.image5" alt="Thumbnail 5" />
+                <div v-for="(item, index) in productImages" :key="`thumbnail-image-${index}`" class="product__thumbnails-item" @click="image = index + 1;" :class="{'product__thumbnails-item--active': image === index + 1}">
+                  <img :src="item" alt="Thumbnail 1" />
                 </div>
               </div>
             </div>
             
             <div class="product__details column is-one-third">
+              <h2>{{product.title}}</h2>
+              <Stars :product="product.id" link="true" />
+              <p v-if="product.body" v-html="product.body"></p>
+
               <div class="product__options">
                 <div class="product__option product__option--with-guide">
-                  <h5>Material</h5>
+                  <h5>Size</h5>
                   <div class="wrap">
                     <b-field>
-                      <b-select :v-model="size">
-                        <option>
-                          Small
+                      <b-select v-model="size">
+                        <option v-for="size in sizes" :value="size.value" :key="`size-${size.value}`">
+                          {{ size.label }}
                         </option>
                       </b-select>
                     </b-field>
@@ -190,6 +166,30 @@ export default {
   },
 
   computed: {
+    sizes () {
+      return this.$store.state.sizes
+    },
+
+    productImages () {
+      const images = []
+      if (this.product.image1) {
+        images.push(this.product.image1)
+      }
+      if (this.product.image2) {
+        images.push(this.product.image2)
+      }
+      if (this.product.image3) {
+        images.push(this.product.image3)
+      }
+      if (this.product.image4) {
+        images.push(this.product.image4)
+      }
+      if (this.product.image5) {
+        images.push(this.product.image5)
+      }
+      return images
+    },
+    
     slug () {
       return this.$route.params.slug;
     },
@@ -279,7 +279,7 @@ export default {
     addToCart: function() {
       const self = this;
 
-      this.$store.commit('localStorage/addToCart', [this.product.id, this.productInfo, this.quantity]);
+      this.$store.commit('localStorage/addToCart', [this.product.id, this.size, this.quantity]);
       this.$buefy.snackbar.open({
         duration: 1000,
         position: 'is-top',
@@ -349,6 +349,50 @@ export default {
         }
       }
 
+      &-nav-item {
+        color: $black;
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        border: none;
+        width: 40px;
+        height: 40px;
+        z-index: 30;
+        transition: opacity .5s ease, background .5s ease, color .5s ease;
+        cursor: pointer;
+        display: block;
+        transform: translateY(-50%);
+
+        @media (max-width: $medium) {
+          font-size: 14px;
+
+          .icon {
+            font-size: 14px;
+          }
+        }
+
+        @media (min-width: $medium) {
+          left: 20px;
+          background: $black;
+          color: $white;
+          border: 1px solid $primary;
+
+          &:hover {
+            background: $tertiary;
+            color: $white;
+          }
+        }
+
+        &:nth-of-type(2) {
+          left: auto;
+          right: 20px;
+
+          @media (max-width: $medium) {
+            right: 5px;
+          }
+        }
+      }
+
       button.close {
         background: $black;
         color: $white;
@@ -376,59 +420,6 @@ export default {
           color: $white;
         }
       }
-    }
-
-    &__information-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 999;
-      background: rgba(0,0,0,.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      img {
-        margin-top: 25px;
-      }
-
-      h3 {
-        margin: 35px 0 10px;
-      }
-
-      .close {
-        background: $black;
-        color: $white;
-        position: absolute;
-        top: 30px;
-        right: 10px;
-        border: none;
-        width: 40px;
-        height: 40px;
-        z-index: 30;
-        transition: all .5s ease;
-        cursor: pointer;
-        display: block;
-        transform: translateY(-50%);
-
-        &:hover {
-          background: $tertiary;
-          color: $white;
-        }
-      }
-    }
-
-    &__information-overlay-wrapper {
-      background: $white;
-      width: 96%;
-      max-width: 1024px;
-      min-height: 250px;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 20px;
-      position: relative;
     }
 
     &__nav-item {
@@ -635,20 +626,18 @@ export default {
         height: 450px;
       }
 
-
       @media (min-width: $large) {
         height: 510px;
       }
 
       @media (min-width: $superlarge) {
-        height: 585px;
+        height: 670px;
       }
 
       img {
         height: 100%;
+        width: 100%;
         object-fit: cover;
-        display: block;
-        margin: 0 auto;
       }
     }
 

@@ -44,7 +44,7 @@ export default {
       this.cart.forEach(item => {
         let product = this.product(item.product);
         let productPrice = this.productTotal(product);
-        productPrice = this.productWithExtras(productPrice, item.extras[0], item.extras[1], item.extras[2], item.extras[3], item.extras[4], item.extras[5], item.extras[6]);
+        productPrice = this.productWithExtras(productPrice);
         price = price + (productPrice * item.quantity);
       });
 
@@ -70,33 +70,9 @@ export default {
 
       return price;
     },
-    productWithExtras(total, material, finish, style, size, frame, glass, backing) {
+    productWithExtras(total) {
       let price = total;
-      price = price + this.prices[material].price;
-
-      if (this.prices[material].finish[finish].size) {
-        price = price + this.prices[material].finish[finish].size[size].price;
-      }
-
-      if (this.prices[material].finish) {
-        price = price + this.prices[material].finish[finish].price;
-      }
-
-      if (this.prices[material].finish[finish].styles) {
-        price = price + this.prices[material].finish[finish].styles[style].price;
-      }
-
-      if (this.prices[material].finish[finish].backing) {
-        price = price + this.prices[material].finish[finish].backing[backing].price;
-      }
-
-      if (this.prices[material].glass) {
-        price = price + this.prices[material].glass[glass].price;
-      }
-
-      if (this.prices[material].frame) {
-        price = price + this.prices[material].frame[frame].price;
-      }
+      price = price
 
       return price;
     }

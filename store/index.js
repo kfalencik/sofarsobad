@@ -26,6 +26,24 @@ export const state = () => ({
   reviews: [],
   orders: [],
   assets: [],
+  sizes: [
+    {
+      value: 'small',
+      label: 'Small'
+    },
+    {
+      value: 'medium',
+      label: 'Medium'
+    },
+    {
+      value: 'large',
+      label: 'Large'
+    },
+    {
+      value: 'xlarge',
+      label: 'Extra Large'
+    }
+  ],
   searchKeyword: '',
   homepage: data.homepage,
   filterPrice: [0, 999],

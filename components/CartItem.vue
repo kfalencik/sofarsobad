@@ -8,7 +8,7 @@
       </div>
       <div class="column is-two-thirds is-two-thirds-mobile">
         <h5>{{ product.title }}</h5>
-        <span>(SKU: {{product.slug}})</span>
+        <span>{{ sizeLabel }}</span>
       </div>
     </div>
 
@@ -32,25 +32,25 @@ export default {
   props: [
     'productid',
     'quantity',
-    'extras',
+    'size',
     'index'
   ],
   computed: {
+    sizes () {
+      return this.$store.state.sizes
+    },
+
+    sizeLabel () {
+      return this.sizes ? this.sizes.find(item => item.value === this.size).label : null
+    },
+
     product() {
       const product = this.$store.state.products.filter(product => product.id === parseInt(this.productid));
       return product[0];
     },
 
-    materials() {
-      return this.$store.state.pricing;
-    },
-
-    formats() {
-      return this.$store.state.formats;
-    },
-
     productTotal() {
-      let price = this.product.price * this.formats[this.extras.format].sizes[this.extras.size].price;
+      let price = this.product.price
       let discount = (price / 100) * this.product.discount;
       price = price - discount;
 
@@ -59,16 +59,6 @@ export default {
 
     productWithExtras() {
       let price = this.productTotal;
-      price = price + this.materials[this.extras.material].finishes[this.extras.finish][this.extras.format === 0 ? 'styles' : 'panoramaStyles'][this.extras.style].sizes[this.extras.size]
-
-      if (this.extras.frame) {
-        price = price + this.materials[this.extras.material].frames[this.extras.frame].sizes[this.extras.format][this.extras.size]
-      }
-
-      if (this.extras.frame && this.extras.glass) {
-        price = price + this.materials[this.extras.material].glass[this.extras.glass].sizes[this.extras.format][this.extras.size]
-      }
-
       return price;
     },
     total() {

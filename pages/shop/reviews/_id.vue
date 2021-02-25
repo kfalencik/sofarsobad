@@ -143,7 +143,6 @@
       margin: 20px 0 10px;
       display: flex;
       flex-direction: row;
-      align-items: center;
 
       &__desc {
         color: $lightgrey;

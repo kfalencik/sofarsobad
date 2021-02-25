@@ -29,7 +29,7 @@ export const mutations = {
   addToCart (state, data) {
     let cartItem = {
       product: data[0],
-      extras: data[1],
+      size: data[1],
       quantity: data[2]
     };
 
@@ -38,15 +38,7 @@ export const mutations = {
 
     // Check if item already exists in cart
     state.cart.forEach(item => {
-      if (item.product == cartItem.product
-        && item.extras.material === cartItem.extras.material
-        && item.extras.finish === cartItem.extras.finish
-        && item.extras.style === cartItem.extras.style
-        && item.extras.format === cartItem.extras.format
-        && item.extras.frame === cartItem.extras.frame
-        && item.extras.glass === cartItem.extras.glass
-        && item.extras.size === cartItem.extras.size
-      ) {
+      if (item.product == cartItem.product && item.size === cartItem.size) {
         found = i;
       }
       i++;

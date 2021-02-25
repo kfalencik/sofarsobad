@@ -3,7 +3,7 @@
     <template v-if="cart.length > 0">
       <div class="cart">
         <div class="cart__items">
-          <CartItem class="cart__item" v-for="(item, index) in cart" :key="'item-' + index" :index="index" :productid="item.product" :quantity="item.quantity" :extras="item.extras" />
+          <CartItem class="cart__item" v-for="(item, index) in cart" :key="'item-' + index" :index="index" :productid="item.product" :quantity="item.quantity" :size="item.size" />
           <div class="cart-item" v-if="discount !== null">
             <strong>{{ discounts[discount].title }}</strong> - {{ discounts[discount].discount }}%
           </div>
@@ -53,32 +53,15 @@ export default {
       return this.$store.state.discounts;
     },
 
-    materials () {
-      return this.$store.state.pricing
-    },
-
-    formats () {
-      return this.$store.state.formats
-    },
 
     total () {
       let price = 0;
 
       this.cart.forEach(item => {
         let product = this.product(item.product);
-        let productPrice = product.price * this.formats[item.extras.format].sizes[item.extras.size].price;
+        let productPrice = product.price
         let discount = (productPrice / 100) * product.discount;
         productPrice = productPrice - discount;
-
-        productPrice = productPrice + this.materials[item.extras.material].finishes[item.extras.finish][item.extras.format === 0 ? 'styles' : 'panoramaStyles'][item.extras.style].sizes[item.extras.size]
-
-        if (item.extras.frame) {
-          productPrice = productPrice + this.materials[item.extras.material].frames[item.extras.frame].sizes[item.extras.format][item.extras.size]
-        }
-
-        if (item.extras.frame && item.extras.glass) {
-          productPrice = productPrice + this.materials[item.extras.material].glass[item.extras.glass].sizes[item.extras.format][item.extras.size]
-        }
 
         price = price + (productPrice * item.quantity);
       });

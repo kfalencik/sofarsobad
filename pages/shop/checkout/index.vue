@@ -289,31 +289,14 @@ export default {
       discounts() {
         return this.$store.state.discounts;
       },
-      materials() {
-        return this.$store.state.pricing;
-      },
-      formats () {
-        return this.$store.state.formats;
-      },
       total() {
         let price = 0;
 
         this.cart.forEach(item => {
           let product = this.product(item.product);
-          let productPrice = product.price * this.formats[item.extras.format].sizes[item.extras.size].price;
+          let productPrice = product.price
           let productDiscount = (productPrice / 100) * product.discount;
           productPrice = productPrice - productDiscount;
-
-          productPrice = productPrice + this.materials[item.extras.material].finishes[item.extras.finish][item.extras.format === 0 ? 'styles' : 'panoramaStyles'][item.extras.style].sizes[item.extras.size]
-
-          if (item.extras.frame) {
-            productPrice = productPrice + this.materials[item.extras.material].frames[item.extras.frame].sizes[item.extras.format][item.extras.size]
-          }
-
-          if (item.extras.frame && item.extras.glass) {
-            productPrice = productPrice + this.materials[item.extras.material].glass[item.extras.glass].sizes[item.extras.format][item.extras.size]
-          }
-
           price = price + (productPrice * item.quantity);
         });
 
@@ -331,7 +314,7 @@ export default {
 
         this.cart.forEach(item => {
           let product = this.product(item.product);
-          let productPrice = this.productWithExtras(product, item.extras);
+          let productPrice = this.productWithExtras(product);
           let price = productPrice * item.quantity;
           cartTotal = cartTotal + price;
 
@@ -390,21 +373,7 @@ export default {
           return (Math.floor(price * 100) / 100).toFixed(2)
         },
         extrasFromatter: function(extras) {
-          let productList = `Material: ${this.materials[extras.material].title}, Media: ${this.materials[extras.material].finishes[extras.finish].title}, Style: ${this.materials[extras.material].finishes[extras.finish].styles[extras.style].title},`;
-
-          if (this.materials[extras.material].frames && extras.frame) {
-            productList = productList + ` Frame: ${this.materials[extras.material].frames[extras.frame].title},`;
-          }
-
-          if (this.materials[extras.material].glass && extras.glass) {
-            productList = productList + ` Glass: ${this.materials[extras.material].glass[extras.glass].title},`;
-          }
-
-          productList = productList + ` Size: ${this.formats[extras.format].sizes[extras.size].title}`;
-
-          if (extras.format !== 0) {
-            productList = productList + ` (${this.formats[extras.format].title})`;
-          }
+          let productList = `Size:`;
 
           return productList;
         },
@@ -413,26 +382,17 @@ export default {
             return product[0];
         },
         productTotal(product, extras) {
-            let price = product.price * this.formats[extras.format].sizes[extras.size];
+            let price = product.price;
             let discount = (price / 100) * product.discount;
             price = price - discount;
 
             return price;
         },
         productWithExtras(product, extras) {
-          let price = product.price * this.formats[extras.format].sizes[extras.size].price;
+          let price = product.price;
           let productDiscount = (price / 100) * product.discount;
           price = price - productDiscount;
 
-          price = price + this.materials[extras.material].finishes[extras.finish][extras.format === 0 ? 'styles' : 'panoramaStyles'][extras.style].sizes[extras.size]
-
-          if (extras.frame) {
-            price = price + this.materials[extras.material].frames[extras.frame].sizes[extras.format][extras.size]
-          }
-
-          if (extras.frame && extras.glass) {
-            price = price + this.materials[extras.material].glass[extras.glass].sizes[extras.format][extras.size]
-          }
 
           return price;
         },

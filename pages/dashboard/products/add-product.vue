@@ -235,10 +235,10 @@ export default {
           uploadImages.push(this.image2)
         }
         if (this.image3) {
-          uploadImages.push(this.image2)
+          uploadImages.push(this.image3)
         }
         if (this.image4) {
-          uploadImages.push(this.image2)
+          uploadImages.push(this.image4)
         }
         if (this.image5) {
           uploadImages.push(this.image5)

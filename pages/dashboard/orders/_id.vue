@@ -49,8 +49,8 @@
           <b-table-column field="SKU" label="SKU" v-slot="props">
             {{ props.row.sku }}
           </b-table-column>
-          <b-table-column field="description" label="Specyfikacja" v-slot="props">
-            <span v-html="extras(props.row.description)"></span>
+          <b-table-column field="description" label="Rozmiar" v-slot="props">
+            <span v-html="props.row.size"></span>
           </b-table-column>
           <b-table-column field="quantity" label="Ilosc" v-slot="props">
             {{ props.row.quantity }}
@@ -116,14 +116,6 @@ export default {
         case 'dispatched':
           return 'is-success'
       }
-    },
-    extras(extras) {
-      let extrasList = '<ul>';
-      extras.split(',').forEach(item => {
-        extrasList = extrasList + '<li>' + item + '</li>';
-      });
-      extrasList = extrasList + '</ul>';
-      return extrasList;
     },
     dispatch() {
       this.$buefy.dialog.confirm({
