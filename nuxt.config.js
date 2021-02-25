@@ -20,8 +20,6 @@ export default async function() {
     productPaths.push('/dashboard/products/' + product.id);
   });
 
-  console.log(products)
-
   return {
     /*
     ** Headers of the page
@@ -60,7 +58,6 @@ export default async function() {
       ]
     },
     generate: {
-      crawler: true,
       routes: [
         ...productPaths,
         '/shop',
