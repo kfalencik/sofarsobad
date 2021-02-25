@@ -74,11 +74,11 @@ export default {
 
     &__image {
       overflow: hidden;
-      transition: all .4s ease;
       height: 350px;
       text-align: center;
 
       div {
+        transform-origin: right top;
         transition: all .4s ease;
         height: 350px;
       }
@@ -92,7 +92,7 @@ export default {
 
     a:hover {
       .product__image div{
-        transform: scale(1.5);
+        transform: scale(2);
       }
     }
 
