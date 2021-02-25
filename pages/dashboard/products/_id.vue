@@ -23,10 +23,11 @@
               <span>Click to upload</span>
             </a>
           </b-upload>
-          <span class="file-thumbnail" v-if="image1URL">
-            <img :src="image1URL" />
-          </span>
         </b-field>
+
+        <div class="file-thumbnail" v-if="image1URL">
+          <img :src="image1URL" />
+        </div>
 
         <b-field class="form__input file" label="Zdjecie 1">
           <b-upload v-model="image2" required>
@@ -35,10 +36,11 @@
               <span>Click to upload</span>
             </a>
           </b-upload>
-          <span class="file-thumbnail" v-if="image2URL">
-            <img :src="image2URL" />
-          </span>
         </b-field>
+
+        <span class="file-thumbnail" v-if="image2URL">
+          <img :src="image2URL" />
+        </span>
 
         <b-field class="form__input file" label="Zdjecie 2">
           <b-upload v-model="image3" required>
@@ -47,10 +49,11 @@
               <span>Click to upload</span>
             </a>
           </b-upload>
-          <span class="file-thumbnail" v-if="image3URL">
-            <img :src="image3URL" />
-          </span>
         </b-field>
+
+        <span class="file-thumbnail" v-if="image3URL">
+          <img :src="image3URL" />
+        </span>
 
         <b-field class="form__input file" label="Zdjecie 3">
           <b-upload v-model="image4" required>
@@ -59,10 +62,11 @@
               <span>Click to upload</span>
             </a>
           </b-upload>
-          <span class="file-thumbnail" v-if="image4URL">
-            <img :src="image4URL" />
-          </span>
         </b-field>
+
+        <span class="file-thumbnail" v-if="image4URL">
+          <img :src="image4URL" />
+        </span>
 
         <b-field class="form__input file" label="Zdjecie 4">
           <b-upload v-model="image5" required>

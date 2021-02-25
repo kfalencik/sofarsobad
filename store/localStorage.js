@@ -36,8 +36,6 @@ export const mutations = {
     let found = null;
     let i = 0;
 
-    console.log(data)
-
     // Check if item already exists in cart
     state.cart.forEach(item => {
       if (item.product == cartItem.product

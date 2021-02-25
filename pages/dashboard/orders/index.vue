@@ -54,8 +54,6 @@ export default {
         product.viewLink = '/dashboard/orders/' + product.paypal.orderID;
       });
 
-      console.log(ordersData)
-
       return ordersData;
     }
   },
