@@ -26,52 +26,18 @@ export const state = () => ({
   reviews: [],
   orders: [],
   assets: [],
-  newsletter: [],
   searchKeyword: '',
   homepage: data.homepage,
-  categories: data.categories,
-  filterCategories: [],
   filterPrice: [0, 999],
   filterTags: [],
-  orientation: '',
   sorter: 'popularity-az',
   pricing: data.pricing,
   prices: data.prices,
-  formats: data.formats,
   messages: [],
   loaded: false,
   redirecting: false,
   ordersLoaded: false,
   openCart: false,
-  slideshowImages: [
-    {
-      images: '6'
-    },
-    {
-      images: '2'
-    },
-    {
-      images: '3'
-    },
-    {
-      images: '4'
-    },
-    {
-      images: '5'
-    },
-    {
-      images: '1'
-    },
-    {
-      images: '7'
-    },
-    {
-      images: '8'
-    },
-    {
-      images: '9'
-    }
-  ]
 })
 
 export const mutations = {
@@ -81,40 +47,8 @@ export const mutations = {
   setSearchKeyword (state, keyword) {
     state.searchKeyword = keyword;
   },
-  setFilterCategory (state, category) {
-    state.filterCategories = [category];
-  },
-  toggleFilterCategory (state, category) {
-    state.filterCategories = category;
-  },
   filterProducts (state) {
     state.filteredProducts = state.products;
-
-    if (state.filterCategories.length > 0) {
-      state.filteredProducts = state.filteredProducts.filter(product => {
-        let found = 0;
-
-        state.filterCategories.forEach(category => {
-          if (product.categories) {
-            found = found + product.categories.split(', ').filter(item => item === category).length
-          }
-        });
-
-        if (found > 0) {
-            return true;
-        }
-      });
-    } 
-
-    if(state.orientation !== '') {
-      if (state.orientation === 'panorama') {
-        state.filteredProducts = state.filteredProducts.filter(item => item.panorama === true)
-      } else {
-        state.filteredProducts = state.filteredProducts.filter(item => {
-          return (item.landscape && state.orientation === 'landscape') || (!item.landscape && state.orientation === 'portrait')
-        })
-      }
-    }
 
     if (state.searchKeyword !== '') {
       state.filteredProducts = state.filteredProducts.filter(product => {
@@ -123,9 +57,6 @@ export const mutations = {
         }
       });
     }
-  },
-  orientationProducts (state, orientation) {
-    state.orientation = orientation;
   },
   sortProducts (state, sorter = null) {
     if (sorter) {
@@ -172,7 +103,6 @@ export const mutations = {
     state.filteredProducts = products;
     state.discounts = data[1];
     state.reviews = data[2];
-    state.newsletter = data[3];
 
     state.loaded = true;
   },
@@ -268,43 +198,6 @@ export const mutations = {
       })
     });
   },
-  addNewsletter (state, email) {
-    db = firebase.firestore();
-    const self = this;
-
-    db.collection("newsletter").add({
-      email,
-      subscribed: true
-    }).then(() => {
-      Toast.open({message: 'You have been added to the newsletter list.', type: 'is-success'});
-    });
-  },
-  editNewsletter (state, data) {
-    db = firebase.firestore();
-    const self = this;
-    
-    db.collection("newsletter").where("email", "==", data[0]).get()
-    .then(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {
-        db.collection("newsletter").doc(doc.id).update({subscribed: data[1]}).then(() => {
-          self.app.router.go();
-        });
-      });
-    });
-  },
-  removeNewsletter(state, email) {
-    db = firebase.firestore();
-    const self = this;
-
-    db.collection("newsletter").where("email", "==", email).get()
-    .then(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {
-        doc.ref.delete().then(() => {
-          self.app.router.go();
-        });
-      })
-    });
-  },
   addDiscountCode (state, discount) {
     db = firebase.firestore();
     const self = this;
@@ -389,18 +282,10 @@ export const actions = {
     let products = [];
     let discounts = [];
     let reviews = [];
-    let assets = [];
-    let newsletter = [];
 
     await db.collection('discounts').get().then(querySnapshot => {
       querySnapshot.docs.forEach(doc => {
         discounts.push(doc.data());
-      });
-    });
-
-    await db.collection('newsletter').get().then(querySnapshot => {
-      querySnapshot.docs.forEach(doc => {
-        newsletter.push(doc.data());
       });
     });
 
@@ -428,7 +313,7 @@ export const actions = {
       });
     });
 
-    context.commit('loadData', [products, discounts, reviews, newsletter]);
+    context.commit('loadData', [products, discounts, reviews]);
   },
   async getOrdersData (context) {
     db = firebase.firestore();
@@ -442,27 +327,5 @@ export const actions = {
     });
     orders.sort((a, b) => (a.timestamp > b.timestamp) ? 1 : -1);
     context.commit('loadOrders', orders);
-  },
-
-  async getSlideshowImages (context) {
-    const storage = firebase.storage().ref();
-
-    context.state.slideshowImages.forEach(item => {
-      const images = []
-
-      storage.child(`site/slideshow/${item.images}.jpg`).getDownloadURL().then(function(url) {
-        images.push(url)
-        storage.child(`site/slideshow/${item.images}_medium.jpg`).getDownloadURL().then(function(url) {
-          images.push(url)
-          storage.child(`site/slideshow/${item.images}_small.jpg`).getDownloadURL().then(function(url) {
-            images.push(url)
-            storage.child(`site/slideshow/${item.images}_xs.jpg`).getDownloadURL().then(function(url) {
-              images.push(url)
-              item.images = images;
-            })
-          })
-        })
-      })
-    })
   }
 }

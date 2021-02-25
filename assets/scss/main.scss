@@ -105,8 +105,12 @@ form {
   }
 }
 
+.loading-overlay .loading-background {
+  background: rgba(0,0,0,0.75);
+}
+
 .help {
-  color: $lightgrey;
+  color: $grey;
 }
 
 .input {

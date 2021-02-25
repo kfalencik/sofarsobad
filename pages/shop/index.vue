@@ -6,7 +6,8 @@
         <p>Discover our collection of beautiful fine art prints created just for you, offering a wide range of styles and subjects including our popular abstract and modern art prints.</p>
       </div>
       <div class="filters">
-        <b-button icon-left="filter" @click="toggleFilters">Filters</b-button>
+        <!-- <b-button icon-left="filter" @click="toggleFilters">Filters</b-button> -->
+        <div></div>
         <b-field>
           <b-select placeholder="Sort by" v-model="sorter" @input="sortProducts($event)" expanded>
             <option value="popularity-az">Bestselling</option>
@@ -21,14 +22,14 @@
         <Products class="column" :products="products" />
       </div>
     </div>
-    <b-sidebar
+    <!-- <b-sidebar
       :fullheight="true"
       v-model="openFilters"
     >
       <div class="p-4">
         <Filters class="column is-narrow" />
       </div>
-    </b-sidebar>
+    </b-sidebar> -->
   </div>
 </template>
 

@@ -1,19 +1,17 @@
 <template>
   <div :class="{'page': true, 'page--home': home}">
-    <div  v-if="loaded">
-    <Header />
+    <Header :loaded="loaded" />
     <main keep-alive>
       <div >
         <div class="container">
           <Messages />
         </div>
-        <nuxt />
+        <nuxt :loaded="loading" />
       </div>
       <slideshow />
       <Newsletter />
     </main>
     <Footer />
-    </div>
     <b-loading :is-full-page="true" :active.sync="loading"></b-loading>
   </div>
 </template>
@@ -34,6 +32,7 @@ export default {
       ] 
     }
   },
+  
   components: {
     Header,
     Newsletter,
@@ -42,9 +41,11 @@ export default {
     Loading,
     Slideshow
   },
+
   mounted() {
     this.$store.dispatch('getShopData');
   },
+
   computed: {
     loaded() {
       return this.$store.state.loaded;

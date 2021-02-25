@@ -13,26 +13,7 @@
         </b-field>
 
         <b-field class="form__input" label="Opis">
-          <b-input maxlength="1000" type="textarea"  v-model="description" placeholder="Opis produktu"></b-input>
-        </b-field>
-
-        <b-field class="form__input" message="Wybierz przynajmniej jedna kategorie" label="Katergorie">
-          <b-taginput
-            v-model="categories"
-            ellipsis
-            autocomplete
-            :allow-new="false"
-            :data="categoriesSelect"
-            maxtags="4"
-            :openOnFocus="true"
-            @typing="getFilteredTags"
-            field="title"
-            icon="label"
-            placeholder="Wybierz kategorie">
-              <template slot-scope="props">
-                {{props.option.title}}
-              </template>
-          </b-taginput>
+          <b-input maxlength="1000" type="textarea" v-model="body" placeholder="Opis produktu"></b-input>
         </b-field>
 
         <b-field class="form__input file" label="Glowne zdjecie produktu">
@@ -47,7 +28,7 @@
           </span>
         </b-field>
 
-        <b-field class="form__input file" label="Zdjecie 3D produktu">
+        <b-field class="form__input file" label="Zdjecie 1">
           <b-upload v-model="image2" required>
             <a class="button is-info">
               <b-icon icon="upload"></b-icon>
@@ -59,7 +40,7 @@
           </span>
         </b-field>
 
-        <b-field class="form__input file" label="Zdjecie na scianie 1">
+        <b-field class="form__input file" label="Zdjecie 2">
           <b-upload v-model="image3" required>
             <a class="button is-info">
               <b-icon icon="upload"></b-icon>
@@ -71,7 +52,7 @@
           </span>
         </b-field>
 
-        <b-field class="form__input file" label="Zdjecie na scianie 2">
+        <b-field class="form__input file" label="Zdjecie 3">
           <b-upload v-model="image4" required>
             <a class="button is-info">
               <b-icon icon="upload"></b-icon>
@@ -83,7 +64,7 @@
           </span>
         </b-field>
 
-        <b-field class="form__input file" label="Zdjecie na scianie 3">
+        <b-field class="form__input file" label="Zdjecie 4">
           <b-upload v-model="image5" required>
             <a class="button is-info">
               <b-icon icon="upload"></b-icon>
@@ -95,7 +76,7 @@
           </span>
         </b-field>
 
-        <b-field message='W dolarach np. "120.99"' class="form__input" label="Cena">
+        <b-field message='W funtach np. "120.99"' class="form__input" label="Cena">
           <b-input placeholder="Cena" v-model="price" required></b-input>
         </b-field>
 
@@ -105,69 +86,6 @@
 
         <b-field class="form__input" label="Ilosc sprzedazy">
           <b-input placeholder="Ilosc sprzedazy" v-model="bought" required></b-input>
-        </b-field>
-
-        <b-field class="form__input">
-          <label class="checkbox">
-            <input type="checkbox" v-model="panorama"> Panoarama?
-          </label>
-        </b-field>
-
-        <template v-if="panorama">
-          <b-field class="form__input file" label="Zdjecie 3D produktu (Panorama)">
-            <b-upload v-model="image6" required>
-              <a class="button is-info">
-                <b-icon icon="upload"></b-icon>
-                <span>Click to upload</span>
-              </a>
-            </b-upload>
-            <span class="file-thumbnail" v-if="image6URL">
-              <img :src="image6URL" />
-            </span>
-          </b-field>
-
-          <b-field class="form__input file" label="Zdjecie na scianie 1 (Panorama)">
-            <b-upload v-model="image7" required>
-              <a class="button is-info">
-                <b-icon icon="upload"></b-icon>
-                <span>Click to upload</span>
-              </a>
-            </b-upload>
-            <span class="file-thumbnail" v-if="image7URL">
-              <img :src="image7URL" />
-            </span>
-          </b-field>
-
-          <b-field class="form__input file" label="Zdjecie na scianie 2 (Panorama)">
-            <b-upload v-model="image8" required>
-              <a class="button is-info">
-                <b-icon icon="upload"></b-icon>
-                <span>Click to upload</span>
-              </a>
-            </b-upload>
-            <span class="file-thumbnail" v-if="image8URL">
-              <img :src="image8URL" />
-            </span>
-          </b-field>
-
-          <b-field class="form__input file" label="Zdjecie na scianie 3 (Panorama)">
-            <b-upload v-model="image9" required>
-              <a class="button is-info">
-                <b-icon icon="upload"></b-icon>
-                <span>Click to upload</span>
-              </a>
-            </b-upload>
-            <span class="file-thumbnail" v-if="image9URL">
-              <img :src="image9URL" />
-            </span>
-          </b-field>
-        </template>
-
-        <b-field label="Orientacja" v-if="!panorama">
-          <b-select placeholder="Wybierz orientacje" v-model="landscape" required>
-            <option value="true">Pozioma</option>
-            <option value="false">Pionowa</option>
-          </b-select>
         </b-field>
 
         <b-field class="form__input" message="Beda uzyte w wyszukiwarce produktow. Najelpiej dodac ok 5-10" label="Dodaj tagi">
@@ -192,15 +110,11 @@ export default {
   data() {
     return {
       title: '',
-      description: '',
+      body: '',
       slug: '',
-      categories: [],
-      categoriesSelect: [],
       price: 0,
       discount: 0,
       bought: 0,
-      panorama: true,
-      landscape: "false",
       tags: [],
       latestId: 0,
       file: null,
@@ -209,40 +123,29 @@ export default {
       image3: null,
       image4: null,
       image5: null,
-      image6: null,
-      image7: null,
-      image8: null,
-      image9: null,
       image1URL: null,
       image2URL: null,
       image3URL: null,
       image4URL: null,
       image5URL: null,
-      image6URL: null,
-      image7URL: null,
-      image8URL: null,
-      image9URL: null
     }
   },
   layout: 'dashboard',
   computed: {
-    id() {
+    id () {
       return this.$route.params.id;
     },
-    product() {
+    product () {
       let product = this.$store.state.products.filter(product => product.id === parseInt(this.id));
       product = product[0];
       this.title = product.title;
-      this.description = product.description;
+      this.body = product.body;
       this.slug = product.slug;
-      this.categoriesSelect = this.$store.state.categories
       this.price = product.price;
       this.discount = product.discount;
       this.bought = product.bought;
       this.panorama = product.panorama ? product.panorama : false
-      this.landscape = product.panorama ? true : product.landscape.toString();
       this.tags = product.tags ? product.tags.split(',') : [];
-      this.categories = product.categories ? product.categories.split(', ').map(item => this.categoriesSelect.filter(category => category.slug === item)[0]) : [];
       
       this.image1URL = product.image1
       this.image2URL = product.image2
@@ -317,54 +220,6 @@ export default {
         
         this.image5URL = reader.readAsDataURL(o);
       }
-    },
-    image6 (o) {
-      if (!this.image6 || this.image6.type !== 'image/jpeg') {
-        this.$store.commit('addMessage', ['Zly typ pliku. Sprawdz czy zdjecie jest w dobrym formacie.', 'bad']);
-        this.image6 = null
-        this.image6URL = null
-      } else {
-        var reader = new FileReader();
-        reader.onload = e => this.image6URL = e.target.result
-        
-        this.image6URL = reader.readAsDataURL(o);
-      }
-    },
-    image7 (o) {
-      if (!this.image7 || this.image7.type !== 'image/jpeg') {
-        this.$store.commit('addMessage', ['Zly typ pliku. Sprawdz czy zdjecie jest w dobrym formacie.', 'bad']);
-        this.image7 = null
-        this.image7URL = null
-      } else {
-        var reader = new FileReader();
-        reader.onload = e => this.image7URL = e.target.result
-        
-        this.image7URL = reader.readAsDataURL(o);
-      }
-    },
-    image8 (o) {
-      if (!this.image8 || this.image8.type !== 'image/jpeg') {
-        this.$store.commit('addMessage', ['Zly typ pliku. Sprawdz czy zdjecie jest w dobrym formacie.', 'bad']);
-        this.image8 = null
-        this.image8URL = null
-      } else {
-        var reader = new FileReader();
-        reader.onload = e => this.image8URL = e.target.result
-        
-        this.image8URL = reader.readAsDataURL(o);
-      }
-    },
-    image9 (o) {
-      if (!this.image9 || this.image9.type !== 'image/jpeg') {
-        this.$store.commit('addMessage', ['Zly typ pliku. Sprawdz czy zdjecie jest w dobrym formacie.', 'bad']);
-        this.image9 = null
-        this.image9URL = null
-      } else {
-        var reader = new FileReader();
-        reader.onload = e => this.image9URL = e.target.result
-        
-        this.image9URL = reader.readAsDataURL(o);
-      }
     }
   },
   methods: {
@@ -373,7 +228,6 @@ export default {
         this.title === '' ||
         this.slug === '' ||
         this.price === 0 ||
-        this.categories === [] ||
         this.tags === '' ||
         this.bought === ''
       ) {
@@ -404,39 +258,15 @@ export default {
           }
         ]
 
-        if (this.panorama) {
-          imagesUpload.push(
-            {
-              id: 6,
-              image: this.image6
-            },
-            {
-              id: 7,
-              image: this.image7
-            },
-            {
-              id: 8,
-              image: this.image8
-            },
-            {
-              id: 9,
-              image: this.image9
-            }
-          )
-        }
-
         this.$store.commit('editProduct', [
           this.product.id, 
           {
             title: this.title,
             slug: this.slug,
-            description: this.description,
+            body: this.body,
             price: this.price,
             discount: this.discount,
             bought: this.bought,
-            panorama: this.panorama,
-            categories: this.categories.map(item => item.slug).join(", "),
-            landscape: this.landscape === 'true' ? true : false,
             tags: this.tags.join(", ")
           },
           imagesUpload
@@ -444,11 +274,6 @@ export default {
 
         this.$buefy.toast.open({message: 'Zmiany zostaly zapisane!', type: 'is-success'});
       }
-    },
-
-    getFilteredTags(text) {
-      const data = this.$store.state.categories;
-      this.categoriesSelect = data.filter((option) => option.title.toLowerCase().indexOf(text.toLowerCase()) >= 0)
     }
   }
 }

@@ -12,16 +12,16 @@
 
     <HomeGrid />
 
-    <Popular number="8" />
+      <Popular number="8" />
 
-    <KeyPoints />
+      <KeyPoints />
 
-    <About />
-    
-    <LimitedEdition />
+      <About />
+      
+      <LimitedEdition />
 
-    <New number="8" />
-    <!-- <Testimonials /> -->
+      <New number="8" />
+      <!-- <Testimonials /> -->
 
     <div class="sr-only">
       <h4>Search by category</h4>
@@ -78,6 +78,13 @@ export default {
   head () {
     return {
       title: 'So Far So Bad',
+    }
+  },
+
+  props: {
+    loaded: {
+      default: false,
+      type: Boolean
     }
   },
 

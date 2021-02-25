@@ -40,12 +40,12 @@
             <nav>
               <ul>
                 <li>
-                  <a href="https://www.facebook.com/peterfalencik" target="_blank">
+                  <a href="https://www.facebook.com/sofarsobadapparel" target="_blank">
                     <b-icon icon="facebook"></b-icon>
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.instagram.com/falencikphotography/" target="_blank">
+                  <a href="https://www.instagram.com/sofarsobadapparel/" target="_blank">
                     <b-icon icon="instagram"></b-icon>
                   </a>
                 </li>
@@ -63,6 +63,7 @@
     </div>
 
     <b-sidebar
+      v-if="loaded"
       :fullheight="true"
       :right="true"
       v-model="openCart"
@@ -80,10 +81,17 @@
 import Cart from '~/components/Cart';
 
   export default{
-    data() {
+    data () {
       return {
         siteName: 'So Far So Bad',
         navigation: false
+      }
+    },
+
+    props: {
+      loaded: {
+        default: false,
+        type: Boolean
       }
     },
 
