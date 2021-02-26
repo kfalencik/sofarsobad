@@ -197,7 +197,7 @@
 
                   <paypal-checkout
                     :amount="priceFormatter(total).toString()"
-                    currency="USD"
+                    currency="GBP"
                     :env="credentials.env"
                     :client="credentials"
                     :items="cartProducts"
@@ -250,7 +250,7 @@ export default {
           name: "So Far So Bad",
           presentation: {
             brand_name: "So Far So Bad",
-            logo_image: "https://www.falencik.com/logo.png"
+            logo_image: "https://www.sofarsobad.co.uk/logo-white.png"
           },
           input_fields: {
             no_shipping: 1
@@ -324,7 +324,7 @@ export default {
             "description": this.extrasFromatter(item.extras),
             "quantity": item.quantity,
             "price": this.priceFormatter(productPrice),
-            "currency": "USD"
+            "currency": "GBP"
           });
         });
 
@@ -336,7 +336,7 @@ export default {
             "description": 'Code: ' + this.discounts[this.discount].code,
             "quantity": 1,
             "price": this.priceFormatter(totalDiscount * -1),
-            "currency": "USD"
+            "currency": "GBP"
           });
         }
 
