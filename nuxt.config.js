@@ -45,14 +45,15 @@ export default async function() {
         { hid: 'twittersite', name: 'twitter:site', content: '@sofarsobadapparel'},
         { hid: 'twittertitle', name: 'twitter:title', content: 'So Far So Bad - Ink Inspired, minimalist apparel'},
         { hid: 'twitterdesc', name: 'twitter:description', content: 'We strongly belive in the "Less is Better" rule so most of our designs are simple but bold.'},
-        { hid: 'twitterimage', name: 'twitter:image', content: 'https://d33wubrfki0l68.cloudfront.net/c65ae7c78c877a2b79ca8c12efc08fbfdf7e6409/32cd5/_nuxt/img/7aadeb4.png'},
+        { hid: 'twitterimage', name: 'twitter:image', content: 'https://www.sofarsobad.co.uk/medusa.png'},
         { hid: 'ogtitle', property: 'og:title', content: 'So Far So Bad - Ink Inspired, minimalist apparel'},
         { hid: 'ogtype', property: 'og:type', content: 'Website'},
         { hid: 'ogurl', property: 'og:url', content: 'https://www.sofarsobad.co.uk'},
         { hid: 'ogdesc', property: 'og:description', content: 'We strongly belive in the "Less is Better" rule so most of our designs are simple but bold.'},
-        { hid: 'ogimage', property: 'og:image', content: 'https://d33wubrfki0l68.cloudfront.net/c65ae7c78c877a2b79ca8c12efc08fbfdf7e6409/32cd5/_nuxt/img/7aadeb4.png'}
+        { hid: 'ogimage', property: 'og:image', content: 'https://www.sofarsobad.co.uk/medusa.png'}
       ],
       link: [
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Alegreya:ital@1&display=swap'},
         { rel: 'canonical', href: 'https://www.sofarsobad.co.uk/'},
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
         { rel: 'icon', sizes: '32x32', href: '/favicon-32x32.png' },
