@@ -1,7 +1,7 @@
 <template>
   <div>
     <HomeGrid />
-    <New v-if="!loaded" number="8" />
+    <New :loaded="!loaded" number="8" />
   </div>
 </template>
 

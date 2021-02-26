@@ -12,7 +12,6 @@
       <Newsletter />
     </main>
     <Footer />
-    <b-loading :is-full-page="true" :active.sync="loading"></b-loading>
   </div>
 </template>
 

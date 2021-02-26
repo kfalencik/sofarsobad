@@ -314,7 +314,7 @@ export const actions = {
       });
     });
 
-    await storage.ref().child('images').listAll().then(function(res) {
+    storage.ref().child('images').listAll().then(function(res) {
       res.items.forEach(imageRef => {
         imageRef.getMetadata().then(function(metadata) {
           imageRef.getDownloadURL().then(url => {

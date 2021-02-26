@@ -4,8 +4,8 @@
       <h2>
         <router-link to="/shop">Newest designs</router-link>
       </h2>
-
-      <Products :products="products" />
+      <Loading v-if="!loaded" />
+      <Products v-else :products="products" />
 
       <div class="has-text-centered">
         <b-button to="/shop" tag="router-link" class="is-black">Explore More</b-button>
@@ -17,9 +17,10 @@
 
 <script>
 import Products from './Products';
+import Loading from './Loading';
 
 export default {
-  props: ['number'],
+  props: ['number', 'loaded'],
   computed: {
     products() {
       let productsArray = [...this.$store.state.products];
@@ -29,7 +30,8 @@ export default {
     }
   },
   components: {
-    Products
+    Products,
+    Loading
   }
 }
 </script>
