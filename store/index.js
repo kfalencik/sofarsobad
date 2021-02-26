@@ -274,6 +274,8 @@ export const mutations = {
           "cart": data[1],
           "total": data[0].total
         }
+
+        console.log(data, emailParams)
         emailjs.send(emailserviceid, 'sofarsobad_dispatched', emailParams, emailuserid);
       });
     });

@@ -136,7 +136,7 @@ export default {
 
           // emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Subtotal</strong></td><td><strong>$${this.order.subtotal}</strong></td></tr>`;
           // emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Tax</strong></td><td><strong>$${this.order.tax}</strong></td></tr>`;
-          emailCart = `£{emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Total</strong></td><td><strong>£${this.order.total}</strong></td></tr>`;
+          emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Total</strong></td><td><strong>£${this.order.total}</strong></td></tr>`;
           emailCart = emailCart + '</table>';
 
           let emailShippingAddress = `<p>${this.order.details.address1}`;

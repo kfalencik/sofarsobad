@@ -237,6 +237,9 @@ export default {
       discounts() {
         return this.$store.state.discounts;
       },
+      sizes () {
+        return this.$store.state.sizes;
+      },
       total() {
         let price = 0;
 
@@ -269,7 +272,7 @@ export default {
           items.push({
             "name": product.title,
             "sku": product.slug,
-            "description": this.extrasFromatter(item.extras),
+            "description": this.extrasFromatter(item.size),
             "quantity": item.quantity,
             "price": this.priceFormatter(productPrice),
             "currency": "GBP"
@@ -320,8 +323,9 @@ export default {
         priceFormatter: function(price) {
           return (Math.floor(price * 100) / 100).toFixed(2)
         },
-        extrasFromatter: function(extras) {
-          let productList = `Size:`;
+        extrasFromatter: function(size) {
+          size = this.sizes.find(item => item.value === size).label
+          let productList = `Size: ${size}`;
 
           return productList;
         },
@@ -356,6 +360,7 @@ export default {
                 this.deliveryZipCode !== ''
             ) {
                 this.checkoutValidation = true;
+                console.log(this.deliveryAddress1)
 
               if(window.innerWidth < 1024) {
                 window.scroll({
