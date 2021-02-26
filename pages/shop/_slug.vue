@@ -458,7 +458,6 @@ export default {
       h5 {
         border-bottom: 1px solid $primary;
         margin-bottom: 5px;
-        font-weight: bold;
       }
 
       &--with-guide {

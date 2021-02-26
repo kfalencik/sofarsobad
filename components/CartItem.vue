@@ -3,7 +3,9 @@
     <div class="columns is-mobile" v-if="product">
       <div class="column is-one-third-mobile is-one-third">
         <div class="cart-item__thumbnail">
-          <img :src="product.image1" alt="Canvas" role="presentation" />
+          <router-link :to="`/shop/${product.slug}`">
+            <img :src="product.image1" alt="Canvas" role="presentation" />
+          </router-link>
         </div>
       </div>
       <div class="column is-two-thirds is-two-thirds-mobile">

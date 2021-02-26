@@ -4,7 +4,7 @@
       <div class="container">
         <div><b-icon icon="email-outline" custom-size="mdi-36px"></b-icon></div>
         <h3>Join our newsletter</h3>
-        <p>Sign up to our newsletter and get <strong>5% off</strong> your next order. Pretty sweet, we know!</p>
+        <p>Sign-up to emails from us and receive <strong>10% off</strong> your first order. We know, it's pretty sweet!</p>
 
         <mailchimp-subscribe
           :url="mailChimpApi"
