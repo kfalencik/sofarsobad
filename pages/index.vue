@@ -2,21 +2,12 @@
   <div>
     <HomeGrid />
     <New v-if="!loaded" number="8" />
-    
-    <!-- <New number="8" /> -->
-    <!-- <Testimonials /> -->
   </div>
 </template>
 
 <script>
 import HomeGrid from '~/components/HomeGrid';
-import Popular from '~/components/Popular';
-import Testimonials from '~/components/Testimonials';
 import New from '~/components/New';
-import Services from '~/components/Services';
-import KeyPoints from '~/components/KeyPoints';
-import LimitedEdition from '~/components/LimitedEditionSection';
-import About from '~/components/About';
 
 export default {
 
@@ -79,13 +70,7 @@ export default {
   transition: 'page',
 
   components: {
-    Popular,
-    Testimonials,
     New,
-    Services,
-    KeyPoints,
-    LimitedEdition,
-    About,
     HomeGrid
   },
 }

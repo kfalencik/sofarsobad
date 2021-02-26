@@ -5,8 +5,6 @@ import emailjs from 'emailjs-com';
 import 'firebase/firestore';
 import 'firebase/firebase-storage';
 import firebaseConfig from '~/assets/data/firebase';
-import data from '../assets/data/main';
-import { ToastProgrammatic as Toast } from 'buefy';
 
 // Firestore database connection
 let db, storage;
@@ -45,12 +43,9 @@ export const state = () => ({
     }
   ],
   searchKeyword: '',
-  homepage: data.homepage,
   filterPrice: [0, 999],
   filterTags: [],
   sorter: 'popularity-az',
-  pricing: data.pricing,
-  prices: data.prices,
   messages: [],
   loaded: false,
   redirecting: false,
@@ -274,8 +269,6 @@ export const mutations = {
           "cart": data[1],
           "total": data[0].total
         }
-
-        console.log(data, emailParams)
         emailjs.send(emailserviceid, 'sofarsobad_dispatched', emailParams, emailuserid);
       });
     });

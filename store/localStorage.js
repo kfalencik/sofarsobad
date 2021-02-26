@@ -137,8 +137,6 @@ export const mutations = {
       "total": state.order.total
     }
 
-    console.log(emailParams)
-
     emailjs.send(emailserviceid, 'sofarsobad_processing', emailParams, emailuserid).then(function(){
       emailjs.send(emailserviceid, 'sofarsobad_order', emailParams, emailuserid);
       setTimeout(function() {

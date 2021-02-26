@@ -88,12 +88,12 @@ export default {
 <style lang="scss" scoped>
   .sidebar {
     padding: 50px;
-    border-right: 1px solid lighten($lightgrey, 40%);
+    border-right: 1px solid $black;
     min-height: 100vh;
     position: fixed;
     left: 0;
     top: 0;
-    background: lighten($lightgrey, 40%);
+    background: $black;
     text-align: center;
     display: flex;
     flex-direction: column;

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="page-header">
         <h2>RETURNS POLICY</h2>
-        <p>Last updated January 03, 2020</p>
+        <p>Last updated February, 2021</p>
       </div>
       <div class="columns">
         <div class="column is-half-widescreen">

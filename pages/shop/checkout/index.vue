@@ -365,8 +365,6 @@ export default {
                 this.deliveryZipCode !== ''
             ) {
                 this.checkoutValidation = true;
-                console.log(this.deliveryAddress1)
-
               if(window.innerWidth < 1024) {
                 window.scroll({
                     top: document.querySelector('.checkout-panel--pay').getBoundingClientRect().top + window.scrollY,
