@@ -52,9 +52,6 @@ export default async function() {
         { hid: 'ogdesc', property: 'og:description', content: 'We strongly belive in the "Less is Better" rule so most of our designs are simple but bold.'},
         { hid: 'ogimage', property: 'og:image', content: 'https://www.sofarsobad.co.uk/medusa.png'}
       ],
-      script: [
-        { hid: 'cookie-law', src: 'https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?tracking=1&showNoConsent=1&noConfirm=1&hideDetailsBtn=1&showPolicyLink=1&privacyPage=https%3A%2F%2Fwww.sofarsobad.co.uk%2Flegal%2Fprivacy-policy', defer: true }
-      ],
       link: [
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Alegreya:ital@1&display=swap'},
         { rel: 'canonical', href: 'https://www.sofarsobad.co.uk/'},
