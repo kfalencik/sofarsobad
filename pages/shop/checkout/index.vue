@@ -1,5 +1,5 @@
 <template>
-  <div class="section">
+  <div class="section" v-if="!loaded">
     <div class="container">
       <div class="page-header">
         <h2>Checkout</h2>
@@ -10,13 +10,13 @@
       <template v-if="cart.length > 0 || loading">
         <div class="columns">
           <div class="column">
-            <div class="checkout-panel">
-              <div class="header">
-                <h4>Personal Information <b-icon icon="human-greeting" /></h4>
-              </div>
+            <form>
+              <div class="checkout-panel">
+                <div class="header">
+                  <h4>Personal Information <b-icon icon="human-greeting" /></h4>
+                </div>
 
-              <div class="content">
-                <form>
+                <div class="content">
                   <div class="columns">
                     <div class="column is-one-third">
                       <b-field label="Title*">
@@ -63,17 +63,15 @@
                       </b-field>
                     </div>
                   </div>
-                </form>
-              </div>
-            </div>
-
-            <div class="checkout-panel">
-              <div class="header">
-                <h4>Delivery information <b-icon icon="truck" /></h4>
+                </div>
               </div>
 
-              <div class="content">
-                <form>
+              <div class="checkout-panel">
+                <div class="header">
+                  <h4>Delivery information <b-icon icon="truck" /></h4>
+                </div>
+
+                <div class="content">
                   <div class="columns">
                     <div class="column is-one-third">
                       <b-field label="Address line 1*">
@@ -121,10 +119,10 @@
                       </div>
                     </div>
                   </div>
-                </form>
               </div>
             </div>
-          </div>
+            </form>
+        </div>
 
           <div class="column is-narrow">
             <div class="checkout-panel checkout-panel--pay">
@@ -185,6 +183,12 @@ export default {
         title: 'So Far So Bad - Checkout',
       }
     },
+    props: {
+      loaded: {
+        default: false,
+        type: Boolean
+      }
+    },
     data() {
         return {
         loading: false,
@@ -224,7 +228,7 @@ export default {
         deliveryAddress3: '',
         deliveryCity: '',
         deliveryZipCode: '',
-        deliveryState: 'AL'
+        deliveryState: ''
       }
     },
     computed: {
@@ -243,20 +247,23 @@ export default {
       total() {
         let price = 0;
 
-        this.cart.forEach(item => {
-          let product = this.product(item.product);
-          let productPrice = product.price
-          let productDiscount = (productPrice / 100) * product.discount;
-          productPrice = productPrice - productDiscount;
-          price = price + (productPrice * item.quantity);
-        });
+        if (this.cart) {
+          this.cart.forEach(item => {
+            let product = this.product(item.product);
+            if (product) {
+              let productPrice = product.price
+              let productDiscount = (productPrice / 100) * product.discount;
+              productPrice = productPrice - productDiscount;
+              price = price + (productPrice * item.quantity);
+            }
+          });
 
-        if (this.discount !== null) {
-          price = price - ((price / 100) * this.discounts[this.discount].discount);
+          if (this.discount !== null) {
+            price = price - ((price / 100) * this.discounts[this.discount].discount);
+          }
+
+          this.tax = parseFloat(((price / 100) * 7).toFixed(2));
         }
-
-        this.tax = parseFloat(((price / 100) * 7).toFixed(2));
-
         return price;
       },
       cartProducts() {
@@ -271,7 +278,7 @@ export default {
 
           items.push({
             "name": product.title,
-            "sku": product.slug,
+            "sku": `sofarsobad-${product.slug}`,
             "description": this.extrasFromatter(item.size),
             "quantity": item.quantity,
             "price": this.priceFormatter(productPrice),
@@ -325,9 +332,7 @@ export default {
         },
         extrasFromatter: function(size) {
           size = this.sizes.find(item => item.value === size).label
-          let productList = `Size: ${size}`;
-
-          return productList;
+          return size;
         },
         product(id) {
             const product = this.$store.state.products.filter(product => product.id === parseInt(id));
@@ -383,6 +388,12 @@ export default {
     min-height: 60vh;
     flex-direction: column;
 
+    .header {
+      margin: 15px 0;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
     h2 {
       margin-top: 20px;
     }
@@ -414,4 +425,10 @@ export default {
           }
       }
   }
+</style>
+
+<style lang="scss">
+.control.has-icons-left .input, .select select {
+  border: 1px solid $black;
+}
 </style>

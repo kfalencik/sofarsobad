@@ -399,9 +399,10 @@ export default {
 
     &__nav-item {
       color: $black;
+      background: $white;
       position: absolute;
       top: 50%;
-      left: 5px;
+      left: 20px;
       border: none;
       width: 40px;
       height: 40px;
@@ -420,7 +421,6 @@ export default {
       }
 
       @media (min-width: $medium) {
-        left: 20px;
         background: $black;
         color: $white;
         border: 1px solid $primary;
@@ -431,13 +431,10 @@ export default {
         }
       }
 
-      &:nth-child(3) {
+      &:nth-of-type(2) {
         left: auto;
         right: 20px;
 
-        @media (max-width: $medium) {
-          right: 5px;
-        }
       }
     }
 

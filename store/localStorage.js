@@ -106,15 +106,15 @@ export const mutations = {
     state.discount = null;
 
     let emailCart = "<table border='1' cellspacing='0' cellpadding='5' style='border: none; border-collapse: collapse;'>";
-    emailCart = `${emailCart}<tr><td>Item</td><td>SKU</td><td>Description</td><td>Quantity</td><td>Price</td></tr>`;
+    emailCart = `${emailCart}<tr><td>Item</td><td>Description</td><td>Quantity</td><td>Price</td></tr>`;
 
     state.order.items.forEach(item => {
-      emailCart = `${emailCart}<tr><td>${item.name}</td><td>${item.sku && item.sku !== 'undefined' ? item.sku : ''}</td><td>${item.description}</td><td>${item.quantity}</td><td>£${item.price}</td></tr>`;
+      emailCart = `${emailCart}<tr><td>${item.name}</td><td>${item.description}</td><td>${item.quantity}</td><td>£${item.price}</td></tr>`;
     });
 
     // emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Subtotal</strong></td><td><strong>$${state.order.subtotal}</strong></td></tr>`;
     // emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Tax</strong></td><td><strong>$${state.order.tax}</strong></td></tr>`;
-    emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td style="border: none"></td><td><strong>Total</strong></td><td><strong>£${state.order.total}</strong></td></tr>`;
+    emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Total</strong></td><td><strong>£${state.order.total}</strong></td></tr>`;
     emailCart = emailCart + '</table>';
 
 

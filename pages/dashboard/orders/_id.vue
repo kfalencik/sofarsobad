@@ -47,16 +47,16 @@
             {{ props.row.name }}
           </b-table-column>
           <b-table-column field="SKU" label="SKU" v-slot="props">
-            {{ props.row.sku }}
+            {{ props.row.sku && props.row.sku !== 'undefined' ? props.row.sku : '' }}
           </b-table-column>
           <b-table-column field="description" label="Rozmiar" v-slot="props">
-            <span v-html="props.row.size"></span>
+            <span v-html="props.row.description ? props.row.description : ''"></span>
           </b-table-column>
           <b-table-column field="quantity" label="Ilosc" v-slot="props">
-            {{ props.row.quantity }}
+            {{ props.row.quantity ? props.row.quantity: '' }}
           </b-table-column>
           <b-table-column field="price" label="Cena" v-slot="props">
-            ${{ props.row.price }}
+            £{{ props.row.price }}
           </b-table-column>
         </b-table>
       </div>
@@ -131,12 +131,12 @@ export default {
           emailCart = `${emailCart}<tr><td>Item</td><td>SKU</td><td>Description</td><td>Quantity</td><td>Price</td></tr>`;
 
           this.order.items.forEach(item => {
-            emailCart = `${emailCart}<tr><td>${item.name}</td><td>${item.sku && item.sku !== 'undefined' ? item.sku : ''}</td><td>${item.description}</td><td>${item.quantity}</td><td>£${item.price}</td></tr>`;
+            emailCart = `${emailCart}<tr><td>${item.name}</td><td>${item.description}</td><td>${item.quantity}</td><td>£${item.price}</td></tr>`;
           });
 
           // emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Subtotal</strong></td><td><strong>$${this.order.subtotal}</strong></td></tr>`;
           // emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Tax</strong></td><td><strong>$${this.order.tax}</strong></td></tr>`;
-          emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Total</strong></td><td><strong>£${this.order.total}</strong></td></tr>`;
+          emailCart = `${emailCart}<tr><td style="border: none"></td><td><strong>Total</strong></td><td><strong>£${this.order.total}</strong></td></tr>`;
           emailCart = emailCart + '</table>';
 
           let emailShippingAddress = `<p>${this.order.details.address1}`;
