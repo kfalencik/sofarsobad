@@ -38,32 +38,32 @@ export default {
       "@context" : "https://schema.org",
       "@type" : "Organization",
       "name" : "So Far So Bad",
-      "legalName": "Smart Photos Studio LLC",
-      "logo": "https://falencik.com/logo.png",
-      "foundingDate": "2020",
-      "url" : "https://falencik.com",
+      "legalName": "So Far So Bad",
+      "logo": "https://sofarsobad.co.uk/logo-white.png",
+      "foundingDate": "2021",
+      "url" : "https://sofarsobad.co.uk",
       "sameAs" : [
-        "https://www.facebook.com/peterfalencik",
+        "https://www.facebook.com/sofarsobadapparel",
       ],
       "founders": [
         {
         "@type": "Person",
-        "name": "Peter Falencik"
+        "name": "Kevin Falencik"
         }
       ],
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "1280 WILDWOOD LAKES BLVD",
-        "addressLocality": "Naples",
-        "addressRegion": "FL",
-        "postalCode": "34104",
-        "addressCountry": "USA"
+        "streetAddress": "67/2 Lorne Street",
+        "addressLocality": "Edinburgh",
+        "addressRegion": "Midlothian",
+        "postalCode": "EH6 8QG",
+        "addressCountry": "United Kingdom"
       },
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer support",
-        "telephone": "[+1239-298-0887]",
-        "email": "studio@falencik.com"
+        "telephone": "[+447961276427]",
+        "email": "hi@sofarsobad.co.uk"
       }
     }
   },

@@ -40,12 +40,12 @@
           <p>The date at the top of this Cookie Policy indicates when it was last updated.  </p>
           
           <h3>Where can I get further information?</h3>
-          <p>If you have any questions about our use of cookies or other technologies, please email us at studio@falencik.com or by post to:  </p>
+          <p>If you have any questions about our use of cookies or other technologies, please email us at help@sofarsobad.co.uk or by post to:  </p>
           
           <div>So Far So Bad</div>
-          <div>1280 WILDWOOD LAKES BLVD</div>
-          <div>Naples, FL 34104</div>
-          <div>United States</div>  
+          <div>67/2 Lorne Street</div>
+          <div>EH6 8QG, Edinburgh</div>
+          <div>United Kingdom</div>  
         </div>
       </div>
     </div>
