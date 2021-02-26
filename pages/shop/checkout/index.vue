@@ -181,7 +181,7 @@
           <div class="column is-narrow">
             <div class="checkout-panel checkout-panel--pay">
               <div class="header">
-                <h4>Your total - ${{priceFormatter(total)}}</h4>
+                <h4>Your total - £{{priceFormatter(total)}}</h4>
                 <img src="/payment-methods.png" width="200" alt="" role="presentation" />
               </div>
 

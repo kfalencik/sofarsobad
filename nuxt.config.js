@@ -76,15 +76,16 @@ export default async function() {
     },
     env: {
       PP_ENV: process.env.PP_ENV || 'sandbox',
-      PP_CID: process.env.PP_CID || 'AVW9mgQzfnpBUadBxQzNesRvzoMrb3YrnVZtwmaAgSUkdJHHY_uxRkfeMvZXeFrZYKXXUF1eop7pocXY',
-      PP_CIDD: process.env.PP_CIDD || 'AVW9mgQzfnpBUadBxQzNesRvzoMrb3YrnVZtwmaAgSUkdJHHY_uxRkfeMvZXeFrZYKXXUF1eop7pocXY',
-      EMAIL_SERVICE: process.env.EMAIL_SERVICE || 'default_service',
-      EMAIL_USER: process.env.EMAIL_USER || 'user_10niH9eYCXacdIs7NmDIs',
+      PP_CID: process.env.PP_CID || 'AVCPUdbSE9AnslA-M0LG1NR_gEkDi7u93rUVJzArKqVrjuIGOzfn-h-57wbOjAaJ9SBtIx2_o7C8tbiE',
+      PP_CIDD: process.env.PP_CIDD || 'EJ_WMrJD3YXnobQpNc39C1n1xCJ2x5au4O1yxpz7WlwqRFtreyGdQxJR13dHMRD2boVuKdOanPAjQb-d',
+      EMAIL_SERVICE: process.env.EMAIL_SERVICE || 'service_c3r9jfb',
+      EMAIL_USER: process.env.EMAIL_USER || 'user_SF617RJNGSX54dsuDaHHL',
       MAILCHIMP_API: process.env.MAILCHIMP_API || 'default',
       MAILCHIMP_UID: process.env.MAILCHIMP_UID || 'default',
       MAILCHIMP_LIST: process.env.MAILCHIMP_LIST || 'default',
       BUILD_HOOK: process.env.BUILD_HOOK || 'default',
-      ANALYTICS: process.env.ANALYTICS || 'default'
+      ANALYTICS: process.env.ANALYTICS || 'default',
+      G_TAG: process.env.G_TAG || 'default'
     },
     /*
     ** Customize the progress-bar color

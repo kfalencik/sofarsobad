@@ -24,7 +24,7 @@
         <div><strong>Data zamowienia: </strong>{{order.date}}</div>
         <!-- <div><strong>Cena brutto: </strong>${{order.subtotal}}</div> -->
         <!-- <div><strong>Podatek: </strong>${{order.tax}}</div> -->
-        <div><strong>Cena: </strong>${{order.total}}</div>
+        <div><strong>Cena: </strong>£{{order.total}}</div>
         <div><strong>Status: </strong><span class="tag" :class="statusType(order.status)" v-html="status(order.status)"></span></div>
         <div class="dispatcher" v-if="order.status !== 'dispatched'">
           <button class="button is-success" @click="dispatch">Oznacz jako wyslane</button>
@@ -131,19 +131,19 @@ export default {
           emailCart = `${emailCart}<tr><td>Item</td><td>SKU</td><td>Description</td><td>Quantity</td><td>Price</td></tr>`;
 
           this.order.items.forEach(item => {
-            emailCart = `${emailCart}<tr><td>${item.name}</td><td>${item.sku}</td><td>${item.description}</td><td>${item.quantity}</td><td>$${item.price}</td></tr>`;
+            emailCart = `${emailCart}<tr><td>${item.name}</td><td>${item.sku}</td><td>${item.description}</td><td>${item.quantity}</td><td>£${item.price}</td></tr>`;
           });
 
           // emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Subtotal</strong></td><td><strong>$${this.order.subtotal}</strong></td></tr>`;
           // emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Tax</strong></td><td><strong>$${this.order.tax}</strong></td></tr>`;
-          emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Total</strong></td><td><strong>$${this.order.total}</strong></td></tr>`;
+          emailCart = `£{emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Total</strong></td><td><strong>£${this.order.total}</strong></td></tr>`;
           emailCart = emailCart + '</table>';
 
           let emailShippingAddress = `<p>${this.order.details.address1}`;
           if (this.order.details.address2 != '') emailShippingAddress = emailShippingAddress + ', '  + this.order.details.address2;
           if (this.order.details.address3 != '') emailShippingAddress = emailShippingAddress + ', '  + this.order.details.address3;
 
-          emailShippingAddress = emailShippingAddress + '</p><p>' + this.order.details.city + ', ' + this.order.details.zipcode + '</p><p>' + this.order.details.state + ', United States</p>'
+          emailShippingAddress = emailShippingAddress + '</p><p>' + this.order.details.city + ', ' + this.order.details.zipcode + '</p><p>' + this.order.details.state + ', United Kingdom</p>'
 
           this.$buefy.toast.open({message: 'Zamowienie zostalo wyslane!', type: 'is-success'});
           this.$store.commit('dispatchOrder', [this.order, emailCart, emailShippingAddress]);

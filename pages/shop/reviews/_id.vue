@@ -100,7 +100,7 @@
             "category": this.product.category,
             "image": this.product.image1,
             "productID": this.product.id,
-            "priceRange": "$$$",
+            "priceRange": "$$",
             "brand": {
               "@type": "Brand",
               "name": "So Far So Bad"

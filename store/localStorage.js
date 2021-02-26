@@ -114,15 +114,15 @@ export const mutations = {
 
     // emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Subtotal</strong></td><td><strong>$${state.order.subtotal}</strong></td></tr>`;
     // emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Tax</strong></td><td><strong>$${state.order.tax}</strong></td></tr>`;
-    emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Total</strong></td><td style="border: none"></td><td><strong>$${state.order.total}</strong></td></tr>`;
+    emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Total</strong></td><td style="border: none"></td><td><strong>£${state.order.total}</strong></td></tr>`;
     emailCart = emailCart + '</table>';
 
 
-    let emailShippingAddress = `<p>${state.order.details.address1}`;
+    let emailShippingAddress = `<p>£{state.order.details.address1}`;
     if (state.order.details.address2 != '') emailShippingAddress = emailShippingAddress + ', '  + state.order.details.address2;
     if (state.order.details.address3 != '') emailShippingAddress = emailShippingAddress + ', '  + state.order.details.address3;
 
-    emailShippingAddress = emailShippingAddress + '</p><p>' + state.order.details.city + ', ' + state.order.details.zipcode + '</p><p>' + state.order.details.state + ', United States</p>'
+    emailShippingAddress = emailShippingAddress + '</p><p>' + state.order.details.city + ', ' + state.order.details.zipcode + '</p><p>' + state.order.details.state + ', United Kingdom</p>'
 
     // Send email
     let emailParams = {
@@ -137,8 +137,8 @@ export const mutations = {
       "total": state.order.total
     }
 
-    emailjs.send(emailserviceid, 'iconari_complete', emailParams, emailuserid).then(function(){
-      emailjs.send(emailserviceid, 'new_order_studio', emailParams, emailuserid);
+    emailjs.send(emailserviceid, 'sofarsobad_processing', emailParams, emailuserid).then(function(){
+      emailjs.send(emailserviceid, 'sofarsobad_order', emailParams, emailuserid);
       setTimeout(function() {
         self.app.router.push('/shop/checkout/complete');
       }, 2000);
