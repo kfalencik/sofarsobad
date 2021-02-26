@@ -1,6 +1,7 @@
 <template>
   <footer class="footer">
     <div class="footer__bottom">
+      <a href="#" onclick="document.cookie='cookiebar=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/'; setupCookieBar(); return false;">Click here to revoke the Cookie consent</a>
       <div class="section">
         <div class="footer__left">
           <span>Copyright @ 2021 So Far So Bad - All rights reserved</span>
