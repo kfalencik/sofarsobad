@@ -5,9 +5,9 @@
         <h2>Shop</h2>
         <p>Discover our collection of tattoo inspired, minimalist designs. We know how much you love simple apparel with small but bold illustrations, so that's what we're striving to deliver.</p>
       </div>
-      <div class="filters">
+      <!-- <div class="filters">
         <!-- <b-button icon-left="filter" @click="toggleFilters">Filters</b-button> -->
-        <div></div>
+        <!-- <div></div>
         <b-field>
           <b-select placeholder="Sort by" v-model="sorter" @input="sortProducts($event)" expanded>
             <option value="popularity-az">Bestselling</option>
@@ -17,7 +17,7 @@
             <option value="date-za">Date, Old to new</option>
           </b-select>
         </b-field>
-      </div>
+      </div> -->
       <div class="columns is-mobile">
         <Products class="column" :products="products" />
       </div>

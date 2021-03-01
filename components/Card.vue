@@ -78,7 +78,7 @@ export default {
       text-align: center;
 
       div {
-        transform-origin: right top;
+        transform-origin: 235px 70px;
         transition: all .4s ease;
         height: 350px;
       }
@@ -92,7 +92,7 @@ export default {
 
     a:hover {
       .product__image div{
-        transform: scale(2);
+        transform: scale(3);
       }
     }
 
