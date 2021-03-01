@@ -1,28 +1,28 @@
 <template>
   <div v-if="discountCode">
-    <h2>Kod promocyjny - {{ code }}</h2>
+    <h2>Discount code - {{ code }}</h2>
 
     <div class="content">
       <form class="form">
 
-        <b-field message='Musi byc unikatowe. Najlepiej duze litery i cyfry. Bez spacji czy specjalnych znakow"' class="form__input" label="Kod promocyjny">
-          <b-input placeholder="Kod promocyjny" v-model="code" required></b-input>
+        <b-field message='Has to be unique. All in captial letters or numbers, no spaces or special characters."' class="form__input" label="Code">
+          <b-input placeholder="Code" v-model="code" required></b-input>
         </b-field>
 
-        <b-field message='Np. "Additional 10% off"' class="form__input" label="Opis znizki">
-          <b-input placeholder="Opis znizki" v-model="title" required></b-input>
+        <b-field message='For example: "Additional 10% off"' class="form__input" label="Description">
+          <b-input placeholder="Description" v-model="title" required></b-input>
         </b-field>
 
-        <b-field message='W procentach np. "20"' class="form__input" label="Znizka">
-          <b-input placeholder="Znizka" v-model="discount" required></b-input>
+        <b-field message='As a percentage, for example: "20"' class="form__input" label="Discount">
+          <b-input placeholder="Discount" v-model="discount" required></b-input>
         </b-field>
 
-        <b-field message='Dzien, miesiac, rok np. 20/04/2020. Bez daty kod nigdy nie wygasnie' class="form__input" label="Data wygasniecia">
-          <b-input placeholder="Data wygasniecia" v-model="expiry"></b-input>
+        <b-field message="DD/MM/YYYY, for example: 20/04/2020. If no date set, it won't expire." class="form__input" label="Expiry Date">
+          <b-input placeholder="Expiry Date" v-model="expiry"></b-input>
         </b-field>
 
         <div class="form__input form__input--buttons">
-          <button type="button" @click.stop="editDiscountCode" class="button is-success">Zapisz zmiany</button>
+          <button type="button" @click.stop="editDiscountCode" class="button is-success">Save Changes</button>
         </div>
       </form>
     </div>
@@ -57,12 +57,12 @@ export default {
   },
   methods: {
     editDiscountCode: function() {
-     if (
+    if (
         this.title === '' ||
         this.code === '' ||
         this.discount === 0
       ) {
-        this.$store.commit('addMessage', ['Cos jest nie tak, sprawdz wszystkie pola.', 'bad']);
+        this.$store.commit('addMessage', ['Please fill in all the required fields.', 'bad']);
       } else {
         this.$store.dispatch('redirecting');
         
@@ -73,7 +73,7 @@ export default {
           expiry: this.expiry,
         }]);
 
-        this.$buefy.toast.open({message: 'Zmiany zostaly zapisane!', type: 'is-success'});
+        this.$buefy.toast.open({message: 'Changes successfully saved!', type: 'is-success'});
       }
     }
   }

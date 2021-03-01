@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Produkty</h2>
+    <h2>Products</h2>
     
     <div class="filters">
       <b-field grouped>
@@ -10,52 +10,41 @@
           type="is-dark"
           to="/dashboard/products/add-product"
         >
-          Dodaj produkt
+          Add a product
         </b-button>
         </p>
 
         <p class="control">
           <b-autocomplete
             v-model="filterName"
-            placeholder="Wyszukaj po nazwie"
+            placeholder="Search products..."
             :data="products"
             field="title"
             @input="filterByName"
           >
           </b-autocomplete>
         </p>
-
-        <p class="control">
-          <b-select class="control" placeholder="Kategoria" @input="filterByCategory" v-model="filterCategory">
-            <option value="">Wybierz kategorie</option>
-            <option
-              v-for="category in categories"
-              :key="category.slug">
-              {{ category.title }}
-            </option>
-          </b-select>
-        </p>
       </b-field>
     </div>
 
     <b-table :data="products" :bordered="true" :striped="true" :narrowed="true" :current-page.sync="currentPage" :paginated="true" :per-page="20">
-      <b-table-column field="id" label="ID" width="40" v-slot="props" sortable numeric>
+      <b-table-column field="id" label="ID" width="150" v-slot="props" sortable numeric>
         {{ props.row.slug }}
       </b-table-column>
-      <b-table-column field="title" label="Nazwa produktu" v-slot="props" sortable>
+      <b-table-column field="title" label="Product" v-slot="props" sortable>
         {{ props.row.title }}
       </b-table-column>
-      <b-table-column field="price" label="Cena" width="120" v-slot="props" sortable>
+      <b-table-column field="price" label="Price" width="120" v-slot="props" sortable>
         {{ price(props.row.price) }}
       </b-table-column>
-      <b-table-column field="discount" label="Znizka" width="100" v-slot="props" sortable>
+      <b-table-column field="discount" label="Discount" width="100" v-slot="props" sortable>
         <span v-if="props.row.discount > 0">{{ props.row.discount }}%</span>
       </b-table-column>
-      <b-table-column field="bought" label="Ilosc sprzedazy" width="120" v-slot="props" numeric sortable>
+      <b-table-column field="bought" label="Sales Number" width="120" v-slot="props" numeric sortable>
         {{ parseInt(props.row.bought) }}
       </b-table-column>
-      <b-table-column field="link" label="Akcje" width="120" v-slot="props">
-        <router-link :to="props.row.editLink">Edytuj</router-link> | <a @click.stop="removeProduct(props.row.id)">Usun</a>
+      <b-table-column field="link" label="Actions" width="120" v-slot="props">
+        <router-link :to="props.row.editLink">Edit</router-link> | <a @click.stop="removeProduct(props.row.id)">Remove</a>
       </b-table-column>
     </b-table>
   </div>
@@ -93,15 +82,15 @@ export default {
 
     removeProduct: function(id) {
       this.$buefy.dialog.confirm({
-        title: 'Czy jestes pewien?',
-        message: 'Usuwasz produkt, ktorego nie bedzie mozna pozniej odzyskac.',
-        confirmText: 'Tak, usun ten produkt',
+        title: 'Are you sure?',
+        message: 'You\'re about to permanently remove a product.',
+        confirmText: 'Yes, remove the product',
         type: 'is-danger',
-        cancelText: 'Anuluj',
+        cancelText: 'Cancel',
         hasIcon: true,
         onConfirm: () => {
           this.$store.dispatch('redirecting');
-          this.$buefy.toast.open({message: 'Produkt zostal usuniety!', type: 'is-success'});
+          this.$buefy.toast.open({message: 'Product has been removed!', type: 'is-success'});
           this.$store.commit('removeProduct', id);
         }
       });

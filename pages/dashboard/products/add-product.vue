@@ -1,22 +1,22 @@
 <template>
   <div>
-    <h2>Dodaj produkt</h2>
+    <h2>Add a Product</h2>
 
     <div class="content">
       <form class="form">
-        <b-field class="form__input" label="Nazwa produktu">
-          <b-input placeholder="Nazwa produktu" v-model="title" required></b-input>
+        <b-field class="form__input" label="Product name">
+          <b-input placeholder="Product name" v-model="title" required></b-input>
         </b-field>
 
-        <b-field message='Musi byc unikatowe np. "000777"' class="form__input" label="Identyfikator produktu">
-          <b-input placeholder="Identyfikator produktu" v-model="slug" required></b-input>
+        <b-field message='Has to be unique.' class="form__input" label="SKU">
+          <b-input placeholder="SKU" v-model="slug" required></b-input>
         </b-field>
 
-        <b-field class="form__input" label="Opis">
-          <b-input maxlength="1000" type="textarea" placeholder="Opis produktu" v-model="body"></b-input>
+        <b-field class="form__input" label="Description">
+          <b-input maxlength="1000" type="textarea" placeholder="Description" v-model="body"></b-input>
         </b-field>
 
-        <b-field class="form__input file" label="Glowne zdjecie produktu">
+        <b-field class="form__input file" label="Main Image">
           <b-upload v-model="image1" required>
             <a class="button is-info">
               <b-icon icon="upload"></b-icon>
@@ -29,7 +29,7 @@
             <img :src="image1URL" />
           </span>
 
-        <b-field class="form__input file" label="Zdjecie 1 produktu">
+        <b-field class="form__input file" label="Image 1">
           <b-upload v-model="image2" required>
             <a class="button is-info">
               <b-icon icon="upload"></b-icon>
@@ -42,7 +42,7 @@
           <img :src="image2URL" />
         </span>
 
-        <b-field class="form__input file" label="Zdjecie 2">
+        <b-field class="form__input file" label="Image 2">
           <b-upload v-model="image3" required>
             <a class="button is-info">
               <b-icon icon="upload"></b-icon>
@@ -55,7 +55,7 @@
             <img :src="image3URL" />
           </span>
 
-        <b-field class="form__input file" label="Zdjecie 3">
+        <b-field class="form__input file" label="Image 3">
           <b-upload v-model="image4" required>
             <a class="button is-info">
               <b-icon icon="upload"></b-icon>
@@ -68,7 +68,7 @@
             <img :src="image4URL" />
           </span>
 
-        <b-field class="form__input file" label="Zdjecie 4">
+        <b-field class="form__input file" label="Image 4">
           <b-upload v-model="image5" required>
             <a class="button is-info">
               <b-icon icon="upload"></b-icon>
@@ -81,29 +81,29 @@
           <img :src="image5URL" />
         </span>
 
-        <b-field message='W funtach np. "120.99"' class="form__input" label="Cena">
-          <b-input placeholder="Cena" v-model="price" required></b-input>
+        <b-field message='n GBP for example: "120.99"' class="form__input" label="Price">
+          <b-input placeholder="Price" v-model="price" required></b-input>
         </b-field>
 
-        <b-field message='W procentach np. "20"' class="form__input" label="Znizka">
-          <b-input placeholder="Znizka" v-model="discount" required></b-input>
+        <b-field message='As a percentage for example: "20"' class="form__input" label="Discount">
+          <b-input placeholder="Discount" v-model="discount" required></b-input>
         </b-field>
 
-        <b-field class="form__input" label="Ilosc sprzedazy">
-          <b-input placeholder="Ilosc sprzedazy" v-model="bought" required></b-input>
+        <b-field class="form__input" label="Sales Number">
+          <b-input placeholder="Sales Number" v-model="bought" required></b-input>
         </b-field>
 
-        <b-field class="form__input" message="Beda uzyte w wyszukiwarce produktow. Najelpiej dodac ok 5-10" label="Dodaj tagi">
+        <b-field class="form__input" message="Used for search and SEO." label="Product Tags">
           <b-taginput
             v-model="tags"
             ellipsis
             icon="label"
-            placeholder="Dodaj">
+            placeholder="Tags">
           </b-taginput>
         </b-field>
 
         <div class="form__input form__input--buttons">
-          <button type="button" @click="addProduct" class="button is-success">Dodaj produkt</button>
+          <button type="button" @click="addProduct" class="button is-success">Add Product</button>
         </div>
       </form>
     </div>
@@ -143,7 +143,7 @@ export default {
   watch: {
     image1 (o) {
       if (!this.image1 || this.image1.type !== 'image/jpeg') {
-        this.$store.commit('addMessage', ['Zly typ pliku. Sprawdz czy zdjecie jest w dobrym formacie.', 'bad']);
+        this.$store.commit('addMessage', ['Wrong file format!', 'bad']);
         this.image1 = null
         this.image1URL = null
       } else {
@@ -155,7 +155,7 @@ export default {
     },
     image2 (o) {
       if (!this.image2 || this.image2.type !== 'image/jpeg') {
-        this.$store.commit('addMessage', ['Zly typ pliku. Sprawdz czy zdjecie jest w dobrym formacie.', 'bad']);
+        this.$store.commit('addMessage', ['Wrong file format!', 'bad']);
         this.image2 = null
         this.image2URL = null
       } else {
@@ -167,7 +167,7 @@ export default {
     },
     image3 (o) {
       if (!this.image3 || this.image3.type !== 'image/jpeg') {
-        this.$store.commit('addMessage', ['Zly typ pliku. Sprawdz czy zdjecie jest w dobrym formacie.', 'bad']);
+        this.$store.commit('addMessage', ['Wrong file format!', 'bad']);
         this.image3 = null
         this.image3URL = null
       } else {
@@ -179,7 +179,7 @@ export default {
     },
     image4 (o) {
       if (!this.image4 || this.image4.type !== 'image/jpeg') {
-        this.$store.commit('addMessage', ['Zly typ pliku. Sprawdz czy zdjecie jest w dobrym formacie.', 'bad']);
+        this.$store.commit('addMessage', ['Wrong file format!', 'bad']);
         this.image4 = null
         this.image4URL = null
       } else {
@@ -191,7 +191,7 @@ export default {
     },
     image5 (o) {
       if (!this.image5 || this.image5.type !== 'image/jpeg') {
-        this.$store.commit('addMessage', ['Zly typ pliku. Sprawdz czy zdjecie jest w dobrym formacie.', 'bad']);
+        this.$store.commit('addMessage', ['Wrong file format!', 'bad']);
         this.image5 = null
         this.image5URL = null
       } else {
@@ -210,7 +210,7 @@ export default {
         this.price === 0 ||
         this.tags === ''
       ){
-        this.$store.commit('addMessage', ['Cos jest nie tak, sprawdz wszystkie pola.', 'bad']);
+        this.$store.commit('addMessage', ['Please fill in all the required fields.', 'bad']);
       } else {
         this.$store.dispatch('redirecting');
 
@@ -259,7 +259,7 @@ export default {
           uploadImages
         ]);
 
-        this.$buefy.toast.open({message: 'Produkt zostal dodany!', type: 'is-success'});
+        this.$buefy.toast.open({message: 'Product successfully added!', type: 'is-success'});
       }
     }
   }

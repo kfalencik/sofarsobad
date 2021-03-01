@@ -1,9 +1,9 @@
 <template>
   <div class="section">
-    <h2>Zamowienie #{{id}}</h2>
+    <h2>Order #{{id}}</h2>
     <div class="columns" v-if="ordersLoaded">
       <div class="column is-half">
-        <h3>Dane Personalne</h3>
+        <h3>Personal Details</h3>
         <div><strong>Imie: </strong>{{order.details.title}} {{order.details.firstName}} {{order.details.lastName}}</div>
         <div><strong>Nazwa firmy: </strong>{{order.details.company}}</div>
         <div><strong>Email: </strong>{{order.details.email}}</div>
@@ -11,7 +11,7 @@
       </div>
 
       <div class="column is-half">
-        <h3>Dane wysylki</h3>
+        <h3>Postage Details</h3>
         <div><strong>Address: </strong>{{order.details.address1}} {{order.details.address2}} {{order.details.address3}}</div>
         <div><strong>City: </strong>{{order.details.city}}</div>
         <div><strong>Zipcode: </strong>{{order.details.zipcode}}</div>
@@ -19,43 +19,43 @@
       </div>
 
       <div class="column is-half">
-        <h3>Ogolne infromacje</h3>
-        <div><strong>Kod PayPal: </strong>{{order.paypal.paymentID}}</div>
-        <div><strong>Data zamowienia: </strong>{{order.date}}</div>
+        <h3>Payment Details</h3>
+        <div><strong>PayPal Transaction ID: </strong>{{order.paypal.paymentID}}</div>
+        <div><strong>Order Date: </strong>{{order.date}}</div>
         <!-- <div><strong>Cena brutto: </strong>${{order.subtotal}}</div> -->
         <!-- <div><strong>Podatek: </strong>${{order.tax}}</div> -->
-        <div><strong>Cena: </strong>£{{order.total}}</div>
+        <div><strong>Price Paid: </strong>£{{order.total}}</div>
         <div><strong>Status: </strong><span class="tag" :class="statusType(order.status)" v-html="status(order.status)"></span></div>
         <div class="dispatcher" v-if="order.status !== 'dispatched'">
-          <button class="button is-success" @click="dispatch">Oznacz jako wyslane</button>
+          <button class="button is-success" @click="dispatch">Mark As Dispatched</button>
         </div>
       </div>
 
       <div class="column is-half" v-if="order.discount">
-        <h3>Kupon promocyjny</h3>
-        <div><strong>Nazwa: </strong>{{ discount.title }}</div>
-        <div><strong>Kupon: </strong>{{ discount.code }}</div>
-        <div><strong>Znizka: </strong>{{ discount.discount }}%</div>
+        <h3>Discount Code</h3>
+        <div><strong>Title: </strong>{{ discount.title }}</div>
+        <div><strong>Code: </strong>{{ discount.code }}</div>
+        <div><strong>Discount: </strong>{{ discount.discount }}%</div>
       </div>
     </div>
 
     <div class="columns" v-if="ordersLoaded">
       <div class="column">
-        <h3>Dane zamowienia</h3>
+        <h3>Order Details</h3>
         <b-table :data="order.items" :bordered="true" :striped="true" :narrowed="true">
-          <b-table-column field="name" label="Nazwa" id="name" v-slot="props">
+          <b-table-column field="name" label="Product" id="name" v-slot="props">
             {{ props.row.name }}
           </b-table-column>
           <b-table-column field="SKU" label="SKU" v-slot="props">
             {{ props.row.sku && props.row.sku !== 'undefined' ? props.row.sku : '' }}
           </b-table-column>
-          <b-table-column field="description" label="Rozmiar" v-slot="props">
+          <b-table-column field="description" label="Size" v-slot="props">
             <span v-html="props.row.description ? props.row.description : ''"></span>
           </b-table-column>
-          <b-table-column field="quantity" label="Ilosc" v-slot="props">
+          <b-table-column field="quantity" label="Quantity" v-slot="props">
             {{ props.row.quantity ? props.row.quantity: '' }}
           </b-table-column>
-          <b-table-column field="price" label="Cena" v-slot="props">
+          <b-table-column field="price" label="Price" v-slot="props">
             £{{ props.row.price }}
           </b-table-column>
         </b-table>
@@ -98,11 +98,11 @@ export default {
 
       switch (temp) {
         case 'abandoned':
-          return 'Nie zaplacone'
+          return 'Not Paid'
         case 'paid':
-          return '<strong>Zaplacone</strong>'
+          return '<strong>Paid</strong>'
         case 'dispatched':
-          return 'Wyslane'
+          return 'Dispatched'
       }
     },
     statusType: function(status) {
@@ -119,11 +119,11 @@ export default {
     },
     dispatch() {
       this.$buefy.dialog.confirm({
-        title: 'Czy jestes pewien?',
-        message: 'Oznaczasz to zamowienie jako wyslane. Spowoduje to wyslanie emaila to klienta z potwierdzeniem wysylki. Czy jestes pewien ze chcesz kontunuowac',
-        confirmText: 'Tak, ten produkt zostal wyslany',
+        title: 'Are you sure?',
+        message: 'This will send a confirmation email to the client with the dispatch information.',
+        confirmText: 'Yes, dispatch order',
         type: 'is-warning',
-        cancelText: 'Anuluj',
+        cancelText: 'Cancel',
         hasIcon: true,
         onConfirm: () => {
           // Send email to customer
@@ -145,7 +145,7 @@ export default {
 
           emailShippingAddress = emailShippingAddress + '</p><p>' + this.order.details.city + ', ' + this.order.details.zipcode + '</p><p>' + this.order.details.state + ', United Kingdom</p>'
 
-          this.$buefy.toast.open({message: 'Zamowienie zostalo wyslane!', type: 'is-success'});
+          this.$buefy.toast.open({message: 'Order dispatched!', type: 'is-success'});
           this.$store.commit('dispatchOrder', [this.order, emailCart, emailShippingAddress]);
           this.$router.push('/dashboard/orders');
         }

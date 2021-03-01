@@ -5,24 +5,24 @@
         <div class="sidebar">
           <router-link to="/">
             <h1 class="sr-only">So Far So Bad</h1>
-            <img src="/logo.png" alt="So Far So Bad" />
+            <img src="/logo-white.png" alt="So Far So Bad" />
           </router-link>
 
           <nav>
             <ul>
               <li>
-                <router-link to="/dashboard/orders">Zamowienia</router-link>
+                <router-link to="/dashboard/orders">Orders</router-link>
               </li>
               <li>
-                <router-link to="/dashboard/products">Produkty</router-link>
+                <router-link to="/dashboard/products">Products</router-link>
               </li>
               <li>
-                <router-link to="/dashboard/discounts">Kody promocyjne</router-link>
+                <router-link to="/dashboard/discounts">Discount codes</router-link>
               </li>
             </ul>
           </nav>
 
-          <button class="logout button is-secondary" @click.prevent="logout">Wyloguj sie</button>
+          <button class="logout button is-secondary" @click.prevent="logout">Log out</button>
         </div>
 
         <div class="content">
@@ -113,7 +113,7 @@ export default {
       }
 
       a {
-        color: $black;
+        color: $white;
         font-weight: bold;
         display: block;
         padding: 15px 0;

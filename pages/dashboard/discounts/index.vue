@@ -1,22 +1,22 @@
 <template>
   <div>
-    <h2>Kody promocyjne</h2>
-    <router-link class="button is-black" to="/dashboard/discounts/add-code">Dodaj kod promocyjny</router-link>
+    <h2>Discount codes</h2>
+    <router-link class="button is-black" to="/dashboard/discounts/add-code">Add a Discount Code</router-link>
     <b-table :data="discounts" :bordered="true" :striped="true" :narrowed="true" :current-page.sync="currentPage" :paginated="true" :per-page="20">
       <b-table-column field="id" label="ID" width="40" v-slot="props">
         {{ props.row.id }}
       </b-table-column>
-      <b-table-column field="code" label="Kod promocyjny" v-slot="props">
+      <b-table-column field="code" label="Code" v-slot="props">
         {{ props.row.code }}
       </b-table-column>
-      <b-table-column field="title" label="Opis znizki" v-slot="props">
+      <b-table-column field="title" label="Description" v-slot="props">
         {{ props.row.title }}
       </b-table-column>
-      <b-table-column field="discount" label="Znizka" width="100" v-slot="props">
+      <b-table-column field="discount" label="Discount" width="100" v-slot="props">
         {{ props.row.discount }}%
       </b-table-column>
-      <b-table-column field="link" label="Akcje" width="120" v-slot="props">
-        <router-link :to="props.row.editLink">Edytuj</router-link> | <a @click.stop="removeDiscountCode(props.row.id)">Usun</a>
+      <b-table-column field="link" label="Actions" width="120" v-slot="props">
+        <router-link :to="props.row.editLink">Edit</router-link> | <a @click.stop="removeDiscountCode(props.row.id)">Remove</a>
       </b-table-column>
     </b-table>
   </div>
@@ -45,15 +45,15 @@ export default {
   methods: {
     removeDiscountCode: function(id) {
       this.$buefy.dialog.confirm({
-        title: 'Czy jestes pewien?',
-        message: 'Usuwasz kod promocyjny, ktorego nie bedzie mozna pozniej odzyskac.',
-        confirmText: 'Tak, usun ten kod',
+        title: 'Are you sure?',
+        message: 'You\'re about to permanently remove a discount code.',
+        confirmText: 'Yes, remove code',
         type: 'is-danger',
-        cancelText: 'Anuluj',
+        cancelText: 'Cancel',
         hasIcon: true,
         onConfirm: () => {
           this.$store.dispatch('redirecting');
-          this.$buefy.toast.open({message: 'Kod promocyjny zostal usuniety!', type: 'is-success'});
+          this.$buefy.toast.open({message: 'Discount code has been removed!', type: 'is-success'});
           this.$store.commit('removeDiscountCode', id);
         }
       });

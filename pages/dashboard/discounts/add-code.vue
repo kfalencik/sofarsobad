@@ -1,28 +1,28 @@
 <template>
   <div>
-    <h2>Dodaj kod promocyjny</h2>
+    <h2>Add a Discount Code</h2>
 
     <div class="content">
       <form class="form">
 
-        <b-field message='Musi byc unikatowe. Najlepiej duze litery i cyfry. Bez spacji czy specjalnych znakow"' class="form__input" label="Kod promocyjny">
-          <b-input placeholder="Kod promocyjny" v-model="code" required></b-input>
+        <b-field message='Has to be unique. All in captial letters or numbers, no spaces or special characters.' class="form__input" label="Code">
+          <b-input placeholder="Code" v-model="code" required></b-input>
         </b-field>
 
-        <b-field message='Np. "Additional 10% off"' class="form__input" label="Opis znizki">
-          <b-input placeholder="Opis znizki" v-model="title" required></b-input>
+        <b-field message='For example: "Additional 10% off"' class="form__input" label="Description">
+          <b-input placeholder="Description" v-model="title" required></b-input>
         </b-field>
 
-        <b-field message='W procentach np. "20"' class="form__input" label="Znizka">
-          <b-input placeholder="Znizka" v-model="discount" required></b-input>
+        <b-field message='As a percentage, for example: "20"' class="form__input" label="Discount">
+          <b-input placeholder="Discount" v-model="discount" required></b-input>
         </b-field>
 
-        <b-field message='Dzien, miesiac, rok np. 20/04/2020. Bez daty kod nigdy nie wygasnie' class="form__input" label="Data wygasniecia">
-          <b-input placeholder="Data wygasniecia" v-model="expiry"></b-input>
+        <b-field message="DD/MM/YYYY, for example: 20/04/2020. If no date set, it won't expire." class="form__input" label="Expiry Date">
+          <b-input placeholder="Expiry Date" v-model="expiry"></b-input>
         </b-field>
 
         <div class="form__input form__input--buttons">
-          <button type="button" @click="addDiscountCode" class="button is-success">Dodaj kod promocyjny</button>
+          <button type="button" @click="addDiscountCode" class="button is-success">Add Discount Code</button>
         </div>
       </form>
     </div>
@@ -53,7 +53,7 @@ export default {
         this.code === '' ||
         this.discount === 0
       ){
-        this.$buefy.toast.open({message: 'Cos jest nie tak, sprawdz wszystkie pola', type: 'is-danger'});
+        this.$buefy.toast.open({message: 'Please fill in all the required fields.', type: 'is-danger'});
       } else {
         this.$store.dispatch('redirecting');
         
@@ -73,7 +73,7 @@ export default {
           expiry: this.expiry,
         });
 
-        this.$buefy.toast.open({message: 'Kod zostal dodany!', type: 'is-success'});
+        this.$buefy.toast.open({message: 'Discount Code successfully added!', type: 'is-success'});
       }
     }
   }
