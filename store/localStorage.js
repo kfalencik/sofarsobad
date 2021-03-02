@@ -137,10 +137,50 @@ export const mutations = {
       "total": state.order.total
     }
 
+    const order = {
+      "brandName": "So Far So Bad",
+      "comment": "",
+      "shipping_­address": {
+        "firstName": state.order.details.firstName,
+        "lastName": state.order.details.lastName,
+        "company": state.order.details.company,
+        "address1": state.order.details.address1,
+        "address2": state.order.details.address2,
+        "city": state.order.details.city,
+        "county": state.order.details.state,
+        "postcode": state.order.details.zipcode,
+        "country": "United Kingdom",
+        "phone1": state.order.details.mobile,
+      },
+      "shipping": {
+        "shippin­gMethod": "courier"
+      },
+      "items": [
+        {
+          "pn": "CV001-BLK-M",
+          "quantity": 1,
+          "retailPrice": 24.99,
+          "description": "",
+          "label": {
+            "type": "printed",
+            "name": "ink-label"
+          }
+        }
+      ]
+    }
+
     emailjs.send(emailserviceid, 'sofarsobad_processing', emailParams, emailuserid).then(function(){
       emailjs.send(emailserviceid, 'sofarsobad_order', emailParams, emailuserid);
       setTimeout(function() {
-        self.app.router.push('/shop/checkout/complete');
+        fetch(`/­api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, {
+          method: 'POST',
+          redirect: 'follow',
+          body: JSON.stringify(order)
+        }).then(response => {
+          console.log(response)
+          self.app.router.push('/shop/checkout/complete');
+        });
+        //self.app.router.push('/shop/checkout/complete');
       }, 2000);
     });
   }

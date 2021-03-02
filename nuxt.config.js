@@ -86,7 +86,9 @@ export default async function() {
       MAILCHIMP_LIST: process.env.MAILCHIMP_LIST || 'default',
       BUILD_HOOK: process.env.BUILD_HOOK || 'default',
       ANALYTICS: process.env.ANALYTICS || 'default',
-      G_TAG: process.env.G_TAG || 'default'
+      G_TAG: process.env.G_TAG || 'default',
+      PRINTING_ID: process.env.PRINTING_ID || 'APP-00023502',
+      PRINTING_KEY: process.env.PRINTING_KEY || 'default'
     },
     /*
     ** Customize the progress-bar color
