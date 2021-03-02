@@ -43,15 +43,21 @@ export default {
         ]
       }
 
-      axios.post(`https://www.twofifteen.co.uk/­api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, order).then(response => {
-        console.log('axios', response)
-      }) 
+      // axios.post(`https://www.twofifteen.co.uk/­api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, order).then(response => {
+      //   console.log('axios', response)
+      // }) 
 
-      fetch(`https://www.twofifteen.co.uk/­api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, {
+      fetch(`/­api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
+        },
         method: 'POST',
         redirect: 'follow',
         body: JSON.stringify(order)
       }).then(response => {
+        
         console.log('fetch', response)
       });
     }

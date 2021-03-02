@@ -3,3 +3,4 @@
 
 # Redirect default Netlify subdomain to primary domain
 http://sofarsobad.netlify.app/* http://sofarsobad.co.uk/:splat 301!
+/api/*  https://api.twofifteen.co.uk/:splat  200
