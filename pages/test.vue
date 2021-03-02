@@ -43,8 +43,25 @@ export default {
         ]
       }
 
-      axios.post(`­/api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, order).then(response => {
-        console.log('axios', response)
+      axios.post(`https://twofifteen.co.uk/api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, order, {
+        headers: {
+          'content-type': 'application/json',
+        }
+      }).then(response => {
+        console.log('axios 1', response)
+      }) 
+
+      axios.post(`/api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, order, 
+      {
+        headers: {
+          'content-type': 'application/json',
+        }
+      }).then(response => {
+        console.log('axios 2', response)
+      }) 
+
+      axios.post(`­/api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, order, {headers: {'content-type': 'application/json'}}).then(response => {
+        console.log('axios 3', response)
       }) 
 
       fetch(`/­api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, {

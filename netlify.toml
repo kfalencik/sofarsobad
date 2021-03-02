@@ -1,17 +1,15 @@
 [[redirects]]
 from = '/api/**'
-to = 'api-link/:splat'
+to = 'https://twofifteen.co.uk/api/:splat'
 status = 200
-headers = { Access-Control-Allow-Origin = '*', Authorization = 'Bearer api-key'}
+headers = { Access-Control-Allow-Origin = '*'}
 
 [[headers]]
 for = '/*'
 [headers.values]
 Access-Control-Allow-Origin = '**'
-Authorization = 'Bearer api-key'
 
 [[headers]]
 for = '/api/*'
 [headers.values]
 Access-Control-Allow-Origin = '**'
-Authorization = 'Bearer api-key'
