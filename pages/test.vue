@@ -43,11 +43,13 @@ export default {
         ]
       }
 
-      // axios.post(`https://www.twofifteen.co.uk/­api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, order).then(response => {
-      //   console.log('axios', response)
-      // }) 
+      const PROXY = '/cors-proxy/'
 
-      fetch(`/­api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, {
+      axios.post(`/­api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, order).then(response => {
+        console.log('axios', response)
+      }) 
+
+      fetch(`${PROXY}/https://www.twofifteen.co.uk/­api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers": "Content-Type",
