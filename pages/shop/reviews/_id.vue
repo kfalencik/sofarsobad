@@ -26,6 +26,14 @@
         <span class="stars__desc">- {{ reviewStars }} / 5</span>
       </div>
 
+      <b-field label="Author">
+        <b-input name="reviewAuthor" v-model="reviewAuthor" required></b-input>
+      </b-field>
+
+      <b-field label="Subject">
+        <b-input name="title" v-model="reviewTitle" required></b-input>
+      </b-field>
+
       <b-field label="Comment">
         <b-input name="review" maxlength="500" type="textarea" v-model="reviewText" required></b-input>
       </b-field>
@@ -54,6 +62,7 @@
     data() {
       return {
         honey: '',
+        reviewTitle: '',
         reviewText: '',
         reviewStars: 5
       }

@@ -3,6 +3,11 @@
     <div class="container">
       <div class="page-header">
         <h2>Checkout</h2>
+        <article class="message is-warning">
+          <div class="message-body">
+            PLEASE NOTE: Due to the current status of the pandemic, the orders can take from 7 up to 14 working days to reach you. We're sorry if that causes any inconvenience.
+          </div>
+        </article>
         <p v-if="cart.length > 0 || loading">Please provide your address and billing information to proceed with the transaction.</p>
         <p v-else>There are no items in your cart. Please add some items from <router-link to="/shop"><strong>our shop</strong></router-link> first.</p>
       </div>

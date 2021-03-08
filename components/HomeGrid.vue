@@ -23,7 +23,7 @@ export default {
       starColors: [],
       mouseEngaged: false,
       mousePressed: false,
-      speedAmplifier: 5,
+      speedAmplifier: 20,
       mouseX: null,
       mouseY: null,
       canvas: null,
@@ -78,7 +78,7 @@ export default {
       }
     },
     render() {
-      let distance = 120;
+      let distance = 220;
       //clear the canvas.
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
       //Run through the stars

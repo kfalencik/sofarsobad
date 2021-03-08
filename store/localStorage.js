@@ -2,12 +2,11 @@ import firebase from 'firebase/app';
 import emailjs from 'emailjs-com';
 import md5 from 'js-md5';
 import 'firebase/firestore';
-import 'firebase/firebase-storage';
 import firebaseConfig from '~/assets/data/firebase';
 import { ToastProgrammatic as Toast } from 'buefy'
 
 // Firestore database connection
-let db, storage;
+let db
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
