@@ -136,7 +136,7 @@ export default {
       };
       this.starColors.push(starColor);
       //generate number of star objects with variables based on the calcWidth variable.
-      for (let y = 0; y < calcWidth; y++) {
+      for (let y = 0; y < calcWidth/2; y++) {
         let starAngle = Math.floor(Math.random() * 360) + 0;
         let star = {
           x: Math.floor(Math.random() * canvas.width) + 0,
