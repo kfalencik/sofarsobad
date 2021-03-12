@@ -67,6 +67,56 @@ export const mutations = {
   changeQuantity (state, data) {
     const product = state.cart[data.index].quantity = data.quantity
   },
+  printify (state) {
+    const printifyOrder = {
+      external_id: 'TEST123',
+      label: 'Test order',
+      line_items: [],
+      shipping_method: 1,
+      send_shipping_notification: true,
+      address_to: {
+        first_name: 'Kevin',
+        last_name: 'Falencik',
+        email: 'kfalencik@gmail.com',
+        phone: '07961276427',
+        country: 'United Kingdom',
+        region: 'Midlothian',
+        address1: '67/2 Lorne Street',
+        address2: '',
+        city: 'Edinburgh',
+        zip: 'EH6 8QG'
+      }
+    }
+
+    const printifyLineItems = []
+
+    state.cart.forEach(product => {
+      printifyLineItems.push({
+        sku: product.sku,
+        quantity: product.quantity
+      })
+    })
+
+    printifyOrder.line_items = printifyLineItems;
+
+    const printifyOptions = {
+      version: 'v1',
+      access_token: process.env.PRINTING_KEY,
+      shop_id: process.env.PRINTING_ID
+    }
+    const baseURL = `https://api.printify.com/${printifyOptions.version}/shops/${printifyOptions.shop_id}/orders.json`
+    
+    if (printifyOptions.access_token) {
+      axios({
+        method: 'post',
+        baseURL: baseURL,
+        headers: { 'Content-Type': 'application/json;charset=utf-8', 'Authorization': 'Bearer ' + printifyOptions.access_token },
+        data: JSON.stringify(printifyOrder)
+      }).then(response => {
+        console.log(response)
+      });
+    }
+  },
   completeOrder (state, data) {
     const self = this;
     db = firebase.firestore();
@@ -93,7 +143,7 @@ export const mutations = {
 
     const printifyOrder = {
       external_id: state.order.paypal.orderID,
-      label: state.order.details.email,
+      label: 'Test order',
       line_items: [],
       shipping_method: 1,
       send_shipping_notification: true,
@@ -130,39 +180,12 @@ export const mutations = {
       shop_id: process.env.PRINTING_ID
     }
     const baseURL = `https://api.printify.com/${printifyOptions.version}/shops/${printifyOptions.shop_id}/orders.json`
-
-    const test = {
-        "external_id": "2750e210-39bb-11e9-a503-452618153e6a",
-        "label": "00012",
-        "line_items": [
-          {
-            "sku": "MY-SKU",
-            "quantity": 1
-          }
-        ],
-        "shipping_method": 1,
-        "send_shipping_notification": false,
-        "address_to": {
-          "first_name": "John",
-          "last_name": "Smith",
-          "email": "example@msn.com",
-          "phone": "0574 69 21 90",
-          "country": "BE",
-          "region": "",
-          "address1": "ExampleBaan 121",
-          "address2": "45",
-          "city": "Retie",
-          "zip": "2470"
-        }
-    }
-
-    console.log(test, JSON.stringify(printifyOrder))
     
     if (printifyOptions.access_token) {
       axios({
         method: 'post',
         baseURL: baseURL,
-        headers: { 'Authorization': 'Bearer ' + printifyOptions.access_token },
+        headers: { 'Content-Type': 'application/json;charset=utf-8', 'Authorization': 'Bearer ' + printifyOptions.access_token },
         data: JSON.stringify(printifyOrder)
       }).then(response => {
         console.log(response)
