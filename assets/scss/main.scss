@@ -51,7 +51,8 @@ body {
   color: $black;
   font-family: $fontBody;
   font-size: 14px;
-  background-color: $lightgrey;
+  background-color: $black;
+  min-height: 100vh;
 }
 
 a {
@@ -213,9 +214,14 @@ h5 {
 }
 
 .page {
+  min-height: 100vh;
 
   main {
     display: block;
+
+    .page-main {
+      background: $lightgrey;
+    }
 
     > div:first-child {
       min-height: 70vh;

@@ -314,6 +314,8 @@ export const actions = {
       });
     });
 
+    context.commit('loadData', [products, discounts, reviews]);
+
     storage.ref().child('images').listAll().then(function(res) {
       res.items.forEach(imageRef => {
         imageRef.getMetadata().then(function(metadata) {
@@ -325,8 +327,6 @@ export const actions = {
         });
       });
     });
-
-    context.commit('loadData', [products, discounts, reviews]);
   },
   async getOrdersData (context) {
     db = firebase.firestore();

@@ -2,12 +2,13 @@
   <div :class="{'page': true, 'page--home': home}">
     <Header :loaded="loaded" />
     <main keep-alive>
-      <div >
+      <div class="page-main">
         <div class="container">
           <Messages />
         </div>
         <nuxt :loaded="loading" />
       </div>
+      <b-loading :is-full-page="true" v-model="loading"></b-loading>
       <slideshow />
       <Newsletter />
     </main>
