@@ -80,6 +80,24 @@
           </span>
         </b-field>
 
+        <h3>Sizes</h3>
+
+        <b-field class="form__input" label="Small SKU">
+          <b-input placeholder="Small SKU" v-model="SKUSmall"></b-input>
+        </b-field>
+
+        <b-field class="form__input" label="Medium SKU">
+          <b-input placeholder="Medium SKU" v-model="SKUMedium"></b-input>
+        </b-field>
+
+        <b-field class="form__input" label="Large SKU">
+          <b-input placeholder="Large SKU" v-model="SKULarge"></b-input>
+        </b-field>
+
+        <b-field class="form__input" label="XLarge SKU">
+          <b-input placeholder="Xlarge SKU" v-model="SKUXLarge"></b-input>
+        </b-field>
+
         <b-field message='In GBP for example: "120.99"' class="form__input" label="Price">
           <b-input placeholder="Price" v-model="price" required></b-input>
         </b-field>
@@ -116,6 +134,10 @@ export default {
       title: '',
       body: '',
       slug: '',
+      SKUSmall: '',
+      SKUMedium: '',
+      SKULarge: '',
+      SKUXLarge: '',
       price: 0,
       discount: 0,
       bought: 0,
@@ -145,6 +167,10 @@ export default {
       this.title = product.title;
       this.body = product.body;
       this.slug = product.slug;
+      this.SKUSmall = product.SKUSmall;
+      this.SKUMedium = product.SKUMedium;
+      this.SKULarge = product.SKULarge;
+      this.SKUXLarge = product.SKUXLarge;
       this.price = product.price;
       this.discount = product.discount;
       this.bought = product.bought;
@@ -267,6 +293,10 @@ export default {
           {
             title: this.title,
             slug: this.slug,
+            SKUSmall: this.SKUSmall,
+            SKUMedium: this.SKUMedium,
+            SKULarge: this.SKULarge,
+            SKUXLarge: this.SKUXLarge,
             body: this.body,
             price: this.price,
             discount: this.discount,
@@ -283,7 +313,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .container {
     min-height: 60vh;
   }
@@ -299,6 +329,10 @@ export default {
         font-weight: bold;
         font-size: 0.8em;
       }
+    }
+
+    .field.form__input > .control input[type=text] {
+      border: 1px solid $black;
     }
 
     .file-thumbnail {

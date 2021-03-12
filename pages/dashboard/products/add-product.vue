@@ -81,6 +81,24 @@
           <img :src="image5URL" />
         </span>
 
+        <h3>Sizes</h3>
+
+        <b-field class="form__input" label="Small SKU">
+          <b-input placeholder="Small SKU" v-model="SKUSmall"></b-input>
+        </b-field>
+
+        <b-field class="form__input" label="Medium SKU">
+          <b-input placeholder="Medium SKU" v-model="SKUMedium"></b-input>
+        </b-field>
+
+        <b-field class="form__input" label="Large SKU">
+          <b-input placeholder="Large SKU" v-model="SKULarge"></b-input>
+        </b-field>
+
+        <b-field class="form__input" label="XLarge SKU">
+          <b-input placeholder="Xlarge SKU" v-model="SKUXLarge"></b-input>
+        </b-field>
+
         <b-field message='n GBP for example: "120.99"' class="form__input" label="Price">
           <b-input placeholder="Price" v-model="price" required></b-input>
         </b-field>
@@ -117,6 +135,10 @@ export default {
       title: '',
       body: '',
       slug: '',
+      SKUSmall: '',
+      SKUMedium: '',
+      SKULarge: '',
+      SKUXLarge: '',
       price: 0,
       discount: 0,
       bought: 0,
@@ -250,6 +272,10 @@ export default {
             title: this.title,
             body: this.body,
             slug: this.slug,
+            SKUSmall: this.SKUSmall,
+            SKUMedium: this.SKUMedium,
+            SKULarge: this.SKULarge,
+            SKUXLarge: this.SKUXLarge,
             price: this.price,
             discount: parseInt(this.discount),
             tags: this.tags.join(", "),
@@ -282,6 +308,10 @@ export default {
         font-weight: bold;
         font-size: 0.8em;
       }
+    }
+
+    .field.form__input > .control input[type=text] {
+      border: 1px solid $black;
     }
 
     .file-thumbnail {
