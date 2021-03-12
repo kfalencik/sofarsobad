@@ -87,8 +87,8 @@ export default async function() {
       BUILD_HOOK: process.env.BUILD_HOOK || 'default',
       ANALYTICS: process.env.ANALYTICS || 'default',
       G_TAG: process.env.G_TAG || 'default',
-      PRINTING_ID: process.env.PRINTING_ID || 'APP-00023502',
-      PRINTING_KEY: process.env.PRINTING_KEY || 'default'
+      PRINTING_ID: null,
+      PRINTING_KEY: process.env.PRINTING_KEY || null
     },
     /*
     ** Customize the progress-bar color

@@ -252,9 +252,8 @@ export default {
     },
 
     addToCart: function() {
-      const self = this;
-
-      this.$store.commit('localStorage/addToCart', [this.product.id, this.size, this.quantity]);
+      const sizeSKU = this.product['SKU' + this.size.charAt(0).toUpperCase() + this.size.slice(1)]
+      this.$store.commit('localStorage/addToCart', [this.product.id, this.size, this.quantity, sizeSKU]);
       this.$buefy.snackbar.open({
         duration: 1000,
         position: 'is-top',

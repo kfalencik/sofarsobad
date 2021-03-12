@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import emailjs from 'emailjs-com';
+import axios from 'axios'
 import md5 from 'js-md5';
 import 'firebase/firestore';
 import firebaseConfig from '~/assets/data/firebase';
@@ -29,7 +30,8 @@ export const mutations = {
     let cartItem = {
       product: data[0],
       size: data[1],
-      quantity: data[2]
+      quantity: data[2],
+      sku: data[3]
     };
 
     let found = null;
@@ -89,99 +91,147 @@ export const mutations = {
       state.order.items.pop();
     }
 
-    db.collection("orders").add({
-      details: data[0],
-      paypal: data[1],
-      items: data[2],
-      subtotal: data[3],
-      total: data[4],
-      tax: data[5],
-      status: data[6],
-      date: date,
-      timestamp: `${yyyy}${mm}${dd}${timeReversed}`,
-      discount: state.discount
-    });
-    state.cart = [];
-    state.discount = null;
-
-    let emailCart = "<table border='1' cellspacing='0' cellpadding='5' style='border: none; border-collapse: collapse;'>";
-    emailCart = `${emailCart}<tr><td>Item</td><td>Description</td><td>Quantity</td><td>Price</td></tr>`;
-
-    state.order.items.forEach(item => {
-      emailCart = `${emailCart}<tr><td>${item.name}</td><td>${item.description}</td><td>${item.quantity}</td><td>£${item.price}</td></tr>`;
-    });
-
-    // emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Subtotal</strong></td><td><strong>$${state.order.subtotal}</strong></td></tr>`;
-    // emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Tax</strong></td><td><strong>$${state.order.tax}</strong></td></tr>`;
-    emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Total</strong></td><td><strong>£${state.order.total}</strong></td></tr>`;
-    emailCart = emailCart + '</table>';
-
-
-    let emailShippingAddress = `<p>${state.order.details.address1}`;
-    if (state.order.details.address2 != '') emailShippingAddress = emailShippingAddress + ', '  + state.order.details.address2;
-    if (state.order.details.address3 != '') emailShippingAddress = emailShippingAddress + ', '  + state.order.details.address3;
-
-    emailShippingAddress = emailShippingAddress + '</p><p>' + state.order.details.city + ', ' + state.order.details.zipcode + '</p><p>' + state.order.details.state + ', United Kingdom</p>'
-
-    // Send email
-    let emailParams = {
-      "send_to": state.order.details.email,
-      "orderID": state.order.paypal.orderID,
-      "firstName": state.order.details.firstName,
-      "lastName": state.order.details.lastName,
-      "address": emailShippingAddress,
-      "cart": emailCart,
-      "tax": state.order.tax,
-      "subtotal": state.order.subtotal,
-      "total": state.order.total
+    const printifyOrder = {
+      external_id: state.order.paypal.orderID,
+      label: state.order.details.email,
+      line_items: [],
+      shipping_method: 1,
+      send_shipping_notification: true,
+      address_to: {
+        first_name: 'Kevin',
+        last_name: 'Falencik',
+        email: 'kfalencik@gmail.com',
+        phone: '07961276427',
+        country: 'United Kingdom',
+        region: 'Midlothian',
+        address1: '67/2 Lorne Street',
+        address2: '',
+        city: 'Edinburgh',
+        zip: 'EH6 8QG'
+      }
     }
 
-    const order = {
-      "brandName": "So Far So Bad",
-      "comment": "",
-      "shipping_­address": {
-        "firstName": state.order.details.firstName,
-        "lastName": state.order.details.lastName,
-        "company": state.order.details.company,
-        "address1": state.order.details.address1,
-        "address2": state.order.details.address2,
-        "city": state.order.details.city,
-        "county": state.order.details.state,
-        "postcode": state.order.details.zipcode,
-        "country": "United Kingdom",
-        "phone1": state.order.details.mobile,
-      },
-      "shipping": {
-        "shippin­gMethod": "courier"
-      },
-      "items": [
-        {
-          "pn": "CV001-BLK-M",
-          "quantity": 1,
-          "retailPrice": 24.99,
-          "description": "",
-          "label": {
-            "type": "printed",
-            "name": "ink-label"
+    const printifyLineItems = []
+
+    state.cart.forEach(product => {
+      console.log(product)
+      printifyLineItems.push({
+        sku: product.sku,
+        quantity: product.quantity
+      })
+    })
+
+    printifyOrder.line_items = printifyLineItems;
+
+
+    const printifyOptions = {
+      version: 'v1',
+      access_token: process.env.PRINTING_KEY,
+      shop_id: process.env.PRINTING_ID
+    }
+    const baseURL = `https://api.printify.com/${printifyOptions.version}/shops/${printifyOptions.shop_id}/orders.json`
+
+    const test = {
+        "external_id": "2750e210-39bb-11e9-a503-452618153e6a",
+        "label": "00012",
+        "line_items": [
+          {
+            "sku": "MY-SKU",
+            "quantity": 1
           }
+        ],
+        "shipping_method": 1,
+        "send_shipping_notification": false,
+        "address_to": {
+          "first_name": "John",
+          "last_name": "Smith",
+          "email": "example@msn.com",
+          "phone": "0574 69 21 90",
+          "country": "BE",
+          "region": "",
+          "address1": "ExampleBaan 121",
+          "address2": "45",
+          "city": "Retie",
+          "zip": "2470"
         }
-      ]
     }
 
-    emailjs.send(emailserviceid, 'sofarsobad_processing', emailParams, emailuserid).then(function(){
-      emailjs.send(emailserviceid, 'sofarsobad_order', emailParams, emailuserid);
-      setTimeout(function() {
-        fetch(`/­api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, {
-          method: 'POST',
-          redirect: 'follow',
-          body: JSON.stringify(order)
-        }).then(response => {
-          console.log(response)
-          self.app.router.push('/shop/checkout/complete');
-        });
-        //self.app.router.push('/shop/checkout/complete');
-      }, 2000);
-    });
+    console.log(test, JSON.stringify(printifyOrder))
+    
+    if (printifyOptions.access_token) {
+      axios({
+        method: 'post',
+        baseURL: baseURL,
+        headers: { 'Authorization': 'Bearer ' + printifyOptions.access_token },
+        data: JSON.stringify(printifyOrder)
+      }).then(response => {
+        console.log(response)
+      });
+    }
+
+    // printifyAPI.Order.create(printifyOrder).then(result => {
+    //   console.log(result)
+    // });
+
+    // db.collection("orders").add({
+    //   details: data[0],
+    //   paypal: data[1],
+    //   items: data[2],
+    //   subtotal: data[3],
+    //   total: data[4],
+    //   tax: data[5],
+    //   status: data[6],
+    //   date: date,
+    //   timestamp: `${yyyy}${mm}${dd}${timeReversed}`,
+    //   discount: state.discount
+    // });
+    // state.cart = [];
+    // state.discount = null;
+
+    // let emailCart = "<table border='1' cellspacing='0' cellpadding='5' style='border: none; border-collapse: collapse;'>";
+    // emailCart = `${emailCart}<tr><td>Item</td><td>Description</td><td>Quantity</td><td>Price</td></tr>`;
+
+    // state.order.items.forEach(item => {
+    //   emailCart = `${emailCart}<tr><td>${item.name}</td><td>${item.description}</td><td>${item.quantity}</td><td>£${item.price}</td></tr>`;
+    // });
+
+    // emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Total</strong></td><td><strong>£${state.order.total}</strong></td></tr>`;
+    // emailCart = emailCart + '</table>';
+
+
+    // let emailShippingAddress = `<p>${state.order.details.address1}`;
+    // if (state.order.details.address2 != '') emailShippingAddress = emailShippingAddress + ', '  + state.order.details.address2;
+    // if (state.order.details.address3 != '') emailShippingAddress = emailShippingAddress + ', '  + state.order.details.address3;
+
+    // emailShippingAddress = emailShippingAddress + '</p><p>' + state.order.details.city + ', ' + state.order.details.zipcode + '</p><p>' + state.order.details.state + ', United Kingdom</p>'
+
+    // // Send email
+    // let emailParams = {
+    //   "send_to": state.order.details.email,
+    //   "orderID": state.order.paypal.orderID,
+    //   "firstName": state.order.details.firstName,
+    //   "lastName": state.order.details.lastName,
+    //   "address": emailShippingAddress,
+    //   "cart": emailCart,
+    //   "tax": state.order.tax,
+    //   "subtotal": state.order.subtotal,
+    //   "total": state.order.total
+    // }
+
+    // emailjs.send(emailserviceid, 'sofarsobad_processing', emailParams, emailuserid).then(function(){
+    //   emailjs.send(emailserviceid, 'sofarsobad_order', emailParams, emailuserid);
+    //   setTimeout(function() {
+    //     fetch(`/­api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, {
+    //       method: 'POST',
+    //       redirect: 'follow',
+    //       body: JSON.stringify(order)
+    //     }).then(response => {
+    //       console.log(response)
+    //       self.app.router.push('/shop/checkout/complete');
+    //     });
+    //     //self.app.router.push('/shop/checkout/complete');
+    //   }, 2000);
+    // });
   }
 }
 
