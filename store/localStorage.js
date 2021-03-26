@@ -67,56 +67,6 @@ export const mutations = {
   changeQuantity (state, data) {
     const product = state.cart[data.index].quantity = data.quantity
   },
-  printify (state) {
-    const printifyOrder = {
-      external_id: 'TEST123',
-      label: 'Test order',
-      line_items: [],
-      shipping_method: 1,
-      send_shipping_notification: true,
-      address_to: {
-        first_name: 'Kevin',
-        last_name: 'Falencik',
-        email: 'kfalencik@gmail.com',
-        phone: '07961276427',
-        country: 'United Kingdom',
-        region: 'Midlothian',
-        address1: '67/2 Lorne Street',
-        address2: '',
-        city: 'Edinburgh',
-        zip: 'EH6 8QG'
-      }
-    }
-
-    const printifyLineItems = []
-
-    state.cart.forEach(product => {
-      printifyLineItems.push({
-        sku: product.sku,
-        quantity: product.quantity
-      })
-    })
-
-    printifyOrder.line_items = printifyLineItems;
-
-    const printifyOptions = {
-      version: 'v1',
-      access_token: process.env.PRINTING_KEY,
-      shop_id: process.env.PRINTING_ID
-    }
-    const baseURL = `https://api.printify.com/${printifyOptions.version}/shops/${printifyOptions.shop_id}/orders.json`
-    
-    if (printifyOptions.access_token) {
-      axios({
-        method: 'post',
-        baseURL: baseURL,
-        headers: { 'Content-Type': 'application/json;charset=utf-8', 'Authorization': 'Bearer ' + printifyOptions.access_token },
-        data: JSON.stringify(printifyOrder)
-      }).then(response => {
-        console.log(response)
-      });
-    }
-  },
   completeOrder (state, data) {
     const self = this;
     db = firebase.firestore();
@@ -143,7 +93,7 @@ export const mutations = {
 
     const printifyOrder = {
       external_id: state.order.paypal.orderID,
-      label: 'Test order',
+      label: `Order - ${state.order.paypal.orderID}`,
       line_items: [],
       shipping_method: 1,
       send_shipping_notification: true,
@@ -152,7 +102,7 @@ export const mutations = {
         last_name: 'Falencik',
         email: 'kfalencik@gmail.com',
         phone: '07961276427',
-        country: 'United Kingdom',
+        country: 'GB',
         region: 'Midlothian',
         address1: '67/2 Lorne Street',
         address2: '',
