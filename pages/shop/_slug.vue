@@ -125,6 +125,15 @@ export default {
 
   transition: 'page',
 
+  head () {
+    return {
+      title: 'So Far So Bad - ' + this.product.title,
+      meta: [
+        { hid: 'og-title', property: 'og:title', content: this.product.title }
+      ]
+    }
+  },
+
   data () {
     return {
       prodcutIndex: 0,
