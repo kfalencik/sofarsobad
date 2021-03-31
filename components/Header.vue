@@ -40,12 +40,12 @@
             <nav>
               <ul>
                 <li>
-                  <a href="https://www.facebook.com/sofarsobadapparel" target="_blank">
+                  <a href="https://facebook.com/sofarsobadapparel" target="_blank" rel="noreferrer">
                     <b-icon icon="facebook"></b-icon>
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.instagram.com/sofarsobadapparel/" target="_blank">
+                  <a href="https://instagram.com/sofarsobadapparel/" target="_blank" rel="noreferrer">
                     <b-icon icon="instagram"></b-icon>
                   </a>
                 </li>

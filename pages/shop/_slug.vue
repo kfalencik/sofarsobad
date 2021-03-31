@@ -107,7 +107,7 @@ export default {
         { hid: 'ogtitle', property: 'og:title', content: 'So Far So Bad - ' + this.product.title},
         { hid: 'ogdesc', property: 'og:description', content: this.product.body },
         { hid: 'ogtype', property: 'og:type', content: 'product.item'},
-        { hid: 'ogurl', property: 'og:url', content: 'https://www.sofarsobad.co.uk/shop/' + this.$route.params.slug},
+        { hid: 'ogurl', property: 'og:url', content: 'https://sofarsobad.co.uk/shop/' + this.$route.params.slug},
         { hid: 'ogimage', property: 'og:image', content: this.product.image1},
         { property: 'product:price:amount', content: this.priceFormatter(this.productTotal)},
         { property: 'product:price:currency', content: 'GBP'},

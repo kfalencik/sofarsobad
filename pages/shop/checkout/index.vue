@@ -207,7 +207,7 @@ export default {
           name: "So Far So Bad",
           presentation: {
             brand_name: "So Far So Bad",
-            logo_image: "https://www.sofarsobad.co.uk/logo-white.png"
+            logo_image: "https://sofarsobad.co.uk/logo-white.png"
           },
           input_fields: {
             no_shipping: 1

@@ -36,7 +36,7 @@ export default {
       "url" : "https://sofarsobad.co.uk",
       "priceRange": "$$",
       "sameAs" : [
-        "https://www.facebook.com/sofarsobadapparel",
+        "https://facebook.com/sofarsobadapparel",
       ],
       "telephone": "+447961276427",
       "founders": [

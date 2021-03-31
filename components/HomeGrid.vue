@@ -10,7 +10,6 @@
 
     <div class="hero__title">
       <img src="/medusa.png" alt="So Far So Bad" />
-      <h1 class="sr-only">So Far So Bad Apparel</h1>
     </div>
   </div>
 </template>

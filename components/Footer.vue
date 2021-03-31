@@ -16,7 +16,7 @@
           </nav>
         </div>
         <div class="sr-only">
-          <a rel="noreferrer" href="https://www.facebook.com/sofarsobadapparel/" target="_blank">Facebook</a>
+          <a rel="noreferrer" href="https://facebook.com/sofarsobadapparel/" target="_blank">Facebook</a>
         </div>
         <div class="footer__right">
           <img src="/payment-methods.png" width="200" alt="" role="presentation" />
