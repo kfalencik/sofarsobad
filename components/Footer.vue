@@ -32,8 +32,8 @@
     padding: 0;
 
     &__bottom {
-      background: $primary;
-      color: $black;
+      background: $black;
+      color: $white;
       font-size: 0.8em;
 
       .section {
@@ -98,7 +98,7 @@
           }
 
           a {
-            color: $black;
+            color: white;
             text-decoration: underline;
           }
         }

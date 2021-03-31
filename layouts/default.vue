@@ -10,7 +10,6 @@
       </div>
       <b-loading :is-full-page="true" v-model="loading"></b-loading>
       <slideshow />
-      <Newsletter />
     </main>
     <Footer />
   </div>
