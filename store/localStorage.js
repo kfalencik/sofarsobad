@@ -185,18 +185,9 @@ export const mutations = {
         }
     
         emailjs.send(emailserviceid, 'sofarsobad_processing', emailParams, emailuserid).then(function(){
-          emailjs.send(emailserviceid, 'sofarsobad_order', emailParams, emailuserid);
-          setTimeout(function() {
-            fetch(`/­api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, {
-              method: 'POST',
-              redirect: 'follow',
-              body: JSON.stringify(order)
-            }).then(response => {
-              console.log(response)
-              self.app.router.push('/shop/checkout/complete');
-            });
-            //self.app.router.push('/shop/checkout/complete');
-          }, 2000);
+          emailjs.send(emailserviceid, 'sofarsobad_order', emailParams, emailuserid).then(function(){
+            self.app.router.push('/shop/checkout/complete');
+          });
         });
       })
     }
