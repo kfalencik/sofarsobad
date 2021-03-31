@@ -119,7 +119,7 @@ export default {
         { hid: 'fbid', property: 'fb:app_id', content: process.env.FB_ID || null }
       ],
       link: [
-        { rel: 'canonical', href: 'https://www.sofarsobad.co.uk/shop/' + this.$route.params.slug}
+        { rel: 'canonical', href: 'https://sofarsobad.co.uk/shop/' + this.$route.params.slug}
       ]
     } : null
   },
