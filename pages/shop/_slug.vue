@@ -105,7 +105,7 @@ export default {
       meta: [
         { hid: 'keywords', name: 'keywords', content: 'tattoo, illustration, design, ink, inked, tattooed, tshirts, apparel, emo, goth, punk, trash, grunge, minimal'},
         { hid: 'ogtitle', property: 'og:title', content: 'So Far So Bad - ' + this.product.title},
-        { hid: 'ogdesc', property: 'og:description', content: 'A beautiful canvas "' + this.product.title + '" for your wall'},
+        { hid: 'ogdesc', property: 'og:description', content: this.product.body },
         { hid: 'ogtype', property: 'og:type', content: 'product.item'},
         { hid: 'ogurl', property: 'og:url', content: 'https://www.sofarsobad.co.uk/shop/' + this.$route.params.slug},
         { hid: 'ogimage', property: 'og:image', content: this.product.image1},
@@ -114,12 +114,45 @@ export default {
         { property: 'product:retailer_item_id', content: this.product.id},
         { hid: 'twittercard', name: 'twitter:card', content: 'summary_large_image'},
         { hid: 'twittertitle', name: 'twitter:title', content: 'So Far So Bad - ' + this.product.title},
-        { hid: 'twitterdesc', name: 'twitter:description', content: 'A beautiful canvas "' + this.product.title + '" for your wall'},
+        { hid: 'twitterdesc', name: 'twitter:description', content: this.product.body},
         { hid: 'twitterimage', name: 'twitter:image', content: this.product.image1},
       ],
       link: [
         { rel: 'canonical', href: 'https://www.sofarsobad.co.uk/shop/' + this.$route.params.slug}
       ]
+    } : null
+  },
+
+  jsonld() {
+    return this.product ? {
+      "@context" : "https://schema.org",
+      "@type" : "Product",
+      "name" : this.product.title,
+      "image": [
+        this.product.image1,
+        this.product.image2,
+        this.product.image3
+      ],
+      "description": this.product.body,
+      "sku": this.product.slug,
+      "brand": {
+        "@type": "Brand",
+        "name": "So Far So Bad"
+      },
+      "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": this.productRating,
+          "reviewCount": this.productReviews.length
+        },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://sofarsobad.co.uk/shop/" + this.product.slug,
+        "priceCurrency": "GBP",
+        "price": this.product.price,
+        "priceValidUntil": "2030-12-31",
+        "itemCondition": "https://schema.org/NewCondition",
+        "availability": "https://schema.org/InStock"
+      }
     } : null
   },
 
@@ -194,6 +227,7 @@ export default {
 
     productReviews () {
       const reviews = this.$store.state.reviews.filter(product => product.id === this.product.id);
+      console.log(reviews)
       return reviews;
     },
 

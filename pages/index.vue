@@ -27,15 +27,18 @@ export default {
   jsonld() {
     return {
       "@context" : "https://schema.org",
-      "@type" : "Organization",
+      "@type" : "Store",
+      "@id": "https://sofarsobad.co.uk",
       "name" : "So Far So Bad",
       "legalName": "So Far So Bad",
-      "logo": "https://sofarsobad.co.uk/logo-white.png",
+      "logo": "https://sofarsobad.co.uk/logo.jpg",
       "foundingDate": "2021",
       "url" : "https://sofarsobad.co.uk",
+      "priceRange": "$$",
       "sameAs" : [
         "https://www.facebook.com/sofarsobadapparel",
       ],
+      "telephone": "+447961276427",
       "founders": [
         {
         "@type": "Person",
@@ -55,7 +58,21 @@ export default {
         "contactType": "customer support",
         "telephone": "[+447961276427]",
         "email": "hi@sofarsobad.co.uk"
-      }
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "00:00",
+          "closes": "23:59"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "00:00",
+          "closes": "00:00"
+        }
+      ]
     }
   },
 

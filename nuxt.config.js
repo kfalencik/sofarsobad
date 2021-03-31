@@ -25,8 +25,6 @@ export default async function() {
     productPaths.push('/dashboard/products/' + product.id);
   });
 
-  console.log(productPaths)
-
   return {
     /*
     ** Headers of the page
@@ -41,18 +39,18 @@ export default async function() {
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { hid: 'description', name: 'description', content: 'We strongly belive in the "Less is Better" rule so most of our designs are simple but bold.' },
+        { hid: 'description', name: 'description', content: 'Ink inspired, minimalist, independent UK brand. We strongly belive in the "Less is Better" rule so most of our designs are simple but bold.' },
         { name: 'keywords', content: 'fashion, clothes, apparel, tattoo, tattooed, ink, inked, tshirt, minimalist, design, shop, ecommerce, store' },
         { hid: 'twittercard', name: 'twitter:card', content: 'summary_large_image'},
         { hid: 'twittersite', name: 'twitter:site', content: '@sofarsobadapparel'},
         { hid: 'twittertitle', name: 'twitter:title', content: 'So Far So Bad - Ink Inspired, minimalist apparel'},
-        { hid: 'twitterdesc', name: 'twitter:description', content: 'We strongly belive in the "Less is Better" rule so most of our designs are simple but bold.'},
-        { hid: 'twitterimage', name: 'twitter:image', content: 'https://www.sofarsobad.co.uk/medusa.png'},
+        { hid: 'twitterdesc', name: 'twitter:description', content: 'Ink inspired, minimalist, independent UK brand. We strongly belive in the "Less is Better" rule so most of our designs are simple but bold.'},
+        { hid: 'twitterimage', name: 'twitter:image', content: 'https://www.sofarsobad.co.uk/logo.jpg'},
         { hid: 'ogtitle', property: 'og:title', content: 'So Far So Bad - Ink Inspired, minimalist apparel'},
         { hid: 'ogtype', property: 'og:type', content: 'Website'},
         { hid: 'ogurl', property: 'og:url', content: 'https://www.sofarsobad.co.uk'},
-        { hid: 'ogdesc', property: 'og:description', content: 'We strongly belive in the "Less is Better" rule so most of our designs are simple but bold.'},
-        { hid: 'ogimage', property: 'og:image', content: 'https://www.sofarsobad.co.uk/medusa.png'},
+        { hid: 'ogdesc', property: 'og:description', content: 'Ink inspired, minimalist, independent UK brand. We strongly belive in the "Less is Better" rule so most of our designs are simple but bold.'},
+        { hid: 'ogimage', property: 'og:image', content: 'https://www.sofarsobad.co.uk/logo.jpg'},
         { hid: 'fbid', property: 'fb:app_id', content: process.env.FB_ID || null }
       ],
       link: [
