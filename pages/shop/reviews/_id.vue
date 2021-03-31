@@ -53,8 +53,10 @@
   import Stars from '~/components/Stars';
 
   export default {
-    head: {
-      title: 'So Far So Bad - ' + this.product ? this.product.title : null + ' reviews',
+    head () {
+      return {
+        title: 'So Far So Bad - ' + this.product ? this.product.title : null + ' reviews',
+      }
     },
     transition: 'page',
     data() {
