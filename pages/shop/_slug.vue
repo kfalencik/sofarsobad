@@ -125,7 +125,7 @@ export default {
   },
 
   jsonld() {
-    return this.product ? {
+    const structuredData = this.product ? {
       "@context" : "https://schema.org",
       "@type" : "Product",
       "name" : this.product.title,
@@ -140,11 +140,6 @@ export default {
         "@type": "Brand",
         "name": "So Far So Bad"
       },
-      "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": this.productRating,
-          "reviewCount": this.productReviews.length
-        },
       "offers": {
         "@type": "Offer",
         "url": "https://sofarsobad.co.uk/shop/" + this.product.slug,
@@ -155,6 +150,16 @@ export default {
         "availability": "https://schema.org/InStock"
       }
     } : null
+
+    if (this.productReviews && this.productReviews.length) {
+      structuredData.aggregateRating = {
+        "@type": "AggregateRating",
+        "ratingValue": this.productRating,
+        "reviewCount": this.productReviews.length
+      }
+    }
+
+    return structuredData
   },
 
   transition: 'page',
