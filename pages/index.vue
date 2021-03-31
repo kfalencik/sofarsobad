@@ -33,6 +33,7 @@ export default {
       "legalName": "So Far So Bad",
       "logo": "https://sofarsobad.co.uk/logo.jpg",
       "foundingDate": "2021",
+      "image" : "https://sofarsobad.co.uk/logo.jpg",
       "url" : "https://sofarsobad.co.uk",
       "priceRange": "$$",
       "sameAs" : [
