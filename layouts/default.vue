@@ -24,15 +24,7 @@ import Messages from '~/components/Messages';
 import Loading from '~/components/Loading';
 import Slideshow from '~/components/Slideshow.vue';
 
-export default {
-  head() {
-    return {
-      link: [
-        { rel: 'canonical', href: 'https://www.sofarsobad.co.uk' + this.$route.path },
-      ] 
-    }
-  },
-  
+export default { 
   components: {
     Header,
     Newsletter,
