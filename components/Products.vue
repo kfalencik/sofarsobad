@@ -1,28 +1,35 @@
 <template>
   <div class="products">
-    <div class="is-variable is-mobile columns is-2" v-if="products.length > 0">
-      <Card v-for="product in products" :key="product.id" :id="product.id" />
-    </div>
+    <template v-if="loading">
+      <div class="is-variable is-mobile columns is-2" v-if="products.length > 0">
+        <Card v-for="product in products" :key="product.id" :id="product.id" />
+      </div>
 
-    <div class="no-results" v-else>
-      <p>Sorry, we have not found any results matching your criteria. Please change or <a @click.prevent.stop="resetFilters">reset</a> filter options and try again.</p>
+      <div class="no-results" v-else>
+        <p>Sorry, we have not found any results matching your criteria. Please change or <a @click.prevent.stop="resetFilters">reset</a> filter options and try again.</p>
+      </div>
+    </template>
+    <div v-else>
+      <Loading />
     </div>
   </div>
 </template>
 
 <script>
 import Card from './Card';
+import Loading from '~/components/Loading';
 
 export default {
   props: ['products'],
 
   components: {
-    Card
+    Card,
+    Loading
   },
 
   computed: {
-    loading() {
-      return this.$store.state.loading;
+    loading () {
+      return this.$store.state.loaded;
     }
   },
 

@@ -1,19 +1,27 @@
 <template>
-  <div class="section" v-if="!loaded">
+  <div class="section section--page">
     <div class="container">
       <div class="page-header">
         <h2>Checkout</h2>
-        <article class="message is-warning">
+        <template v-if="loading && !payment">
+          <article class="message is-warning">
+            <div class="message-body">
+              PLEASE NOTE: Due to the current status of the pandemic, the orders can take from 7 up to 14 working days to reach you. We're sorry if that causes any inconvenience.
+            </div>
+          </article>
+          <p v-if="cart.length > 0">Please provide your address and billing information to proceed with the transaction.</p>
+          <p v-else>There are no items in your cart. Please add some items from <router-link to="/shop"><strong>our shop</strong></router-link> first.</p>
+        </template>
+        <article class="message is-warning" v-if="payment">
           <div class="message-body">
-            PLEASE NOTE: Due to the current status of the pandemic, the orders can take from 7 up to 14 working days to reach you. We're sorry if that causes any inconvenience.
+            <p>Please wait while we process your order payment.</p>
           </div>
         </article>
-        <p v-if="cart.length > 0 || loading">Please provide your address and billing information to proceed with the transaction.</p>
-        <p v-else>There are no items in your cart. Please add some items from <router-link to="/shop"><strong>our shop</strong></router-link> first.</p>
+        <Loading v-if="!loading || payment" />
       </div>
 
-      <template v-if="cart.length > 0 || loading">
-        <div class="columns">
+      <template v-if="cart.length > 0 && loading">
+        <div class="columns" v-show="!payment">
           <div class="column">
             <form>
               <div class="checkout-panel">
@@ -175,18 +183,21 @@
           </div>
         </div>
       </template>
-
-      <b-loading :is-full-page="true" :active.sync="loading"></b-loading>
     </div>
   </div>
 </template>
 
 <script>
+import Loading from '~/components/Loading';
+
 export default {
     head () {
       return {
         title: 'So Far So Bad - Checkout',
       }
+    },
+    components: {
+      Loading
     },
     props: {
       loaded: {
@@ -196,7 +207,7 @@ export default {
     },
     data() {
         return {
-        loading: false,
+        payment: false,
         tax: 0,
         credentials: {
           env: process.env.PP_ENV,
@@ -237,6 +248,9 @@ export default {
       }
     },
     computed: {
+      loading () {
+        return this.$store.state.loaded;
+      },
       cart() {
         return this.$store.state.localStorage.cart
       },
@@ -309,7 +323,7 @@ export default {
     methods: {
         paymentAuthorized: function(event) {
           const self = this;
-          this.loading = true;
+          self.payment = true;
 
           this.$store.commit('localStorage/completeOrder', [{
             title: this.personalTitle,

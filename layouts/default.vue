@@ -8,7 +8,6 @@
         </div>
         <nuxt :loaded="loading" />
       </div>
-      <b-loading :is-full-page="true" v-model="loading"></b-loading>
       <slideshow />
     </main>
     <Footer />
@@ -17,7 +16,6 @@
 
 <script>
 import Header from '~/components/Header';
-import Newsletter from '~/components/Newsletter';
 import Footer from '~/components/Footer';
 import Messages from '~/components/Messages';
 import Loading from '~/components/Loading';
@@ -26,7 +24,6 @@ import Slideshow from '~/components/Slideshow.vue';
 export default { 
   components: {
     Header,
-    Newsletter,
     Footer,
     Messages,
     Loading,
