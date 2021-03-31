@@ -25,6 +25,8 @@ export default async function() {
     productPaths.push('/dashboard/products/' + product.id);
   });
 
+  console.log(productPaths)
+
   return {
     /*
     ** Headers of the page
@@ -50,7 +52,8 @@ export default async function() {
         { hid: 'ogtype', property: 'og:type', content: 'Website'},
         { hid: 'ogurl', property: 'og:url', content: 'https://www.sofarsobad.co.uk'},
         { hid: 'ogdesc', property: 'og:description', content: 'We strongly belive in the "Less is Better" rule so most of our designs are simple but bold.'},
-        { hid: 'ogimage', property: 'og:image', content: 'https://www.sofarsobad.co.uk/medusa.png'}
+        { hid: 'ogimage', property: 'og:image', content: 'https://www.sofarsobad.co.uk/medusa.png'},
+        { hid: 'fbid', property: 'fb:app_id', content: process.env.FB_ID || null }
       ],
       link: [
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Alegreya:ital@1&display=swap'},
@@ -85,9 +88,9 @@ export default async function() {
       MAILCHIMP_UID: process.env.MAILCHIMP_UID || 'default',
       MAILCHIMP_LIST: process.env.MAILCHIMP_LIST || 'default',
       BUILD_HOOK: process.env.BUILD_HOOK || 'default',
-      ANALYTICS: process.env.ANALYTICS || 'default',
+      FB_ID: process.env.FB_ID || null,
       G_TAG: process.env.G_TAG || 'default',
-      PRINTING_ID: null,
+      PRINTING_ID: process.env.PRINTING_ID || null,
       PRINTING_KEY: process.env.PRINTING_KEY || null
     },
     /*
