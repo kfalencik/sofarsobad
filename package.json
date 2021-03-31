@@ -15,7 +15,6 @@
     "core-js": "^2.6.11",
     "emailjs-com": "^2.4.1",
     "firebase": "^7.6.1",
-    "js-md5": "^0.7.3",
     "nuxt": "^2.0.0",
     "nuxt-buefy": "^0.4.0",
     "nuxt-compress": "^1.0.2",
@@ -23,7 +22,6 @@
     "nuxt-vuex-localstorage": "^1.2.6",
     "vue-fb-customer-chat": "^0.2.0",
     "vue-gtag": "^1.11.0",
-    "vue-mailchimp-subscribe": "^1.1.0",
     "vue-paypal-checkout": "^3.2.0"
   },
   "devDependencies": {

@@ -4,18 +4,19 @@
     <div class="columns" v-if="ordersLoaded">
       <div class="column is-half">
         <h3>Personal Details</h3>
-        <div><strong>Imie: </strong>{{order.details.title}} {{order.details.firstName}} {{order.details.lastName}}</div>
-        <div><strong>Nazwa firmy: </strong>{{order.details.company}}</div>
-        <div><strong>Email: </strong>{{order.details.email}}</div>
-        <div><strong>Telefon: </strong>{{order.details.phone}}</div>
+        <div><strong>Full name: </strong>{{order.details.title}} {{order.details.firstName}} {{order.details.lastName}}</div>
+        <div><strong>Company name: </strong>{{order.details.company}}</div>
+        <div><strong>Email address: </strong>{{order.details.email}}</div>
+        <div><strong>Phone number: </strong>{{order.details.phone}}</div>
       </div>
 
       <div class="column is-half">
         <h3>Postage Details</h3>
         <div><strong>Address: </strong>{{order.details.address1}} {{order.details.address2}} {{order.details.address3}}</div>
         <div><strong>City: </strong>{{order.details.city}}</div>
-        <div><strong>Zipcode: </strong>{{order.details.zipcode}}</div>
-        <div><strong>State: </strong>{{order.details.state}}</div>
+        <div><strong>Postcode: </strong>{{order.details.zipcode}}</div>
+        <div><strong>Region: </strong>{{order.details.state}}</div>
+        <div><strong>Country: </strong>GB</div>
       </div>
 
       <div class="column is-half">

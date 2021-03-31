@@ -297,7 +297,7 @@ export default {
 
           items.push({
             "name": product.title,
-            "sku": `sofarsobad-${product.slug}`,
+            "sku": `${item.sku}`,
             "description": this.extrasFromatter(item.size),
             "quantity": item.quantity,
             "price": this.priceFormatter(productPrice),

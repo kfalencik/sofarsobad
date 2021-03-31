@@ -140,6 +140,9 @@ export default {
 </style>
 
 <style lang="scss">
+  body {
+    background: $white;
+  }
   .pagination-list {
     ul {
       margin: 0;
