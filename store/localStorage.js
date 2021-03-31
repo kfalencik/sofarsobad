@@ -137,74 +137,69 @@ export const mutations = {
         baseURL: baseURL,
         headers: { 'Content-Type': 'application/json;charset=utf-8', 'Authorization': 'Bearer ' + printifyOptions.access_token },
         data: JSON.stringify(printifyOrder)
-      }).then(response => {
-        console.log(response)
-      });
+      }).then((order) => {
+        console.log(order)
+        db.collection("orders").add({
+          details: data[0],
+          paypal: data[1],
+          items: data[2],
+          subtotal: data[3],
+          total: data[4],
+          tax: data[5],
+          status: data[6],
+          date: date,
+          timestamp: `${yyyy}${mm}${dd}${timeReversed}`,
+          discount: state.discount
+        });
+        state.cart = [];
+        state.discount = null;
+    
+        let emailCart = "<table border='1' cellspacing='0' cellpadding='5' style='border: none; border-collapse: collapse;'>";
+        emailCart = `${emailCart}<tr><td>Item</td><td>Description</td><td>Quantity</td><td>Price</td></tr>`;
+    
+        state.order.items.forEach(item => {
+          emailCart = `${emailCart}<tr><td>${item.name}</td><td>${item.description}</td><td>${item.quantity}</td><td>£${item.price}</td></tr>`;
+        });
+    
+        emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Total</strong></td><td><strong>£${state.order.total}</strong></td></tr>`;
+        emailCart = emailCart + '</table>';
+    
+    
+        let emailShippingAddress = `<p>${state.order.details.address1}`;
+        if (state.order.details.address2 != '') emailShippingAddress = emailShippingAddress + ', '  + state.order.details.address2;
+        if (state.order.details.address3 != '') emailShippingAddress = emailShippingAddress + ', '  + state.order.details.address3;
+    
+        emailShippingAddress = emailShippingAddress + '</p><p>' + state.order.details.city + ', ' + state.order.details.zipcode + '</p><p>' + state.order.details.state + ', United Kingdom</p>'
+    
+        // Send email
+        let emailParams = {
+          "send_to": state.order.details.email,
+          "orderID": state.order.paypal.orderID,
+          "firstName": state.order.details.firstName,
+          "lastName": state.order.details.lastName,
+          "address": emailShippingAddress,
+          "cart": emailCart,
+          "tax": state.order.tax,
+          "subtotal": state.order.subtotal,
+          "total": state.order.total
+        }
+    
+        emailjs.send(emailserviceid, 'sofarsobad_processing', emailParams, emailuserid).then(function(){
+          emailjs.send(emailserviceid, 'sofarsobad_order', emailParams, emailuserid);
+          setTimeout(function() {
+            fetch(`/­api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, {
+              method: 'POST',
+              redirect: 'follow',
+              body: JSON.stringify(order)
+            }).then(response => {
+              console.log(response)
+              self.app.router.push('/shop/checkout/complete');
+            });
+            //self.app.router.push('/shop/checkout/complete');
+          }, 2000);
+        });
+      })
     }
-
-    // printifyAPI.Order.create(printifyOrder).then(result => {
-    //   console.log(result)
-    // });
-
-    // db.collection("orders").add({
-    //   details: data[0],
-    //   paypal: data[1],
-    //   items: data[2],
-    //   subtotal: data[3],
-    //   total: data[4],
-    //   tax: data[5],
-    //   status: data[6],
-    //   date: date,
-    //   timestamp: `${yyyy}${mm}${dd}${timeReversed}`,
-    //   discount: state.discount
-    // });
-    // state.cart = [];
-    // state.discount = null;
-
-    // let emailCart = "<table border='1' cellspacing='0' cellpadding='5' style='border: none; border-collapse: collapse;'>";
-    // emailCart = `${emailCart}<tr><td>Item</td><td>Description</td><td>Quantity</td><td>Price</td></tr>`;
-
-    // state.order.items.forEach(item => {
-    //   emailCart = `${emailCart}<tr><td>${item.name}</td><td>${item.description}</td><td>${item.quantity}</td><td>£${item.price}</td></tr>`;
-    // });
-
-    // emailCart = `${emailCart}<tr><td style="border: none"></td><td style="border: none"></td><td><strong>Total</strong></td><td><strong>£${state.order.total}</strong></td></tr>`;
-    // emailCart = emailCart + '</table>';
-
-
-    // let emailShippingAddress = `<p>${state.order.details.address1}`;
-    // if (state.order.details.address2 != '') emailShippingAddress = emailShippingAddress + ', '  + state.order.details.address2;
-    // if (state.order.details.address3 != '') emailShippingAddress = emailShippingAddress + ', '  + state.order.details.address3;
-
-    // emailShippingAddress = emailShippingAddress + '</p><p>' + state.order.details.city + ', ' + state.order.details.zipcode + '</p><p>' + state.order.details.state + ', United Kingdom</p>'
-
-    // // Send email
-    // let emailParams = {
-    //   "send_to": state.order.details.email,
-    //   "orderID": state.order.paypal.orderID,
-    //   "firstName": state.order.details.firstName,
-    //   "lastName": state.order.details.lastName,
-    //   "address": emailShippingAddress,
-    //   "cart": emailCart,
-    //   "tax": state.order.tax,
-    //   "subtotal": state.order.subtotal,
-    //   "total": state.order.total
-    // }
-
-    // emailjs.send(emailserviceid, 'sofarsobad_processing', emailParams, emailuserid).then(function(){
-    //   emailjs.send(emailserviceid, 'sofarsobad_order', emailParams, emailuserid);
-    //   setTimeout(function() {
-    //     fetch(`/­api/­orders.­php?AppId=${process.env.PRINTING_ID}&­Signature=­${process.env.PRINTING_KEY}`, {
-    //       method: 'POST',
-    //       redirect: 'follow',
-    //       body: JSON.stringify(order)
-    //     }).then(response => {
-    //       console.log(response)
-    //       self.app.router.push('/shop/checkout/complete');
-    //     });
-    //     //self.app.router.push('/shop/checkout/complete');
-    //   }, 2000);
-    // });
   }
 }
 

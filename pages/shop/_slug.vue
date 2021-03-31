@@ -99,40 +99,29 @@ import Stars from '~/components/Stars';
 import SimilarProducts from '~/components/SimilarProducts';
 
 export default {
-  metaInfo () {
-    return {
-      title: 'So Far So Bad - ' + this.product.title,
-      meta: [
-        { hid: 'keywords', name: 'keywords', content: 'tattoo, illustration, design, ink, inked, tattooed, tshirts, apparel, emo, goth, punk, trash, grunge, minimal'},
-        { hid: 'ogtitle', property: 'og:title', content: 'So Far So Bad - ' + this.product.title},
-        { hid: 'ogdesc', property: 'og:description', content: 'A beautiful canvas "' + this.product.title + '" for your wall'},
-        { hid: 'ogtype', property: 'og:type', content: 'product.item'},
-        { hid: 'ogurl', property: 'og:url', content: 'https://www.sofarsobad.co.uk/shop/' + this.$route.params.slug},
-        { hid: 'ogimage', property: 'og:image', content: this.product.image1},
-        { property: 'product:price:amount', content: this.priceFormatter(this.productTotal)},
-        { property: 'product:price:currency', content: 'GBP'},
-        { property: 'product:retailer_item_id', content: this.product.id},
-        { hid: 'twittercard', name: 'twitter:card', content: 'summary_large_image'},
-        { hid: 'twittertitle', name: 'twitter:title', content: 'So Far So Bad - ' + this.product.title},
-        { hid: 'twitterdesc', name: 'twitter:description', content: 'A beautiful canvas "' + this.product.title + '" for your wall'},
-        { hid: 'twitterimage', name: 'twitter:image', content: this.product.image1},
-      ],
-      link: [
-        { rel: 'canonical', href: 'https://www.sofarsobad.co.uk/shop/' + this.$route.params.slug}
-      ]
-    }
+  head: {
+    title: 'So Far So Bad - ' + this.product.title,
+    meta: [
+      { hid: 'keywords', name: 'keywords', content: 'tattoo, illustration, design, ink, inked, tattooed, tshirts, apparel, emo, goth, punk, trash, grunge, minimal'},
+      { hid: 'ogtitle', property: 'og:title', content: 'So Far So Bad - ' + this.product.title},
+      { hid: 'ogdesc', property: 'og:description', content: 'A beautiful canvas "' + this.product.title + '" for your wall'},
+      { hid: 'ogtype', property: 'og:type', content: 'product.item'},
+      { hid: 'ogurl', property: 'og:url', content: 'https://www.sofarsobad.co.uk/shop/' + this.$route.params.slug},
+      { hid: 'ogimage', property: 'og:image', content: this.product.image1},
+      { property: 'product:price:amount', content: this.priceFormatter(this.productTotal)},
+      { property: 'product:price:currency', content: 'GBP'},
+      { property: 'product:retailer_item_id', content: this.product.id},
+      { hid: 'twittercard', name: 'twitter:card', content: 'summary_large_image'},
+      { hid: 'twittertitle', name: 'twitter:title', content: 'So Far So Bad - ' + this.product.title},
+      { hid: 'twitterdesc', name: 'twitter:description', content: 'A beautiful canvas "' + this.product.title + '" for your wall'},
+      { hid: 'twitterimage', name: 'twitter:image', content: this.product.image1},
+    ],
+    link: [
+      { rel: 'canonical', href: 'https://www.sofarsobad.co.uk/shop/' + this.$route.params.slug}
+    ]
   },
 
   transition: 'page',
-
-  head () {
-    return {
-      title: 'So Far So Bad - ' + this.product.title,
-      meta: [
-        { hid: 'og-title', property: 'og:title', content: this.product.title }
-      ]
-    }
-  },
 
   data () {
     return {
