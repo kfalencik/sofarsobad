@@ -1,10 +1,10 @@
 <template>
-  <div class="hero">
+  <div id="hero" class="hero">
     <canvas id="mainstage"></canvas>
     <svg id="weirdFilter">
       <filter id="svgFilter">
-        <feTurbulence id="turbulence" type="turbulence" baseFrequency="0.009" numOctaves="5" />
-        <feDisplacementMap id="displacement" in="SourceGraphic" scale="200" />
+        <feTurbulence id="turbulence" type="turbulence" baseFrequency="0.009" numOctaves="10" />
+        <feDisplacementMap id="displacement" in="SourceGraphic" scale="140" />
       </filter>
     </svg>
 
@@ -22,7 +22,7 @@ export default {
       starColors: [],
       mouseEngaged: false,
       mousePressed: false,
-      speedAmplifier: 20,
+      speedAmplifier: 30,
       mouseX: null,
       mouseY: null,
       canvas: null,
@@ -42,7 +42,7 @@ export default {
       //calculate the distances of the canvas and the width we use to determine number of stars.
       this.calcWidth = document.getElementById("mainstage").clientWidth / 10;
       this.canvas.width = document.getElementById("mainstage").clientWidth;
-      this.canvas.height = document.getElementById("mainstage").clientHeight;
+      this.canvas.height = document.getElementById("hero").clientHeight;
       //create the stars
       this.initiateStars(this.canvas, this.starArray, this.calcWidth);
       //start the main loop to keep the canvas updates.
@@ -53,10 +53,10 @@ export default {
       setInterval(function() {
         self.update();
         self.render();
-      }, 1000/60);
+      }, 1000/120);
     },
     update() {
-      if (this.speedAmplifier > 1.1) {
+      if (this.speedAmplifier > 1) {
         this.speedAmplifier = this.speedAmplifier - 0.1;
       }
       for (let k = 0; k < this.starArray.length; k++) {
@@ -202,13 +202,15 @@ export default {
   height: 100%;
   position: absolute;
   top: 0px;
+  bottom: 0px;
 }
 
 #mainstage {
   width: 100%;
-  height: 100%;
+  height: 150%;
   overflow:hidden;
   margin: 0;
+  margin-top: 50px;
   padding: 0px;
   background-color: black;
   filter:blur(5px) url(#svgFilter);
