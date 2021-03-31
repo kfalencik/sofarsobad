@@ -116,6 +116,7 @@ export default {
         { hid: 'twittertitle', name: 'twitter:title', content: 'So Far So Bad - ' + this.product.title},
         { hid: 'twitterdesc', name: 'twitter:description', content: this.product.body},
         { hid: 'twitterimage', name: 'twitter:image', content: this.product.image1},
+        { hid: 'fbid', property: 'fb:app_id', content: process.env.FB_ID || null }
       ],
       link: [
         { rel: 'canonical', href: 'https://www.sofarsobad.co.uk/shop/' + this.$route.params.slug}
