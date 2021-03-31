@@ -1,5 +1,5 @@
 <template>
-  <div class="section">
+  <div class="section" v-if="product">
     <div class="container">
       <div>
         <router-link :to="'/shop/' + product.slug">Go back to product page</router-link>
@@ -53,10 +53,8 @@
   import Stars from '~/components/Stars';
 
   export default {
-    head () {
-      return {
-        title: 'So Far So Bad - ' + this.product.title + ' reviews',
-      }
+    head: {
+      title: 'So Far So Bad - ' + this.product ? this.product.title : null + ' reviews',
     },
     transition: 'page',
     data() {
@@ -105,17 +103,17 @@
           "@type": "Review",
           "itemReviewed": {
             "@type": "Product",
-            "name": this.product.title,
-            "category": this.product.category,
-            "image": this.product.image1,
-            "productID": this.product.id,
+            "name": this.product ? this.product.title : null,
+            "category": this.product ? this.product.category : null,
+            "image": this.product ? this.product.image1 : null,
+            "productID": this.product ? this.product.id : null,
             "priceRange": "$$",
             "brand": {
               "@type": "Brand",
               "name": "So Far So Bad"
             },
-            "description": this.product.description,
-            "sku": this.product.slug,
+            "description": this.product ? this.product.description : null,
+            "sku": this.product ? this.product.slug : null,
           },
           "reviewRating": {
             "@type": "Rating",
