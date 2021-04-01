@@ -97,17 +97,29 @@ export const mutations = {
       line_items: [],
       shipping_method: 1,
       send_shipping_notification: true,
+      // address_to: {
+      //   first_name: 'Kevin',
+      //   last_name: 'Falencik',
+      //   email: 'kfalencik@gmail.com',
+      //   phone: '07961276427',
+      //   country: 'GB',
+      //   region: 'Midlothian',
+      //   address1: '67/2 Lorne Street',
+      //   address2: '',
+      //   city: 'Edinburgh',
+      //   zip: 'EH6 8QG'
+      // }
       address_to: {
-        first_name: 'Kevin',
-        last_name: 'Falencik',
-        email: 'kfalencik@gmail.com',
-        phone: '07961276427',
+        first_name: state.order.details.firstName,
+        last_name: state.order.details.lastName,
+        email: state.order.details.personalEmail,
+        phone: state.order.details.personalPhone,
         country: 'GB',
-        region: 'Midlothian',
-        address1: '67/2 Lorne Street',
-        address2: '',
-        city: 'Edinburgh',
-        zip: 'EH6 8QG'
+        region: state.order.details.deliveryState,
+        address1: state.order.details.deliveryaddress1,
+        address2: state.order.details.deliveryaddress2,
+        city: state.order.details.deliveryCity,
+        zip: state.order.details.deliveryZipCode
       }
     }
 
