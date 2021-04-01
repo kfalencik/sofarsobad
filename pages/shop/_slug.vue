@@ -81,6 +81,8 @@
                     </div>
                   </div>
 
+                  <div class="has-text-right mb-5 is-clickable" @click="sizingInfo">Sizing table <b-icon size="is-small" icon="help-circle"></b-icon></div>
+
                 <div class="product__add-to-cart">
                   <div class="product__add">
                     <button class="button is-black" @click="addToCart">Add to cart</button>
@@ -272,6 +274,48 @@ export default {
   },
 
   methods: {
+    sizingInfo () {
+      this.$buefy.dialog.alert({
+        title: 'Sizing table',
+        confirmText: 'Close table',
+        type: 'is-black',
+        message: `
+          <table id="size-guide" style="min-width: 360px;">
+            <thead>
+            <tr>
+            <th style="padding: 10px;">&nbsp;</th>
+            <th style="color: #000000; font-weight: 500; text-align: left; font-size: 15px; padding: 10px;">S</th>
+            <th style="color: #000000; font-weight: 500; text-align: left; font-size: 15px; padding: 10px;">M</th>
+            <th style="color: #000000; font-weight: 500; text-align: left; font-size: 15px; padding: 10px;">L</th>
+            <th style="color: #000000; font-weight: 500; text-align: left; font-size: 15px; padding: 10px;">XL</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td style="padding: 10px; color: #525252; font-size: 15px; border-top: 1px solid #ededed; word-break: break-word;">Width, in</td>
+            <td style="padding: 10px; color: #525252; font-size: 15px; border-top: 1px solid #ededed; word-break: break-word;">18</td>
+            <td style="padding: 10px; color: #525252; font-size: 15px; border-top: 1px solid #ededed; word-break: break-word;">20</td>
+            <td style="padding: 10px; color: #525252; font-size: 15px; border-top: 1px solid #ededed; word-break: break-word;">22.01</td>
+            <td style="padding: 10px; color: #525252; font-size: 15px; border-top: 1px solid #ededed; word-break: break-word;">24.02</td>
+            </tr>
+            <tr>
+            <td style="padding: 10px; color: #525252; font-size: 15px; border-top: 1px solid #ededed; word-break: break-word;">Length, in</td>
+            <td style="padding: 10px; color: #525252; font-size: 15px; border-top: 1px solid #ededed; word-break: break-word;">28</td>
+            <td style="padding: 10px; color: #525252; font-size: 15px; border-top: 1px solid #ededed; word-break: break-word;">29.02</td>
+            <td style="padding: 10px; color: #525252; font-size: 15px; border-top: 1px solid #ededed; word-break: break-word;">30</td>
+            <td style="padding: 10px; color: #525252; font-size: 15px; border-top: 1px solid #ededed; word-break: break-word;">31.03</td>
+            </tr>
+            <tr>
+            <td style="padding: 10px; color: #525252; font-size: 15px; border-top: 1px solid #ededed; word-break: break-word;">Sleeve length, in</td>
+            <td style="padding: 10px; color: #525252; font-size: 15px; border-top: 1px solid #ededed; word-break: break-word;">8.9</td>
+            <td style="padding: 10px; color: #525252; font-size: 15px; border-top: 1px solid #ededed; word-break: break-word;">9.18</td>
+            <td style="padding: 10px; color: #525252; font-size: 15px; border-top: 1px solid #ededed; word-break: break-word;">9.45</td>
+            <td style="padding: 10px; color: #525252; font-size: 15px; border-top: 1px solid #ededed; word-break: break-word;">9.73</td>
+            </tr>
+            </tbody>
+          </table>`
+      })
+    },
     nextProduct (direction) {
       let newProductSlug = 0;
       let productIndex = 0;
