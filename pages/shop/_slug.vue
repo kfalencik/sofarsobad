@@ -60,6 +60,12 @@
                 <h2>{{product.title}}</h2>
                 <Stars :product="product.id" link="true" />
                 <p v-if="product.body" v-html="product.body"></p>
+                <ul>
+                  <li>100% Airlume combed and ringspun cotton</li>
+                  <li>Light fabric 142 g/m</li>
+                  <li>Retail fit</li>
+                  <li>Runs true to size</li>
+                </ul>
 
                 <div class="product__options">
                   <div class="product__option product__option--with-guide">
@@ -327,6 +333,7 @@ export default {
   }
 
   .product {
+    padding-top: 35px;
     $canvasWidth: 300px;
     $canvasHeight: 480px;
     $canvasDepth: 6px;
@@ -491,8 +498,10 @@ export default {
     }
 
     &__options {
-      padding: 0 0 15px;
+      padding: 15px 0 15px;
       margin-bottom: 15px;
+      border-top: 1px solid $black;
+      margin-top: 20px;
     }
 
     &__option {
