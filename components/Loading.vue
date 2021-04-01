@@ -6,6 +6,7 @@
 
 <style lang="scss" scoped>
     .loading {
+        margin-top: 35px;
         display: flex;
         flex: 1;
         align-items: center;

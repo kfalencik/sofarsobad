@@ -1,102 +1,105 @@
 <template>
-  <div v-if="product && product.title">
-      <div class="section section--page">
-        <div class="product container">
-          <template v-if="overlay">
-            <div class="product__overlay" @click="overlay = false">
-              <img v-for="(item, index) in productImages" :src="item" :key="`overlay-image-${index}`" role="presentation" alt="" v-show="image === index + 1" />
+  <div v-if="loading">
+    <div v-if="product && product.title">
+        <div class="section section--page">
+          <div class="product container">
+            <template v-if="overlay">
+              <div class="product__overlay" @click="overlay = false">
+                <img v-for="(item, index) in productImages" :src="item" :key="`overlay-image-${index}`" role="presentation" alt="" v-show="image === index + 1" />
 
-              <button @click.prevent.stop="image === 1 ? image = productImages.length : image = image - 1" class="product__overlay-nav-item" title="Previous">
-                <b-icon icon="arrow-left"></b-icon>
-              </button>
-              <button @click.prevent.stop="image === productImages.length ? image = 1 : image = image + 1" class="product__overlay-nav-item" title="Next">
-                <b-icon icon="arrow-right"></b-icon>
-              </button>
-
-              <button class="close" @click="overlay = false" title="Close">
-                <b-icon icon="close"></b-icon>
-              </button>
-            </div>
-          </template>
-
-          <div class="columns is-4 mt-4">
-            <div class="column is-two-thirds">
-              <router-link to="/shop"><b-icon icon="chevron-left" size="is-small"></b-icon>Back to shop</router-link>
-            </div>
-            <div class="column is-one-third">
-              <div class="product__navigation has-text-right">
-                <span @click="nextProduct('next')"><b-icon icon="chevron-left" size="is-small"></b-icon> Previous Product</span>
-                &nbsp; &nbsp; &nbsp;
-                <span @click="nextProduct('prev')">Next Product <b-icon icon="chevron-right" size="is-small"></b-icon></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="columns is-4">
-            <div class="column is-two-thirds">
-              <div class="product__image">
-                <img v-for="(item, index) in productImages" :src="item" :key="`product-image-${index}`" v-show="image === index + 1" role="presentation" alt="" />
-
-                <button @click="overlay = true" class="product__image-fullscreen" title="Full screen">
-                  <b-icon icon="fullscreen"></b-icon>
-                </button>
-                <button @click="image === productImages.length ? image = 1 : image = image + 1" class="product__nav-item" title="Next">
-                  <b-icon icon="arrow-right"></b-icon>
-                </button>
-                <button @click="image === 1 ? image = productImages.length : image = image - 1" class="product__nav-item" title="Previous">
+                <button @click.prevent.stop="image === 1 ? image = productImages.length : image = image - 1" class="product__overlay-nav-item" title="Previous">
                   <b-icon icon="arrow-left"></b-icon>
                 </button>
-              </div>
+                <button @click.prevent.stop="image === productImages.length ? image = 1 : image = image + 1" class="product__overlay-nav-item" title="Next">
+                  <b-icon icon="arrow-right"></b-icon>
+                </button>
 
-              <div class="product__thumbnails"> 
-                <div v-for="(item, index) in productImages" :key="`thumbnail-image-${index}`" class="product__thumbnails-item" @click="image = index + 1;" :class="{'product__thumbnails-item--active': image === index + 1}">
-                  <img :src="item" alt="Thumbnail 1" />
+                <button class="close" @click="overlay = false" title="Close">
+                  <b-icon icon="close"></b-icon>
+                </button>
+              </div>
+            </template>
+
+            <div class="columns is-4 mt-4">
+              <div class="column is-two-thirds">
+                <router-link to="/shop"><b-icon icon="chevron-left" size="is-small"></b-icon>Back to shop</router-link>
+              </div>
+              <div class="column is-one-third">
+                <div class="product__navigation has-text-right">
+                  <span @click="nextProduct('next')"><b-icon icon="chevron-left" size="is-small"></b-icon> Previous Product</span>
+                  &nbsp; &nbsp; &nbsp;
+                  <span @click="nextProduct('prev')">Next Product <b-icon icon="chevron-right" size="is-small"></b-icon></span>
                 </div>
               </div>
             </div>
-            
-            <div class="product__details column is-one-third">
-              <h2>{{product.title}}</h2>
-              <Stars :product="product.id" link="true" />
-              <p v-if="product.body" v-html="product.body"></p>
 
-              <div class="product__options">
-                <div class="product__option product__option--with-guide">
-                  <h5>Size</h5>
-                  <div class="wrap">
-                    <b-field>
-                      <b-select v-model="size">
-                        <option v-for="size in sizes" :value="size.value" :key="`size-${size.value}`">
-                          {{ size.label }}
-                        </option>
-                      </b-select>
-                    </b-field>
+            <div class="columns is-4">
+              <div class="column is-two-thirds">
+                <div class="product__image">
+                  <img v-for="(item, index) in productImages" :src="item" :key="`product-image-${index}`" v-show="image === index + 1" role="presentation" alt="" />
+
+                  <button @click="overlay = true" class="product__image-fullscreen" title="Full screen">
+                    <b-icon icon="fullscreen"></b-icon>
+                  </button>
+                  <button @click="image === productImages.length ? image = 1 : image = image + 1" class="product__nav-item" title="Next">
+                    <b-icon icon="arrow-right"></b-icon>
+                  </button>
+                  <button @click="image === 1 ? image = productImages.length : image = image - 1" class="product__nav-item" title="Previous">
+                    <b-icon icon="arrow-left"></b-icon>
+                  </button>
+                </div>
+
+                <div class="product__thumbnails"> 
+                  <div v-for="(item, index) in productImages" :key="`thumbnail-image-${index}`" class="product__thumbnails-item" @click="image = index + 1;" :class="{'product__thumbnails-item--active': image === index + 1}">
+                    <img :src="item" alt="Thumbnail 1" />
                   </div>
                 </div>
+              </div>
+              
+              <div class="product__details column is-one-third">
+                <h2>{{product.title}}</h2>
+                <Stars :product="product.id" link="true" />
+                <p v-if="product.body" v-html="product.body"></p>
 
-              <div class="product__add-to-cart">
-                <div class="product__add">
-                  <button class="button is-black" @click="addToCart">Add to cart</button>
-                </div>
+                <div class="product__options">
+                  <div class="product__option product__option--with-guide">
+                    <h5>Size</h5>
+                    <div class="wrap">
+                      <b-field>
+                        <b-select v-model="size">
+                          <option v-for="size in sizes" :value="size.value" :key="`size-${size.value}`">
+                            {{ size.label }}
+                          </option>
+                        </b-select>
+                      </b-field>
+                    </div>
+                  </div>
 
-                <div class="product__price">
-                  <h3>{{ priceDisplay(price * quantity) }}</h3>
+                <div class="product__add-to-cart">
+                  <div class="product__add">
+                    <button class="button is-black" @click="addToCart">Add to cart</button>
+                  </div>
+
+                  <div class="product__price">
+                    <h3>{{ priceDisplay(price * quantity) }}</h3>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <SimilarProducts :number="8" />
     </div>
-
-    <SimilarProducts :number="8" />
   </div>
+  <Loading v-else />
 </template>
 
 <script>
 
 import Stars from '~/components/Stars';
 import SimilarProducts from '~/components/SimilarProducts';
+import Loading from '~/components/Loading';
 
 export default {
   head () {
@@ -176,12 +179,17 @@ export default {
 
   components: {
     Stars,
-    SimilarProducts
+    SimilarProducts,
+    Loading
   },
 
   computed: {
     sizes () {
       return this.$store.state.sizes
+    },
+
+    loading () {
+      return this.$store.state.loaded;
     },
 
     productImages () {
