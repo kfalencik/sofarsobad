@@ -45,7 +45,7 @@ export const state = () => ({
   searchKeyword: '',
   filterPrice: [0, 999],
   filterTags: [],
-  sorter: 'popularity-az',
+  sorter: 'date-za',
   messages: [],
   loaded: false,
   redirecting: false,
@@ -61,7 +61,7 @@ export const mutations = {
     state.searchKeyword = keyword;
   },
   filterProducts (state) {
-    state.filteredProducts = state.products;
+    state.filteredProducts = state.products.sort((a, b) => (a.date < b.date) ? -1 : ((a.date > b.date) ? 1 : 0));
 
     if (state.searchKeyword !== '') {
       state.filteredProducts = state.filteredProducts.filter(product => {
