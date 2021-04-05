@@ -30,6 +30,9 @@
         <div class="dispatcher" v-if="order.status !== 'dispatched'">
           <button class="button is-success" @click="dispatch">Mark As Dispatched</button>
         </div>
+        <div class="dispatcher" v-else>
+          <strong>Tracking number:</strong> {{ order.tracking ? order.tracking : null }}
+        </div>
       </div>
 
       <div class="column is-half" v-if="order.discount">
@@ -125,8 +128,12 @@ export default {
         confirmText: 'Yes, dispatch order',
         type: 'is-warning',
         cancelText: 'Cancel',
+        inputAttrs: {
+          placeholder: 'Tracking number',
+          maxlength: 50
+        },
         hasIcon: true,
-        onConfirm: () => {
+        onConfirm: (tracking) => {
           // Send email to customer
           let emailCart = "<table border='1' cellspacing='0' cellpadding='5' style='border: none; border-collapse: collapse;'>";
           emailCart = `${emailCart}<tr><td>Item</td><td>SKU</td><td>Description</td><td>Quantity</td><td>Price</td></tr>`;
@@ -147,7 +154,7 @@ export default {
           emailShippingAddress = emailShippingAddress + '</p><p>' + this.order.details.city + ', ' + this.order.details.zipcode + '</p><p>' + this.order.details.state + ', United Kingdom</p>'
 
           this.$buefy.toast.open({message: 'Order dispatched!', type: 'is-success'});
-          this.$store.commit('dispatchOrder', [this.order, emailCart, emailShippingAddress]);
+          this.$store.commit('dispatchOrder', [this.order, emailCart, emailShippingAddress, tracking]);
           this.$router.push('/dashboard/orders');
         }
       })

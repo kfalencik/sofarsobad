@@ -257,7 +257,7 @@ export const mutations = {
     db.collection("orders").where("paypal.orderID", "==", data[0].paypal.orderID).get()
     .then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
-        db.collection("orders").doc(doc.id).update({status: 'dispatched'});
+        db.collection("orders").doc(doc.id).update({status: 'dispatched', tracking: data[3]});
 
         // Send email
         let emailParams = {
@@ -267,7 +267,8 @@ export const mutations = {
           "lastName": data[0].details.lastName,
           "address": data[2],
           "cart": data[1],
-          "total": data[0].total
+          "total": data[0].total,
+          "tracking": data[3]
         }
         emailjs.send(emailserviceid, 'sofarsobad_dispatched', emailParams, emailuserid);
       });
