@@ -122,7 +122,7 @@ export default {
       }
     },
     dispatch() {
-      this.$buefy.dialog.confirm({
+      this.$buefy.dialog.prompt({
         title: 'Are you sure?',
         message: 'This will send a confirmation email to the client with the dispatch information.',
         confirmText: 'Yes, dispatch order',

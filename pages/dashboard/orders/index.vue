@@ -42,7 +42,7 @@ export default {
       currentPage: 1,
     }
   },
-  created() {
+  mounted() {
     this.$store.dispatch('getOrdersData');
   },
   computed: {
